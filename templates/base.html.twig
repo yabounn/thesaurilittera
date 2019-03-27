@@ -13,7 +13,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand thesaurilittera" href="home"><img src="https://img.icons8.com/flat_round/64/000000/bookmark-book.png"
+        <a class="navbar-brand thesaurilittera" href="{{ path('home') }}"><img src="https://img.icons8.com/flat_round/64/000000/bookmark-book.png"
                 width="50" height="50">Thesaurilittera</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,16 +23,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="home">Accueil <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('home') }}">Accueil <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="bookstore">Librairie</a>
+                    <a class="nav-link" href="">Librairie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="exchanges">Echanges</a>
+                    <a class="nav-link" href="">Echanges</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="forum">Forum</a>
+                    <a class="nav-link" href="">Forum</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -42,7 +42,7 @@
             </form>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="login">Connexion</a>
+                    <a class="nav-link" href="">Connexion</a>
                 </li>
             </ul>
         </div>
