@@ -1,8 +1,3 @@
-# Exemple de route avec celle de la home possibilité d'utiliser les annotations dans HomeController par exemple
-# home:
-#   path: /
-#   controller: App\Controller\HomeController::index
-
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
