@@ -41,18 +41,18 @@
     color: white;
 }
 
-.fa-stack[data-count]:after {
+.has-badge[data-count]:after {
     position: absolute;
-    right: 0%;
-    top: 1%;
+    right: -.2em;
+    top: 1em;
     content: attr(data-count);
-    font-size: 30%;
-    padding: .6em;
-    border-radius: 999px;
-    line-height: .75em;
+    font-size: .4em;
+    padding: .5em;
+    border-radius: 50%;
+    line-height: 1em;
     color: white;
     background: rgba(255, 0, 0, .85);
     text-align: center;
-    min-width: 2em;
+    min-width: 1em;
     font-weight: bold;
 }
