@@ -1,0 +1,95 @@
+.section-carousel {
+    display: inline-block;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1);
+    /* border: 1px solid red; */
+    padding-bottom: 15px;
+}
+
+/* .section-carousel>h3 {
+    text-align: center;
+} */
+
+.carousel {
+    position: relative;
+    padding-bottom: 1em;
+}
+
+/* Chevrons in the top of the slide */
+.controls-top {
+    margin: 1.5em;
+    text-align: center;
+}
+
+.btn-floating {
+    padding: 10px;
+    /* background-color: #0069D9; */
+    background-color: #47a7f5;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 5px 15px 0 rgba(0, 0, 0, .15);
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 50%;
+    transition: all .2s ease-in-out;
+    /* position: relative;
+    vertical-align: middle; */
+}
+
+.btn-floating:hover {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+}
+
+.btn-floating i {
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    line-height: 30px;
+}
+
+.controls-top i {
+    font-size: 1.2em;
+}
+
+/* Wave/ripple effect on the button of the top */
+.ripple {
+    background-position: center;
+    transition: background 0.8s;
+}
+.ripple:hover {
+    background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+}
+.ripple:active {
+    /* background-color: #6eb9f7; */
+    background-color: #0069D9;
+    background-size: 100%;
+    transition: background 0s;
+}
+
+/* Slides*/
+.carousel-item.active {
+    display: flex;
+}
+.carousel-item .mb-2 {
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 255, .2);
+}
+
+/* Circle in the bottom of the slide */
+.carousel-indicators {
+    bottom: -1.5em;
+}
+
+.carousel-indicators li {
+    background-color: #858383;
+    /* background-color: #DBDBFF; */
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.carousel-indicators .active {
+    /* background-color: #0069D9; */
+    background-color: #47a7f5;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
