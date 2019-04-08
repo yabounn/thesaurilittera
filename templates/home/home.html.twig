@@ -5,6 +5,7 @@
 {% block stylesheets %}
 {{ parent() }}
 <link href="{{ asset('css/carousel.css') }}" rel="stylesheet" />
+<link href="{{ asset('css/selectionBook.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block body %}
@@ -160,6 +161,28 @@
                     </section>
                     <!-- section-preview -->
                 </section>
+                <!-- section-carousel -->
+
+                <!-- book-selection -->
+                <section class=" col-lg-8 book-selection">
+                    <h3>Sélection du livre de la semaine</h3>
+                    <section class="card-selection">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                              <img src="{{ asset('images/ancient-books.jpg') }}" class="card-img" alt="Livre antique">
+                            </div>
+                            <div class="col-md-8">
+                              <div class="card-body">
+                                <h5 class="card-title">Titre du livre</h5>
+                                <h5 class="card-title">Auteur</h5>
+                                <h6 class="card-title">Catégorie</h6>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                              </div>
+                            </div>
+                          </div>
+                    </section>
+                </section>
+                <!-- /.book-selection -->
             </div>
             <!-- /.grid column -->
         </div>
