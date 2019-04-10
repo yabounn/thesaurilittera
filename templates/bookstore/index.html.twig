@@ -2,8 +2,92 @@
 
 {% block title %}Librairie{% endblock %}
 
+{% block stylesheets %}
+{{ parent() }}
+
+<link rel="stylesheet" href="{{ asset('css/bookstore/bookstore.css')}}">
+<link rel="stylesheet" href="{{ asset('css/bookstore/breadcrumb.css')}}">
+<link rel="stylesheet" href="{{ asset('css/bookstore/animationbook.css')}}">
+{% endblock stylesheets %}
+
 {% block body %}
-    <div class="container mt-4">
-        <h1>Voici l'ensemble des livres destinés à la vente</h1>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('home') }}">Accueil</a></li>
+        <li class="breadcrumb-item active">Librarie</li>
+    </ol>
+</nav>
+
+<div class="container bookstore">
+    <div class="row">
+        <!-- Content -->
+        <div class="col-md-12">
+            <div class="row">
+                <div class="filter-bar row col-xs-12">
+                    <select class="custom-select">
+                        <option selected>Filtrer par</option>
+                        <option value="1">Titre du livre</option>
+                        <option value="2">Auteur</option>
+                    </select>
+                </div>
+                <!-- /.filter-bar -->
+                <div class="store row col-sm-12 row-0">
+                    <!-- books -->
+                    <div class=" col-md-3 col-sm-6">
+                        <h4 class="store-title-book">
+                            <a href="#">Titre du livre 1</a>
+                        </h4>
+                        <div class="book-view book-closeview">
+                            <div class="image-couv">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="book-container col-md-3 col-sm-6">
+                        <h4 class="store-title-book">
+                            <a href="#">Titre du livre 2</a>
+                        </h4>
+                        <div class="book-view book-closeview">
+                            <div class="image-couv">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-container col-md-3 col-sm-6">
+                        <h4 class="store-title-book">
+                            <a href="#">Titre du livre 3</a>
+                        </h4>
+                        <div class="book-view book-closeview">
+                            <div class="image-couv">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="book-container col-md-3 col-sm-6">
+                        <h4 class="store-title-book">
+                            <a href="#">Titre du livre 4</a>
+                        </h4>
+                        <div class="book-view book-closeview">
+                            <div class="image-couv">
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.books -->
+                </div>
+                <!-- /.store -->
+            </div>
+            <!-- /.grid row -->
+        </div>
+        <!-- /.content -->
     </div>
+    <!-- /.grid row -->
+</div>
+<!-- /.container -->
 {% endblock %}

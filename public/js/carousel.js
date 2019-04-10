@@ -2,7 +2,7 @@
 //     alert('Hello, comment vas-tu ?');
 // }
 
-// Show three cards in the slide
+// Show three cards in the slide on the homepage
 $('.carousel .carousel-item').each(function(){
     var next = $(this).next();
     if (!next.length) {
