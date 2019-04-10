@@ -1,0 +1,18 @@
+main {
+    display: flex;
+    justify-content: center;
+}
+.container {
+    padding: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.row.homepage {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.row.carousel-selection {
+    flex-direction: column;
+}

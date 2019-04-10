@@ -1,0 +1,37 @@
+.best-selling {
+    margin-bottom: 1.5em;
+    /* border: 1px solid black; */
+}
+
+.best-selling .row {
+    justify-content: center;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.jumbotron {
+    text-align: center;
+    border-radius: 1rem;
+    background-color: #F8F9FA;
+    padding: 2rem 2rem;
+}
+
+.book-comment .card {
+    margin-top: 2rem;
+}
+
+.last-comment ul {
+    display: flex;
+    justify-content: center;
+    padding-inline-start: 0;
+
+}
+
+.last-comment li {
+    list-style-type: none;
+    margin: 1rem;
+    padding-left: .2rem;
+}
