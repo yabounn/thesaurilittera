@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livres à l'échange{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('css/bookexchange/carousel.css')}}">
+
+{% endblock %}
+
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('home') }}">Accueil</a></li>
+            <li class="breadcrumb-item active">Echanges</li>
+        </ol>
+    </nav>
+
+    <div class="carousel">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+    </div>
+
+    <button onclick="rotate()">Tourner</button>
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/bookexchange/carousel.js') }}"></script>
+{% endblock javascripts%}

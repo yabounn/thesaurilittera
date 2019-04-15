@@ -37,7 +37,7 @@
                         href="{{ path('bookstore')}}">Librairie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Echanges</a>
+                    <a class="nav-link {% if current_menu is defined and current_menu == 'bookexchange' %}active{% endif %}" href="{{ path('bookexchange')}}">Echanges</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">Forum</a>
