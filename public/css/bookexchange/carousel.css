@@ -19,7 +19,7 @@
     border: 1px solid black;
 }
 
-.item:nth-child(1){
+/* .item:nth-child(1){
     transform: rotateY(0deg) translateZ(346.4px);
 }
 .item:nth-child(2){
@@ -36,4 +36,4 @@
 }
 .item:nth-child(6){
     transform: rotateY(300deg) translateZ(346.4px);
-}
+} */
