@@ -43,15 +43,22 @@
                     <a class="nav-link" href="">Forum</a>
                 </li>
             </ul>
+            <!-- search bar-->
             <div class="container h-100">
                 <div class="d-flex justify-content-center h-100">
-                    <div class="searchbar">
+                    <!-- <div class="searchbar">
                         <input class="search_input" type="text" name="" placeholder="Rechercher un livre, un auteur">
                         <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
-                    </div>
+                        {# <button id="button-search" type="button"><i class="fas fa-search"></i></button> #}
+                        <div id="results"></div>
+                    </div> 
+                    -->
+                    {{ render(controller(
+                        'App\\Controller\\SearchController::searchBar'
+                    )) }}
                 </div>
             </div>
-
+            <!-- /.search bar-->
             <ul class="navbar-nav login">
                 <li class="nav-item">
                     <a class="nav-link" href="">Connexion</a>
@@ -188,6 +195,8 @@
     <!-- Footer -->
 
     {% block javascripts %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
@@ -197,6 +206,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <script src="{{ asset('js/navbar/booksearch.js') }}"></script>
+
     {% endblock %}
 </body>
 
