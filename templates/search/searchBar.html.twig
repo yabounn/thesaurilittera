@@ -1,2 +1,10 @@
+{% form_theme formSearch 'bootstrap_4_layout.html.twig' %}
 
-{{ form(form) }}
+{{ form_start(formSearch) }}
+
+{# {{ form_widget(formSearch)}} #}
+{{ form_row(formSearch.rechercher, {'attr': {'placeholder': "Rechercher"}}) }}
+
+<button type="submit" class="btn btn-primary">Ok</button>
+
+{{ form_end(formSearch) }}
