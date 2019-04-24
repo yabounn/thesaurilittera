@@ -1,10 +1,11 @@
 {% form_theme formSearch 'bootstrap_4_layout.html.twig' %}
 
-{{ form_start(formSearch) }}
+{{ form_start(formSearch, {'attr': {'action': path('handleSearch')},
+                           'attr': {'id': 'searchForm'} })                       
+}}
 
-{# {{ form_widget(formSearch)}} #}
-{{ form_row(formSearch.rechercher, {'attr': {'placeholder': "Rechercher"}}) }}
+{{ form_widget(formSearch, {'attr': {'placeholder': "Rechercher un livre"}} )}}
 
-<button type="submit" class="btn btn-primary">Ok</button>
+<a href="{{ path('search') }}" class="search_icon"><i class="fas fa-search"></i></a>
 
 {{ form_end(formSearch) }}

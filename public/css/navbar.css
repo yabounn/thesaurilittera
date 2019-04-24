@@ -1,4 +1,6 @@
-.searchbar {
+/* searchBar */
+#searchForm {
+    display: flex;
     margin-bottom: auto;
     margin-top: auto;
     height: 60px;
@@ -7,7 +9,15 @@
     padding: 10px;
 }
 
-.search_input {
+.form-control:focus#search {
+    box-shadow: none;
+}
+
+.form-control#search {
+    padding: 0;
+}
+
+#search {
     color: white;
     border: 0;
     outline: 0;
@@ -18,18 +28,18 @@
     transition: width 0.4s linear;
 }
 
-.searchbar:hover>.search_input {
+#searchForm:hover>#search {
     padding: 0 10px;
     width: 450px;
     caret-color: red;
     transition: width 0.4s linear;
 }
 
-.searchbar:hover>.search_icon {
+#searchForm:hover>.search_icon {
     background: white;
     color: #e74c3c;
 }
-
+ 
 .search_icon {
     height: 40px;
     width: 40px;
@@ -41,6 +51,7 @@
     color: white;
 }
 
+/* counter shopping-cart */
 .has-badge[data-count]:after {
     position: absolute;
     right: -1em;
@@ -55,4 +66,4 @@
     text-align: center;
     min-width: 2em;
     font-weight: bold;
-}
+} 

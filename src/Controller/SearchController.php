@@ -4,9 +4,9 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+
 
 class SearchController extends AbstractController
 {
@@ -20,24 +20,26 @@ class SearchController extends AbstractController
         ]);
     }
 
-    public function searchBar(Request $request)
+    public function searchBar()
     {
-        $form = $this->createFormBuilder()
-                    -> add ('rechercher')
-                    // ->add('rechercher', SearchType::class, [
-                    //     'attr' => ['placeholder' => "Rechercher"
-                    //     ]
-                    // ])
-                    // ->add('ok', SubmitType::class, [
-                    //     'attr' => ['class' => "btn btn-primary"
-                    //     ]    
-                    // ])
-                    ->getForm();
+        // $form = $this->createFormBuilder()
+        //             -> add ('rechercher')
+        //             ->getForm();
 
-        $form->handleRequest($request);            
+        $form = $this->createForm(SearchType::class);
 
         return $this->render('search/searchBar.html.twig', [
             'formSearch' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/search", name="handleSearch")
+     * @param Request $request
+     */
+    public function handleSearch(Request $request)
+    {
+        var_dump($request->request);
+        die();
     }
 }
