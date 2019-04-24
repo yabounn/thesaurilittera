@@ -17,7 +17,6 @@ class SearchType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        
         $resolver->setDefaults([
             // Configure your form options here
         ]);

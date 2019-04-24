@@ -1,5 +1,5 @@
 /* searchBar */
-#searchForm {
+ #searchForm {
     display: flex;
     margin-bottom: auto;
     margin-top: auto;
@@ -8,6 +8,7 @@
     border-radius: 30px;
     padding: 10px;
 }
+
 
 .form-control:focus#search {
     box-shadow: none;
@@ -49,7 +50,7 @@
     align-items: center;
     border-radius: 50%;
     color: white;
-}
+} 
 
 /* counter shopping-cart */
 .has-badge[data-count]:after {

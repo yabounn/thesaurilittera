@@ -1,0 +1,20 @@
+{% form_theme formSearch 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(formSearch, {'attr': {'action': path('search')},
+                           'attr': {'id': 'searchForm'} })                       
+}}
+
+{{ form_widget(formSearch, {'attr': {'placeholder': "Rechercher un livre, un auteur"}}) }}
+
+<a href="{{ path('search') }}" class="search_icon"><i class="fas fa-search"></i></a>
+
+{{ form_end(formSearch) }}
+
+
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+
+<script src="{{ asset('js/navbar/booksearch.js') }}"></script>
+{% endblock %}

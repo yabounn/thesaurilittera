@@ -1,19 +1,45 @@
-function booksearch() {
-    // console.log('Cette fonction est ok !');
-    var search = document.getElementById('search-input').value
-    document.getElementById('results').innerHTML = ""
-    console.log(search)
+$(document).ready(function () {
 
-    $.ajax({
-        url: "https://www.googleapis.com/books/v1/volumes?q=" + search,
-        dataType: "json",
+    $("#searchForm").submit(function (e) {
+        e.preventDefault();
 
-        success: function(data) {
-            console.log(data)
-        },
+        var search = $("#search").val();
+        // console.log(search);
+        
+        $.ajax({
+            url: "https://www.googleapis.com/books/v1/volumes?q=" + search,
+            dataType: "json",
+            type: 'GET',
 
-        type: 'GET'
+            success: function (data) {
+                console.log(data)
+            }
+        });
     });
-}
+});
 
-document.getElementById('button-search').addEventListener('click', booksearch, false);
+
+
+
+
+
+
+// function booksearch() {
+// console.log('Cette fonction est ok !');
+// var search = document.getElementById('search-input').value
+// document.getElementById('results').innerHTML = ""
+// console.log(search)
+
+// $.ajax({
+//     url: "https://www.googleapis.com/books/v1/volumes?q=" + search,
+//     dataType: "json",
+
+//     success: function(data) {
+//         console.log(data)
+//     },
+
+//     type: 'GET'
+// });
+// }
+
+// document.getElementById('button-search').addEventListener('click', booksearch, false);
