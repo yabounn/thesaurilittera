@@ -46,6 +46,12 @@ class Book
      */
     private $category;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="relation")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $authorBook;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +125,18 @@ class Book
     public function setCategory(string $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getAuthorBook(): ?Author
+    {
+        return $this->authorBook;
+    }
+
+    public function setAuthorBook(?Author $authorBook): self
+    {
+        $this->authorBook = $authorBook;
 
         return $this;
     }
