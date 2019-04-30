@@ -18,8 +18,8 @@
 //     });
 // });
 
-function booksearch() {
-    // e.preventDefault();
+function booksearch(e) {
+    e.preventDefault();
 
     var search = document.getElementById('search').value
     document.getElementById('result').innerHTML = ""
