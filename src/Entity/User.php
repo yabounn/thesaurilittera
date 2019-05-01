@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,15 +21,15 @@ class User
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $username;
 
@@ -47,30 +49,23 @@ class User
     private $address;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $nbComment;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
+     */
+    private $commentPosted;
+
+    public function __construct()
+    {
+        $this->commentPosted = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getFirstname(): ?string
@@ -85,12 +80,24 @@ class User
         return $this;
     }
 
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
     public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
 
@@ -133,18 +140,6 @@ class User
         return $this;
     }
 
-    public function getNbComment(): ?int
-    {
-        return $this->nbComment;
-    }
-
-    public function setNbComment(int $nbComment): self
-    {
-        $this->nbComment = $nbComment;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -153,6 +148,37 @@ class User
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getCommentPosted(): Collection
+    {
+        return $this->commentPosted;
+    }
+
+    public function addCommentPosted(Comment $commentPosted): self
+    {
+        if (!$this->commentPosted->contains($commentPosted)) {
+            $this->commentPosted[] = $commentPosted;
+            $commentPosted->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentPosted(Comment $commentPosted): self
+    {
+        if ($this->commentPosted->contains($commentPosted)) {
+            $this->commentPosted->removeElement($commentPosted);
+            // set the owning side to null (unless already changed)
+            if ($commentPosted->getUser() === $this) {
+                $commentPosted->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -19,28 +19,40 @@ class Author
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fisrtname;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="authorId", orphanRemoval=true)
      */
-    private $firstname;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="authorBook", orphanRemoval=true)
-     */
-    private $relation;
+    private $books;
 
     public function __construct()
     {
-        $this->relation = new ArrayCollection();
+        $this->books = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getFisrtname(): ?string
+    {
+        return $this->fisrtname;
+    }
+
+    public function setFisrtname(?string $fisrtname): self
+    {
+        $this->fisrtname = $fisrtname;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -55,43 +67,31 @@ class Author
         return $this;
     }
 
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
-    public function setFirstname(string $firstname): self
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Book[]
      */
-    public function getRelation(): Collection
+    public function getBooks(): Collection
     {
-        return $this->relation;
+        return $this->books;
     }
 
-    public function addRelation(Book $relation): self
+    public function addBook(Book $book): self
     {
-        if (!$this->relation->contains($relation)) {
-            $this->relation[] = $relation;
-            $relation->setAuthorBook($this);
+        if (!$this->books->contains($book)) {
+            $this->books[] = $book;
+            $book->setAuthorId($this);
         }
 
         return $this;
     }
 
-    public function removeRelation(Book $relation): self
+    public function removeBook(Book $book): self
     {
-        if ($this->relation->contains($relation)) {
-            $this->relation->removeElement($relation);
+        if ($this->books->contains($book)) {
+            $this->books->removeElement($book);
             // set the owning side to null (unless already changed)
-            if ($relation->getAuthorBook() === $this) {
-                $relation->setAuthorBook(null);
+            if ($book->getAuthorId() === $this) {
+                $book->setAuthorId(null);
             }
         }
 

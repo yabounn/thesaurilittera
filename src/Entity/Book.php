@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,9 +29,19 @@ class Book
     private $author;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $publisher;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $publishedDate;
+
+    /**
      * @ORM\Column(type="text")
      */
-    private $summary;
+    private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -37,20 +49,20 @@ class Book
     private $cover;
 
     /**
-     * @ORM\Column(type="date")
-     */
-    private $datePublication;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $category;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="relation")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="books")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $authorBook;
+    private $authorId;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="book")
+     */
+    private $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -81,14 +93,38 @@ class Book
         return $this;
     }
 
-    public function getSummary(): ?string
+    public function getPublisher(): ?string
     {
-        return $this->summary;
+        return $this->publisher;
     }
 
-    public function setSummary(string $summary): self
+    public function setPublisher(string $publisher): self
     {
-        $this->summary = $summary;
+        $this->publisher = $publisher;
+
+        return $this;
+    }
+
+    public function getPublishedDate(): ?\DateTimeInterface
+    {
+        return $this->publishedDate;
+    }
+
+    public function setPublishedDate(\DateTimeInterface $publishedDate): self
+    {
+        $this->publishedDate = $publishedDate;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
@@ -105,38 +141,45 @@ class Book
         return $this;
     }
 
-    public function getDatePublication(): ?\DateTimeInterface
+    public function getAuthorId(): ?Author
     {
-        return $this->datePublication;
+        return $this->authorId;
     }
 
-    public function setDatePublication(\DateTimeInterface $datePublication): self
+    public function setAuthorId(?Author $authorId): self
     {
-        $this->datePublication = $datePublication;
+        $this->authorId = $authorId;
 
         return $this;
     }
 
-    public function getCategory(): ?string
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
     {
-        return $this->category;
+        return $this->comments;
     }
 
-    public function setCategory(string $category): self
+    public function addComment(Comment $comment): self
     {
-        $this->category = $category;
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setBook($this);
+        }
 
         return $this;
     }
 
-    public function getAuthorBook(): ?Author
+    public function removeComment(Comment $comment): self
     {
-        return $this->authorBook;
-    }
-
-    public function setAuthorBook(?Author $authorBook): self
-    {
-        $this->authorBook = $authorBook;
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getBook() === $this) {
+                $comment->setBook(null);
+            }
+        }
 
         return $this;
     }

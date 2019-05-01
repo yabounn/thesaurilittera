@@ -17,12 +17,12 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $titleComment;
+    private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $content;
 
@@ -32,28 +32,28 @@ class Comment
     private $createdAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Book", inversedBy="comments")
      */
-    private $titleBook;
+    private $book;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="commentPosted")
      */
-    private $usernameComment;
+    private $user;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitleComment(): ?string
+    public function getTitle(): ?string
     {
-        return $this->titleComment;
+        return $this->title;
     }
 
-    public function setTitleComment(string $titleComment): self
+    public function setTitle(?string $title): self
     {
-        $this->titleComment = $titleComment;
+        $this->title = $title;
 
         return $this;
     }
@@ -82,26 +82,26 @@ class Comment
         return $this;
     }
 
-    public function getTitleBook(): ?string
+    public function getBook(): ?Book
     {
-        return $this->titleBook;
+        return $this->book;
     }
 
-    public function setTitleBook(string $titleBook): self
+    public function setBook(?Book $book): self
     {
-        $this->titleBook = $titleBook;
+        $this->book = $book;
 
         return $this;
     }
 
-    public function getUsernameComment(): ?string
+    public function getUser(): ?User
     {
-        return $this->usernameComment;
+        return $this->user;
     }
 
-    public function setUsernameComment(string $usernameComment): self
+    public function setUser(?User $user): self
     {
-        $this->usernameComment = $usernameComment;
+        $this->user = $user;
 
         return $this;
     }
