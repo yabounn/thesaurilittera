@@ -44,6 +44,11 @@ class User
     private $password;
 
     /**
+     * PAS DE ORM CAR confirm_password n'est pas dans la BDD
+     */
+    private $confirm_password;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $address;
@@ -124,6 +129,18 @@ class User
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getConfirmPassword(): ?string
+    {
+        return $this->confirm_password;
+    }
+
+    public function setConfirmPassword(string $confirm_password): self
+    {
+        $this->confirm_password = $confirm_password;
 
         return $this;
     }
