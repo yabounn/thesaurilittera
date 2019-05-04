@@ -54,12 +54,18 @@
             </div>
             <!-- /.search bar-->
             <ul class="navbar-nav login">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('security_registration') }}">Connexion</a>
-                    <span class="fa-stack fa-2x has-badge" data-count="0">
-                        <i class="fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
-                    </span>
-                </li>
+                {% if not app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
+                        <span class="fa-stack fa-2x has-badge" data-count="0">
+                            <i class="fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
+                        </span>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </nav>

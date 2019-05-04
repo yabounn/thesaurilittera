@@ -2,14 +2,21 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ *  fields={"email"},
+ *  message="L'email est déjà utilisé !"
+ * )
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -35,16 +42,20 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="8", minMessage="Votre mot de passe doit contenir au minimum 8 caractères !")
+     * 
      */
     private $password;
 
     /**
      * PAS DE ORM CAR confirm_password n'est pas dans la BDD
+     * @Assert\EqualTo(propertyPath="password", message="Les mots de passe ne correspondent pas !")
      */
     private $confirm_password;
 
@@ -167,6 +178,23 @@ class User
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    /**
+     * Methode UserInterface 
+     */
+    public function eraseCredentials() {}
+
+    /**
+     * Methode UserInterface 
+     */
+    public function getSalt() {}
+
+    /**
+     * Methode UserInterface 
+     */
+    public function getRoles() {
+        return ['ROLE_USER'];
     }
 
     /**
