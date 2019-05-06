@@ -1,0 +1,50 @@
+{% form_theme formAddedBook 'bootstrap_4_layout.html.twig' %}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Ajouter un livre
+{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un livre </h1>
+
+    {{ form_start(formAddedBook) }}
+    {{ form_errors(formAddedBook) }}
+    {#{{ form_widget(formAddedBook) }}#}
+
+    {{ form_row(formAddedBook.title, {'label': 'Titre', 'attr': {
+        'placeholder': 'Titre du livre ...'}})
+    }}
+    
+    {{ form_row(formAddedBook.author, {'label': 'Auteur', 'attr': {
+        'placeholder': 'Auteur du livre ...'}})
+    }}
+
+    {{ form_row(formAddedBook.publisher, {'label': 'Edition', 'attr': {
+        'placeholder': 'Edition ...'}})
+    }}
+
+    {{ form_row(formAddedBook.publishedDate, {'label': 'Date de publication', 'attr': {
+        'placeholder': 'Date de publication ...'}})
+    }}
+
+    {{ form_row(formAddedBook.description, {'label': 'Résumé', 'attr': {
+        'placeholder': 'Résumé du livre ...'}})
+    }}
+
+    {{ form_row(formAddedBook.publishedDate, {'label': 'Date de publication', 'attr': {
+        'placeholder': 'Date de publication ...'}})
+    }}
+
+    {{ form_row(formAddedBook.cover, {'label': 'Couverture', 'attr': {
+        'placeholder': 'Couverture du livre ...'}})
+    }}
+
+    {{ form_row(formAddedBook.category, {'label': 'Categorie', 'attr': {
+        'placeholder': 'Choisir une catégorie ...'}})
+    }}
+    <button type="submit" class="btn btn-success">Ajouter !</button>
+
+    {{ form_end(formAddedBook) }}
+{% endblock %}

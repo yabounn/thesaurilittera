@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
-class Author
+class Category
 {
     /**
      * @ORM\Id()
@@ -19,17 +19,17 @@ class Author
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $firstname;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $title;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="authorId", orphanRemoval=true)
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="category")
      */
     private $books;
 
@@ -43,26 +43,26 @@ class Author
         return $this->id;
     }
 
-    public function getFirstname(): ?string
+    public function getTitle(): ?string
     {
-        return $this->firstname;
+        return $this->title;
     }
 
-    public function setFirstname(?string $firstname): self
+    public function setTitle(string $title): self
     {
-        $this->firstname = $firstname;
+        $this->title = $title;
 
         return $this;
     }
 
-    public function getName(): ?string
+    public function getDescription(): ?string
     {
-        return $this->name;
+        return $this->description;
     }
 
-    public function setName(string $name): self
+    public function setDescription(?string $description): self
     {
-        $this->name = $name;
+        $this->description = $description;
 
         return $this;
     }
@@ -79,7 +79,7 @@ class Author
     {
         if (!$this->books->contains($book)) {
             $this->books[] = $book;
-            $book->setAuthorId($this);
+            $book->setCategory($this);
         }
 
         return $this;
@@ -90,8 +90,8 @@ class Author
         if ($this->books->contains($book)) {
             $this->books->removeElement($book);
             // set the owning side to null (unless already changed)
-            if ($book->getAuthorId() === $this) {
-                $book->setAuthorId(null);
+            if ($book->getCategory() === $this) {
+                $book->setCategory(null);
             }
         }
 
