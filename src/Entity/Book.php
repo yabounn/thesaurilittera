@@ -5,9 +5,16 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
+ * @Vich\Uploadable
  */
 class Book
 {
@@ -17,6 +24,18 @@ class Book
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @var File
+     * @Vich\UploadableField(mapping="cover_image", fileNameProperty="filename" )
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -39,19 +58,16 @@ class Book
     private $summary;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Cover", mappedBy="book", cascade={"persist", "remove"})
-     */
-    private $cover;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="book")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="book", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="book")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="book", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
+     * 
      */
     private $category;
 
@@ -68,6 +84,30 @@ class Book
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(string $filename): self
+    {
+        $this->filename = $filename;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+
+        return $this;
     }
 
     public function getTitle(): ?string
@@ -114,23 +154,6 @@ class Book
     public function setSummary(string $summary): self
     {
         $this->summary = $summary;
-
-        return $this;
-    }
-
-    public function getCover(): ?Cover
-    {
-        return $this->cover;
-    }
-
-    public function setCover(Cover $cover): self
-    {
-        $this->cover = $cover;
-
-        // set the owning side of the relation if necessary
-        if ($this !== $cover->getBook()) {
-            $cover->setBook($this);
-        }
 
         return $this;
     }

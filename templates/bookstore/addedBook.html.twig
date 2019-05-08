@@ -29,7 +29,7 @@
         'placeholder': 'Date de publication ...'}})
     }}
 
-    {{ form_row(formAddedBook.description, {'label': 'Résumé', 'attr': {
+    {{ form_row(formAddedBook.summary, {'label': 'Résumé', 'attr': {
         'placeholder': 'Résumé du livre ...'}})
     }}
 
@@ -37,10 +37,10 @@
         'placeholder': 'Date de publication ...'}})
     }}
 
-    {{ form_row(formAddedBook.cover, {'label': 'Couverture', 'attr': {
-        'placeholder': 'Couverture du livre ...'}})
+    {{ form_row(formAddedBook.imageFile, {'label': 'Couverture', 'attr': {
+        'placeholder': 'Insérer l\'image de la couverture  ...'}})
     }}
-
+    
     {{ form_row(formAddedBook.category, {'label': 'Categorie', 'attr': {
         'placeholder': 'Choisir une catégorie ...'}})
     }}
