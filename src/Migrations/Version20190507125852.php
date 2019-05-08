@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190506081631 extends AbstractMigration
+final class Version20190507125852 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,9 @@ final class Version20190506081631 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE author CHANGE fisrtname firstname VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE cover ADD book_id INT NOT NULL');
+        $this->addSql('ALTER TABLE cover ADD CONSTRAINT FK_8D0886C516A2B381 FOREIGN KEY (book_id) REFERENCES book (id)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D0886C516A2B381 ON cover (book_id)');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +32,8 @@ final class Version20190506081631 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE author CHANGE firstname fisrtname VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci');
+        $this->addSql('ALTER TABLE cover DROP FOREIGN KEY FK_8D0886C516A2B381');
+        $this->addSql('DROP INDEX UNIQ_8D0886C516A2B381 ON cover');
+        $this->addSql('ALTER TABLE cover DROP book_id');
     }
 }

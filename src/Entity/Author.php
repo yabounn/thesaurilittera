@@ -29,13 +29,13 @@ class Author
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="authorId", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="author", orphanRemoval=true)
      */
-    private $books;
+    private $book;
 
     public function __construct()
     {
-        $this->books = new ArrayCollection();
+        $this->book = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,16 +70,16 @@ class Author
     /**
      * @return Collection|Book[]
      */
-    public function getBooks(): Collection
+    public function getBook(): Collection
     {
-        return $this->books;
+        return $this->book;
     }
 
     public function addBook(Book $book): self
     {
-        if (!$this->books->contains($book)) {
-            $this->books[] = $book;
-            $book->setAuthorId($this);
+        if (!$this->book->contains($book)) {
+            $this->book[] = $book;
+            $book->setAuthor($this);
         }
 
         return $this;
@@ -87,11 +87,11 @@ class Author
 
     public function removeBook(Book $book): self
     {
-        if ($this->books->contains($book)) {
-            $this->books->removeElement($book);
+        if ($this->book->contains($book)) {
+            $this->book->removeElement($book);
             // set the owning side to null (unless already changed)
-            if ($book->getAuthorId() === $this) {
-                $book->setAuthorId(null);
+            if ($book->getAuthor() === $this) {
+                $book->setAuthor(null);
             }
         }
 

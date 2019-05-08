@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190506080251 extends AbstractMigration
+final class Version20190507121513 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,8 +22,7 @@ final class Version20190506080251 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE author CHANGE firstname fisrtname VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE book CHANGE author_id_id author_id_id INT NOT NULL, CHANGE category_id category_id INT NOT NULL');
+        $this->addSql('CREATE TABLE comment (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) DEFAULT NULL, content LONGTEXT NOT NULL, created_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
     }
 
     public function down(Schema $schema) : void
@@ -31,7 +30,6 @@ final class Version20190506080251 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE author CHANGE fisrtname firstname VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE book CHANGE author_id_id author_id_id INT DEFAULT NULL, CHANGE category_id category_id INT DEFAULT NULL');
+        $this->addSql('DROP TABLE comment');
     }
 }

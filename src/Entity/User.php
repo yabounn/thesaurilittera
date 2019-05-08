@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -12,8 +12,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(
- *  fields={"email"},
- *  message="L'email est déjà utilisé !"
+ * fields={"email"},
+ * message="L'email est déjà utilisé !"
  * )
  */
 class User implements UserInterface
@@ -36,7 +36,8 @@ class User implements UserInterface
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * 
      */
     private $username;
 
@@ -49,20 +50,37 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit contenir au minimum 8 caractères !")
-     * 
      */
     private $password;
 
     /**
-     * PAS DE ORM CAR confirm_password n'est pas dans la BDD
      * @Assert\EqualTo(propertyPath="password", message="Les mots de passe ne correspondent pas !")
      */
     private $confirm_password;
-
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
     private $address;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $addressNumber;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $postalCode;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $telephone;
 
     /**
      * @ORM\Column(type="datetime")
@@ -72,11 +90,11 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
      */
-    private $commentPosted;
+    private $comment;
 
     public function __construct()
     {
-        $this->commentPosted = new ArrayCollection();
+        $this->comment = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,7 +131,7 @@ class User implements UserInterface
         return $this->username;
     }
 
-    public function setUsername(?string $username): self
+    public function setUsername(string $username): self
     {
         $this->username = $username;
 
@@ -168,6 +186,54 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getAddressNumber(): ?int
+    {
+        return $this->addressNumber;
+    }
+
+    public function setAddressNumber(?int $addressNumber): self
+    {
+        $this->addressNumber = $addressNumber;
+
+        return $this;
+    }
+
+    public function getPostalCode(): ?int
+    {
+        return $this->postalCode;
+    }
+
+    public function setPostalCode(int $postalCode): self
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?int
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(int $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -183,45 +249,48 @@ class User implements UserInterface
     /**
      * Methode UserInterface 
      */
-    public function eraseCredentials() {}
+    public function eraseCredentials()
+    { }
+    
+    /**
+     * Methode UserInterface 
+     */
+    public function getSalt()
+    { }
 
     /**
      * Methode UserInterface 
      */
-    public function getSalt() {}
-
-    /**
-     * Methode UserInterface 
-     */
-    public function getRoles() {
+    public function getRoles()
+    {
         return ['ROLE_USER'];
     }
 
     /**
      * @return Collection|Comment[]
      */
-    public function getCommentPosted(): Collection
+    public function getComment(): Collection
     {
-        return $this->commentPosted;
+        return $this->comment;
     }
 
-    public function addCommentPosted(Comment $commentPosted): self
+    public function addComment(Comment $comment): self
     {
-        if (!$this->commentPosted->contains($commentPosted)) {
-            $this->commentPosted[] = $commentPosted;
-            $commentPosted->setUser($this);
+        if (!$this->comment->contains($comment)) {
+            $this->comment[] = $comment;
+            $comment->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeCommentPosted(Comment $commentPosted): self
+    public function removeComment(Comment $comment): self
     {
-        if ($this->commentPosted->contains($commentPosted)) {
-            $this->commentPosted->removeElement($commentPosted);
+        if ($this->comment->contains($comment)) {
+            $this->comment->removeElement($comment);
             // set the owning side to null (unless already changed)
-            if ($commentPosted->getUser() === $this) {
-                $commentPosted->setUser(null);
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
             }
         }
 

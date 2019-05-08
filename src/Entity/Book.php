@@ -26,11 +26,6 @@ class Book
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $author;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $publisher;
 
     /**
@@ -41,29 +36,29 @@ class Book
     /**
      * @ORM\Column(type="text")
      */
-    private $description;
+    private $summary;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToOne(targetEntity="App\Entity\Cover", mappedBy="book", cascade={"persist", "remove"})
      */
     private $cover;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="books")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="book")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $authorId;
+    private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="book")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="book")
      */
     private $comments;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="books")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $category;
 
     public function __construct()
     {
@@ -83,18 +78,6 @@ class Book
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
 
         return $this;
     }
@@ -123,38 +106,55 @@ class Book
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getSummary(): ?string
     {
-        return $this->description;
+        return $this->summary;
     }
 
-    public function setDescription(string $description): self
+    public function setSummary(string $summary): self
     {
-        $this->description = $description;
+        $this->summary = $summary;
 
         return $this;
     }
 
-    public function getCover(): ?string
+    public function getCover(): ?Cover
     {
         return $this->cover;
     }
 
-    public function setCover(string $cover): self
+    public function setCover(Cover $cover): self
     {
         $this->cover = $cover;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $cover->getBook()) {
+            $cover->setBook($this);
+        }
 
         return $this;
     }
 
-    public function getAuthorId(): ?Author
+    public function getAuthor(): ?Author
     {
-        return $this->authorId;
+        return $this->author;
     }
 
-    public function setAuthorId(?Author $authorId): self
+    public function setAuthor(?Author $author): self
     {
-        $this->authorId = $authorId;
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
@@ -186,18 +186,6 @@ class Book
                 $comment->setBook(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
 
         return $this;
     }

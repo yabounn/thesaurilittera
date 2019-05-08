@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190506082026 extends AbstractMigration
+final class Version20190507132743 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,9 @@ final class Version20190506082026 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE author CHANGE fisrtname  VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE comment ADD book_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526C16A2B381 FOREIGN KEY (book_id) REFERENCES book (id)');
+        $this->addSql('CREATE INDEX IDX_9474526C16A2B381 ON comment (book_id)');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +32,8 @@ final class Version20190506082026 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE author CHANGE firstname  VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci');
+        $this->addSql('ALTER TABLE comment DROP FOREIGN KEY FK_9474526C16A2B381');
+        $this->addSql('DROP INDEX IDX_9474526C16A2B381 ON comment');
+        $this->addSql('ALTER TABLE comment DROP book_id');
     }
 }

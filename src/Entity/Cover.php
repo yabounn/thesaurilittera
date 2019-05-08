@@ -21,6 +21,12 @@ class Cover
      */
     private $name;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Book", inversedBy="cover", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $book;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +40,18 @@ class Cover
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getBook(): ?Book
+    {
+        return $this->book;
+    }
+
+    public function setBook(Book $book): self
+    {
+        $this->book = $book;
 
         return $this;
     }
