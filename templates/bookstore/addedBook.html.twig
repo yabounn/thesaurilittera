@@ -2,49 +2,65 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    Ajouter un livre
-{% endblock %}
+{% block title %}Ajouter un livre{% endblock %}
+
 
 {% block body %}
+<div class="container">
     <h1>Ajouter un livre </h1>
 
-    {{ form_start(formAddedBook) }}
-    {{ form_errors(formAddedBook) }}
-    {#{{ form_widget(formAddedBook) }}#}
+    <div class="jumbotron">
+        {{ form_start(formAddedBook) }}
+        
+        {#{{ dump() }}#}
 
-    {{ form_row(formAddedBook.title, {'label': 'Titre', 'attr': {
+        <div class="form-group">
+            {{ form_row(formAddedBook.title, {'label': 'Titre', 'attr': {
         'placeholder': 'Titre du livre ...'}})
-    }}
-    
-    {{ form_row(formAddedBook.author, {'label': 'Auteur', 'attr': {
-        'placeholder': 'Auteur du livre ...'}})
-    }}
+            }}
+        </div>
+        <div class="form-group">
+            {{ form_row(formAddedBook.author, {'label': 'Auteur'})
+        }}
+        </div>
 
-    {{ form_row(formAddedBook.publisher, {'label': 'Edition', 'attr': {
-        'placeholder': 'Edition ...'}})
-    }}
+        <div class="form-group">
+            {{ form_row(formAddedBook.publisher, {'label': 'Editions', 'attr': {
+        'placeholder': 'Editions ...'}})
+            }}
+        </div>
 
-    {{ form_row(formAddedBook.publishedDate, {'label': 'Date de publication', 'attr': {
+        <div class="form-group">
+            {{ form_row(formAddedBook.publishedDate, {'label': 'Date de publication', 'attr': {
         'placeholder': 'Date de publication ...'}})
-    }}
+            }}
+        </div>
 
-    {{ form_row(formAddedBook.summary, {'label': 'Résumé', 'attr': {
+        <div class="form-group">
+            {{ form_row(formAddedBook.summary, {'label': 'Résumé', 'attr': {
         'placeholder': 'Résumé du livre ...'}})
-    }}
+            }}
+        </div>
 
-    {{ form_row(formAddedBook.publishedDate, {'label': 'Date de publication', 'attr': {
+        <div class="form-group">
+            {{ form_row(formAddedBook.publishedDate, {'label': 'Date de publication', 'attr': {
         'placeholder': 'Date de publication ...'}})
-    }}
-
-    {{ form_row(formAddedBook.imageFile, {'label': 'Couverture', 'attr': {
+            }}
+        </div>
+        <div class="form-group">
+            {{ form_row(formAddedBook.imageFile, {'label': 'Couverture', 'attr': {
         'placeholder': 'Insérer l\'image de la couverture  ...'}})
-    }}
-    
-    {{ form_row(formAddedBook.category, {'label': 'Categorie', 'attr': {
+            }}
+        </div>
+        <div class="form-group">
+            {{ form_row(formAddedBook.category, {'label': 'Categorie', 'attr': {
         'placeholder': 'Choisir une catégorie ...'}})
-    }}
-    <button type="submit" class="btn btn-success">Ajouter !</button>
+            }}
+        </div>
 
-    {{ form_end(formAddedBook) }}
+        <button type="submit" class="btn btn-success">Ajouter !</button>
+
+        {{ form_end(formAddedBook) }}
+    </div>
+</div>
 {% endblock %}

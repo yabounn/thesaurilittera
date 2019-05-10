@@ -3,81 +3,83 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>Inscrivez-vous</h1>
-<div class="jumbroton">
-    {{ form_start(formRegistration) }}
-    {# {{ form_widget(formRegistration) }} #}
+<div class="container">
+    <h1>Inscrivez-vous</h1>
+    <div class="jumbroton">
+        {{ form_start(formRegistration) }}
+        {# {{ form_widget(formRegistration) }} #}
 
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            {{ form_row(formRegistration.firstname, {'label': 'Prénom', 'attr': {
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                {{ form_row(formRegistration.firstname, {'label': 'Prénom', 'attr': {
         'placeholder': 'Prénom ...'}})
-            }}
-        </div>
-        <div class="form-group col-md-6">
-            {{ form_row(formRegistration.name, {'label': 'Nom', 'attr': {
+                }}
+            </div>
+            <div class="form-group col-md-6">
+                {{ form_row(formRegistration.name, {'label': 'Nom', 'attr': {
         'placeholder': 'Nom ...'}})
-            }}
+                }}
+            </div>
         </div>
-    </div>
 
-    <div class="form-row">
-        {{ form_row(formRegistration.username, {'label': 'Pseudo', 'attr': {
+        <div class="form-row">
+            {{ form_row(formRegistration.username, {'label': 'Pseudo', 'attr': {
         'placeholder': 'Pseudo ...'}})
-        }}
-    </div>
+            }}
+        </div>
 
-    <div class="form-row">
-        {{ form_row(formRegistration.email, {'label': 'Adresse email', 'attr': {
+        <div class="form-row">
+            {{ form_row(formRegistration.email, {'label': 'Adresse email', 'attr': {
         'placeholder': 'Adresse email ...'}})
-        }}
-    </div>
+            }}
+        </div>
 
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            {{ form_row(formRegistration.password, {'label': 'Mot de passe', 'attr': {
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                {{ form_row(formRegistration.password, {'label': 'Mot de passe', 'attr': {
         'placeholder': 'Mot de passe ...'}})
-            }}
-        </div>
-        <div class="form-group col-md-6">
-            {{ form_row(formRegistration.confirm_password, {'label': 'Confirmation du mot de passe', 'attr': {
+                }}
+            </div>
+            <div class="form-group col-md-6">
+                {{ form_row(formRegistration.confirm_password, {'label': 'Confirmation du mot de passe', 'attr': {
         'placeholder': 'Confirmez votre mot de passe ...'}})
+                }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_row(formRegistration.address, {'label': 'Adresse postale', 'attr': {
+            'placeholder': 'Adresse postale ...'}})
             }}
         </div>
-    </div>
 
-    <div class="form-group">
-        {{ form_row(formRegistration.address, {'label': 'Adresse postale', 'attr': {
-            'placeholder': 'Adresse postale ...'}})
-        }}
-    </div>
-
-    <div class="form-group">
-        {{ form_row(formRegistration.addressNumber, {'label': 'Numéro', 'attr': {
+        <div class="form-group">
+            {{ form_row(formRegistration.addressNumber, {'label': 'Numéro', 'attr': {
             'placeholder': 'Numéro ...'}})
-        }}
-    </div>
+            }}
+        </div>
 
-    <div class="form-group">
-        {{ form_row(formRegistration.postalCode, {'label': 'Code postal', 'attr': {
+        <div class="form-group">
+            {{ form_row(formRegistration.postalCode, {'label': 'Code postal', 'attr': {
             'placeholder': 'Code postal ...'}})
-        }}
-    </div>
+            }}
+        </div>
 
-    <div class="form-group">
-        {{ form_row(formRegistration.city, {'label': 'Ville', 'attr': {
+        <div class="form-group">
+            {{ form_row(formRegistration.city, {'label': 'Ville', 'attr': {
             'placeholder': 'Ville ...'}})
-        }}
-    </div>
+            }}
+        </div>
 
-    <div class="form-group">
-        {{ form_row(formRegistration.telephone, {'label': 'Telephone', 'attr': {
+        <div class="form-group">
+            {{ form_row(formRegistration.telephone, {'label': 'Telephone', 'attr': {
             'placeholder': 'Telephone ...'}})
-        }}
+            }}
+        </div>
+        <button type="submit" class="btn btn-success">Inscription!</button>
+
+        {{ form_end(formRegistration)}}
+
     </div>
-    <button type="submit" class="btn btn-success">Inscription!</button>
-
-    {{ form_end(formRegistration)}}
-
 </div>
 {% endblock %}

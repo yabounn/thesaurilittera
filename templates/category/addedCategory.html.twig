@@ -1,0 +1,17 @@
+{% form_theme formAddedCategory 'bootstrap_4_layout.html.twig' %}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une catégorie{% endblock %}
+
+
+{% block body %}
+    {{ form_start(formAddedCategory)}}
+
+    {{ form_widget(formAddedCategory) }}
+
+    <button class="btn btn-primary">Ajouter !</button>
+
+    {{ form_end (formAddedCategory)}}
+
+{% endblock %}
