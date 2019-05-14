@@ -1,0 +1,41 @@
+{% extends 'base.html.twig'%}
+
+{% block title 'Ajouter un livre'%}
+
+{% block body %}
+<div class="container">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">  
+                    <div class="col-md-6">
+                        <h3>{{book.title}}</h3>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>{{author.name}}</h4>
+                        <h5>{{book.publishedDate|date("d/m/Y")}}</h5>
+                        <h5>{{book.publisher}}</h5>
+                    </div>
+                    <div class="row col-md-12 mt-4">
+                        <h6>{{book.summary}}</h6>
+                    </div>            
+                </div>
+            </div>
+            <div class="col-md-4">
+                <img src="{{ asset('images/covers/extra-danse.jpg')}}" alt="festival extra danse">
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron-white">
+        <p>Prix</p>
+        <p>Quantité</p>
+        <p>Ajouter au panier</p>
+    </div>
+
+    <p>Retour à la librairie</p>
+    <p>Haut de la page</p>
+</div>
+
+
+{% endblock %}

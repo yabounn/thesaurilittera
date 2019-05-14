@@ -41,11 +41,7 @@ class AddedBookType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Book::class,
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
-            'csrf_token_id' => 'book_item',
- 
+            'data_class' => Book::class
         ]);
     }
 }

@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\Author;
 use App\Form\AddedBookType;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BookstoreController extends AbstractController
 {
@@ -22,7 +23,7 @@ class BookstoreController extends AbstractController
     }
 
     /**
-     * @Route("/livre", name="addedBook")
+     * @Route("/book/add", name="addedBook")
      */
 
     public function addedBook(Request $request, ObjectManager $manager)
@@ -42,6 +43,29 @@ class BookstoreController extends AbstractController
 
         return $this->render('bookstore/addedBook.html.twig', [
             'formAddedBook' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/book/{id}", name="showBook", requirements={"id"="\d+"})
+     */
+    public function showBook($id)
+    {
+        $book = $this->getDoctrine()
+            ->getRepository(Book::class)
+            ->find($id);
+
+        if (!$book) {
+            throw $this->createNotFoundException('Aucun livre ne correspond à l\'id'.$id);
+        }
+
+        $author = $this->getDoctrine()
+            ->getRepository(Author::class)
+            ->find($id);
+
+        return $this->render('bookstore/showBook.html.twig', [
+            'book' => $book,
+            'author' => $author
         ]);
     }
 }

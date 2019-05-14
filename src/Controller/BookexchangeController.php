@@ -14,6 +14,7 @@ class BookexchangeController extends AbstractController
     {
         return $this->render('bookexchange/index.html.twig', [
             'controller_name' => 'BookexchangeController',
+            'current_menu' => 'bookexchange'
         ]);
     }
 }
