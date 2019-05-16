@@ -1,21 +1,31 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Connexion !{% endblock %}
+
 {% block body %}
-    <h2>Veuillez indiquer vos identifiants !</h2>
+<div class="container">
+    <form method="post">
+        {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
 
-    <form action="{{ path('security_login') }}" method="post">
-
-        <div class="form-label-group">
-            <label for="email">Adresse email</label>
-            <input type="text" id="email" class="form-control" name="_username" placeholder="Adresse email ..." required/>
-        </div>
-        <div class="form-label-group">
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" class="form-control" name="_password" placeholder="Mot de passe" required/>
+        <h2 class="h3 mb-4 mt-4 font-weight-normal">Merci de renseigner vos identifiants !</h2>
+        <div class="form-group">
+            <label for="inputEmail" class="sr-only">Email</label>
+            <input type="email" value="{{ last_username }}" name="_username" id="inputEmail" class="form-control"
+                placeholder="Adresse email ..." required autofocus>
         </div>
         <div class="form-group">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="_password" id="inputPassword" class="form-control"
+                placeholder="Mot de passe ..." required>
+        </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <div class="form-group">
             <button type="submit" class="btn btn-success">Connexion !</button>
-            <a href="{{ path('security_registration') }}">Je n'ai pas de compte</a>
+            <p><a href="{{ path('security_registration') }}">Je n'ai pas de compte</a></p>
         </div>
     </form>
+</div>
 {% endblock %}

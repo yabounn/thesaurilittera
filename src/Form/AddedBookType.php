@@ -27,7 +27,7 @@ class AddedBookType extends AbstractType
             ])
             ->add('summary', TextareaType::class)
             ->add('imageFile', FileType::class)
-            // ->add('category', CategoryType::class)
+            ->add('price')
             ->add('category', EntityType::class, [
                 'class' => 'App\Entity\Category',
                 'choice_label' => 'title',

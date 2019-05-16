@@ -57,13 +57,19 @@
                 {% if not app.user %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
+                        <a style="color: #060606;" href=""><span class="fa-stack has-badge">
+                                <i class="fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
+                            </span><b>(0)</b></a>
                     </li>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
-                        <span class="fa-stack fa-2x has-badge" data-count="0">
+                        <a style="color: #060606;" href=""><span class="fa-stack has-badge">
+                                <i class="fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
+                            </span><b>(0)</b></a>
+                        <!-- <span class="fa-stack fa-2x has-badge" data-count="0">
                             <i class="fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
-                        </span>
+                        </span> -->
                     </li>
                 {% endif %}
             </ul>
@@ -74,7 +80,7 @@
     
     {% endblock %}
     <!-- Footer -->
-    <footer class="page-footer font-small blue-gry lighten-5 pt-4">
+    <footer class="page-footer font-small blue-gry lighten-5  mt-4 pt-4">
 
         <!-- Footer Links -->
         <div class="container text-center text-md-left">

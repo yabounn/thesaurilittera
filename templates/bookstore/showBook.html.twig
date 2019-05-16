@@ -2,32 +2,77 @@
 
 {% block title 'Ajouter un livre'%}
 
-{% block body %}
-<div class="container">
-    <div class="jumbotron">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="row">  
-                    <div class="col-md-6">
-                        <h3>{{book.title}}</h3>
-                    </div>
-                    <div class="col-md-6">
-                        <h4>{{author.name}}</h4>
-                        <h5>{{book.publishedDate|date("d/m/Y")}}</h5>
-                        <h5>{{book.publisher}}</h5>
-                    </div>
-                    <div class="row col-md-12 mt-4">
-                        <h6>{{book.summary}}</h6>
-                    </div>            
-                </div>
-            </div>
-            <div class="col-md-4">
-                <img src="{{ asset('images/covers/extra-danse.jpg')}}" alt="festival extra danse">
-            </div>
-        </div>
-    </div>
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('css/bookstore/showbook.css') }}" rel="stylesheet" />
+{% endblock stylesheets%}
 
-    <div class="jumbotron-white">
+{% block body %}
+<!-- Container one-book-->
+<div class="container one-book">
+    <!-- Row -->
+    <div class="row">
+        <!-- First -->
+        <div class="first col-lg-8 col-12">
+            <!-- Section info-book -->
+            <section class="info-book">
+                <!-- Section-inner -->
+                <div class="section-inner">
+                    <h3 class="info-book">Informations sur le livre</h3>
+                    <!-- Item row -->
+                    <div class="item row mt-4">
+                        <div class="col-md-2 col-12">
+                            <img src="{{ asset('images/covers/extra-danse.jpg')}}" style="width: inherit"
+                                alt="festival extra danse">
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <h3>{{book.title}}</h3>
+                            <h4>{{author.name}}</h4>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <p><b>Paru le :</b> {{book.publishedDate|date("d/m/Y")}}</p>
+                            <p><b>Editeur :</b> {{book.publisher}}</p>
+                        </div>
+                        <div class="row col-md-8 col-12 mt-4">
+                            <p><b>Résumé :</b> {{book.summary}}</p>
+                        </div>
+                    </div>
+                    <!-- /.item row -->
+                </div>
+                <!-- /.section-inner -->
+            </section>
+            <!-- /.section info-book  -->
+        </div>
+        <!-- /.first -->
+        <!-- second -->
+        <div class="second col-lg-4 col-12">
+            <section class="buy-book">
+                <!-- Section-inner -->
+                <div class="section-inner">
+                    <h3 class="buy-book">Acheter ce livre</h3>
+                    <div class="item row mt-4">
+                        <div class="col-md-6 offset-md-3">
+                            <p><b>Prix (euros) : </b> 10,00 </p>
+                        </div>
+                        <div class="col-md-6 offset-md-3">
+                            <form action="">
+                                <select name="qté" id="">
+                                    <option value="">1</option>
+                                </select>
+                                <button class="btn btn-success">Ajouter au panier !</button>
+                            </form>    
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- /.second -->
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container one-book -->
+
+{#<div class="jumbotron-white">
         <p>Prix</p>
         <p>Quantité</p>
         <p>Ajouter au panier</p>
@@ -35,7 +80,5 @@
 
     <p>Retour à la librairie</p>
     <p>Haut de la page</p>
-</div>
-
-
+</div>#}
 {% endblock %}
