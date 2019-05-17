@@ -9,16 +9,36 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use App\Repository\BookRepository;
 
 class BookstoreController extends AbstractController
 {
+
+    /**
+     * @var BookRepository
+     */
+    private $repository;
+
+    public function __construct(BookRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * @Route("/bookstore", name="bookstore")
+     * @return Response
      */
-    public function index()
+    public function index() : Response 
     {
+        // $repository = $this->getDoctrine()->getRepository(Book::class);
+        // dump($repository);
+        $books = $this->repository->findAll();
+        // dump($books);
+
         return $this->render('bookstore/index.html.twig', [
             'current_menu' => 'bookstore',
+            'books' => $books
         ]);
     }
 
@@ -48,8 +68,9 @@ class BookstoreController extends AbstractController
 
     /**
      * @Route("/book/{id}", name="showBook", requirements={"id"="\d+"})
+     * @return response
      */
-    public function showBook($id)
+    public function showBook($id) : Response
     {
         $book = $this->getDoctrine()
             ->getRepository(Book::class)

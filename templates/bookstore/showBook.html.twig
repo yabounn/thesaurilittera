@@ -1,6 +1,6 @@
 {% extends 'base.html.twig'%}
 
-{% block title 'Ajouter un livre'%}
+{% block title 'Informations sur le livre'%}
 
 {% block stylesheets %}
 {{ parent() }}
@@ -22,7 +22,7 @@
                     <!-- Item row -->
                     <div class="item row mt-4">
                         <div class="col-md-2 col-12">
-                            <img src="{{ asset('images/covers/extra-danse.jpg')}}" style="width: inherit"
+                            <img src="{{ asset('images/covers/')}}{{book.filename}}" style="width: inherit"
                                 alt="festival extra danse">
                         </div>
                         <div class="col-md-6 col-12">

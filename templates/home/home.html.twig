@@ -16,19 +16,22 @@
         <div class="row col-md-12 homepage">
             <div class="col-md-8">
                 <div class="row carousel-selection">
+                    <!-- Section-carousel -->
                     <div class=" col-md-12 section-carousel">
-                        <h3>En ce moment ...</h3>
+                        <h3>En ce moment...</h3>
                         <section class="section-preview text-center">
+                            {% set blimit = 3 %}
+                            {% if books|length != 0 %}
                             <!-- Carousel content  -->
                             <div id="option" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators pagination -->
                                 <ul class="carousel-indicators">
                                     <li data-target="#option" data-slide-to="0" class="active"></li>
                                     <li data-target="#option" data-slide-to="1"></li>
-                                    <li data-target="#option" data-slide-to="2"></li>
+                                    <!-- <li data-target="#option" data-slide-to="2"></li>
                                     <li data-target="#option" data-slide-to="3"></li>
                                     <li data-target="#option" data-slide-to="4"></li>
-                                    <li data-target="#option" data-slide-to="5"></li>
+                                    <li data-target="#option" data-slide-to="5"></li> -->
                                 </ul>
                                 <!-- /.indicators pagination -->
                                 <!--Controls-->
@@ -39,136 +42,44 @@
                                             class="fas fa-chevron-right fa-2x"></i></a>
                                 </div>
                                 <!--/.Controls-->
-                                <!-- slides -->
+
+                                <!-- Carousel-inner -->
                                 <div class="carousel-inner" role="listbox">
-
                                     <div class="carousel-item active">
+                                        {% for book in books %}
                                         <div class="col-12 col-md-4">
                                             <div class="card mb-2">
-                                                <img class="card-img-top" src="{{ asset('images/ancient-books.jpg') }}"
-                                                    alt="Livre antique">
+                                                <img class="card-img-top" src="{{ asset('images/covers/')}}{{book.filename}}"
+                                                    alt="{{book.title}}">
                                                 <div class="card-body">
-                                                    <h4 class="card-title font-weight-bold">Titre du livre 1</h4>
-                                                    <h4 class="card-text">Auteur</h4>
-                                                    <h5 class="card-text">Categorie</h5>
-                                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur
-                                                        adipisicing
-                                                        elit.
-                                                        Distinctio
-                                                        nobis asperiores dolores.</p>
-                                                    <a href="#" class="btn btn-primary btn-md btn-rounded ">Plus</a>
+                                                    <h5 class="card-title font-weight-bold">{{book.title}}</h5>
+                                                    <h5 class="card-text">{{book.author.firstname}} {{book.author.name}}</h5>
+                                                    <h6 class="card-text">{{book.category.title}}</h6>
+                                                    <p class="card-text">{{book.summary | slice(0, 200)}} [...]</p>
+                                                    <a href="{{path('showBook', {id: book.id})}}" class="btn btn-primary btn-md btn-rounded ">Plus</a>
                                                 </div>
                                             </div>
                                         </div>
+                                        {% if loop.index % blimit == 0 and not loop.last %}
                                     </div>
+                                    <!-- /.carousel-item active -->
 
+                                    <!-- carousel-item -->
                                     <div class="carousel-item">
-                                        <div class="col-12 col-md-4">
-                                            <div class="card mb-2">
-                                                <img class="card-img-top" src="{{ asset('images/ancient-books.jpg') }}"
-                                                    alt="Livre antique">
-                                                <div class="card-body">
-                                                    <h4 class="card-title font-weight-bold">Titre du livre 2</h4>
-                                                    <h4 class="card-text">Auteur</h4>
-                                                    <h5 class="card-text">Categorie</h5>
-                                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur
-                                                        adipisicing
-                                                        elit.
-                                                        Distinctio
-                                                        nobis asperiores dolores.</p>
-                                                    <a href="#" class="btn btn-primary btn-md btn-rounded ">Plus</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                      {% endif %}
+                                      {% endfor %}  
                                     </div>
-
-                                    <div class="carousel-item">
-                                        <div class="col-12 col-md-4">
-                                            <div class="card mb-2">
-                                                <img class="card-img-top" src="{{ asset('images/book-pages.jpg') }}"
-                                                    alt="Livre ouvert">
-                                                <div class="card-body">
-                                                    <h4 class="card-title font-weight-bold">Titre du livre 3</h4>
-                                                    <h4 class="card-text">Auteur</h4>
-                                                    <h5 class="card-text">Categorie</h5>
-                                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur
-                                                        adipisicing
-                                                        elit.
-                                                        Distinctio
-                                                        nobis asperiores dolores.</p>
-                                                    <a href="#" class="btn btn-primary btn-md btn-rounded ">Plus</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="carousel-item">
-                                        <div class="col-12 col-md-4">
-                                            <div class="card mb-2">
-                                                <img class="card-img-top" src="{{ asset('images/ancient-books.jpg') }}"
-                                                    alt="Livre antique">
-                                                <div class="card-body">
-                                                    <h4 class="card-title font-weight-bold">Titre du livre 4</h4>
-                                                    <h4 class="card-text">Auteur</h4>
-                                                    <h5 class="card-text">Categorie</h5>
-                                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur
-                                                        adipisicing
-                                                        elit.
-                                                        Distinctio
-                                                        nobis asperiores dolores.</p>
-                                                    <a href="#" class="btn btn-primary btn-md btn-rounded ">Plus</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="carousel-item">
-                                        <div class="col-12 col-md-4">
-                                            <div class="card mb-2">
-                                                <img class="card-img-top" src="{{ asset('images/book-pages.jpg') }}"
-                                                    alt="Livre ouvert">
-                                                <div class="card-body">
-                                                    <h4 class="card-title font-weight-bold">Titre du livre 5</h4>
-                                                    <h4 class="card-text">Auteur</h4>
-                                                    <h5 class="card-text">Categorie</h5>
-                                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur
-                                                        adipisicing
-                                                        elit.
-                                                        Distinctio
-                                                        nobis asperiores dolores.</p>
-                                                    <a href="#" class="btn btn-primary btn-md btn-rounded ">Plus</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="carousel-item">
-                                        <div class="col-12 col-md-4">
-                                            <div class="card mb-2">
-                                                <img class="card-img-top" src="{{ asset('images/ancient-books.jpg') }}"
-                                                    alt="Livre antique">
-                                                <div class="card-body">
-                                                    <h4 class="card-title font-weight-bold">Titre du livre 6</h4>
-                                                    <h4 class="card-text">Auteur</h4>
-                                                    <h5 class="card-text">Categorie</h5>
-                                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur
-                                                        adipisicing
-                                                        elit.
-                                                        Distinctio
-                                                        nobis asperiores dolores.</p>
-                                                    <a href="#" class="btn btn-primary btn-md btn-rounded ">Plus</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!-- /.carousel-item -->
                                 </div>
-                                <!-- /.slides -->
+                                <!-- /.carousel-inner -->
                             </div>
                             <!-- /.carousel content -->
+                            {% endif %}
                         </section>
                         <!-- /.section-preview -->
                     </div>
                     <!-- /.section-carousel -->
+
                     <div class="col-md-12 book-selection ">
                         <h3>Sélection du livre de la semaine</h3>
                         <section class="card-selection">
@@ -190,9 +101,11 @@
                             </div>
                         </section>
                     </div>
+                    <!-- /.book-selection -->
                 </div>
                 <!-- /.row carousel-selection -->
             </div>
+            <!-- /.col-md-8 -->
 
             <div class="col-md-4 best-selling">
                 <div class="row book-comment">
@@ -216,26 +129,29 @@
                         <div class="jumbotron">
                             <h4 class="talk-about">On en parle</h4>
                             <div class="card">
-                                    <a href="#">
-                                        <div class="card-header">
-                                            <h5>Titre du livre 1</h5>
-                                        </div>
-                                    </a>
-                                    <a href="#"></a>
-                                        <div class="card-content">
-                                            <p class="card-author">Jean</p>
-                                            <p>a laissé ce commentaire :</p>
-                                            <p class="card-content"><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum exercitationem atque, nemo corrupti in blanditiis voluptatum? Ipsum, fugiat dolore possimus sed delectus quisquam vel atque vitae harum. Blanditiis, ratione hic!</span></p>
-                                        </div>
-                                        <div class="card-action">
-                                            <ul class="tools">
-                                                <li><i class="fas fa-heart"></i><span class="tools-item-counter">14</span></li>
-                                                <li><i class="fas fa-comment"></i><span class="tools-item-counter">5</span></li>
-                                                <li><i class="fas fa-eye"></i><span class="tools-item-counter">230</span></li>
-                                            </ul>
-                                        </div>
-                                    </a>
+                                <a href="#">
+                                    <div class="card-header">
+                                        <h5>Titre du livre 1</h5>
+                                    </div>
+                                </a>
+                                <a href="#"></a>
+                                <div class="card-content">
+                                    <p class="card-author">Jean</p>
+                                    <p>a laissé ce commentaire :</p>
+                                    <p class="card-content"><span>Lorem ipsum dolor sit amet consectetur adipisicing
+                                            elit. Eum exercitationem atque, nemo corrupti in blanditiis voluptatum?
+                                            Ipsum, fugiat dolore possimus sed delectus quisquam vel atque vitae harum.
+                                            Blanditiis, ratione hic!</span></p>
                                 </div>
+                                <div class="card-action">
+                                    <ul class="tools">
+                                        <li><i class="fas fa-heart"></i><span class="tools-item-counter">14</span></li>
+                                        <li><i class="fas fa-comment"></i><span class="tools-item-counter">5</span></li>
+                                        <li><i class="fas fa-eye"></i><span class="tools-item-counter">230</span></li>
+                                    </ul>
+                                </div>
+                                </a>
+                            </div>
                         </div>
                         <!-- /.jumbotron -->
                     </div>
@@ -245,7 +161,9 @@
         </div>
         <!-- /.grid row homepage -->
     </div>
+    <!-- /.container -->
 </main>
+
 {% endblock body %}
 
 {% block javascripts %}
