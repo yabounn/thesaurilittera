@@ -27,14 +27,14 @@
                         </div>
                         <div class="col-md-6 col-12">
                             <h3>{{book.title}}</h3>
-                            <h4>{{author.name}}</h4>
+                            <h4>{{book.author.name}}</h4>
                         </div>
                         <div class="col-md-4 col-12">
                             <p><b>Paru le :</b> {{book.publishedDate|date("d/m/Y")}}</p>
                             <p><b>Editeur :</b> {{book.publisher}}</p>
                         </div>
                         <div class="row col-md-8 col-12 mt-4">
-                            <p><b>Résumé :</b> {{book.summary}}</p>
+                            <p><b>Résumé :</b> {{book.summary | nl2br}}</p>
                         </div>
                     </div>
                     <!-- /.item row -->
@@ -52,9 +52,9 @@
                     <h3 class="buy-book">Acheter ce livre</h3>
                     <div class="item row mt-4">
                         <div class="col-md-6 offset-md-3">
-                            <p><b>Prix (euros) : </b> 10,00 </p>
+                            <p><b>Prix : </b> 10,00 €</p>
                         </div>
-                        <div class="col-md-6 offset-md-3">
+                        <div class="col-md-6 offset-md-3 mt-4">
                             <form action="">
                                 <select name="qté" id="">
                                     <option value="">1</option>

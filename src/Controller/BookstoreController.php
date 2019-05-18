@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Book;
-use App\Entity\Author;
 use App\Form\AddedBookType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -68,25 +67,21 @@ class BookstoreController extends AbstractController
 
     /**
      * @Route("/book/{id}-{slug}", name="showBook", requirements={"id": "\d+", "slug": "[a-z0-9\-]*"})
+     * @param Book $book
      * @return response
      */
-    public function showBook($id) : Response
+    public function showBook(Book $book, string $slug) : Response // Injection de dependance en param, SF sait quel id envoyer
     {
-        $book = $this->getDoctrine()
-            ->getRepository(Book::class)
-            ->find($id);
-
-        if (!$book) {
-            throw $this->createNotFoundException('Aucun livre ne correspond à l\'id'.$id);
+        // Vérifie si slug ok en "ème param on passe une 301 (redirect perm)
+        if ($book->getSlug() !== $slug) {
+            return $this->redirectToRoute('showBook', [
+                'id' => $book->getId(),
+                'slug' => $book->getSlug()
+            ], 301);
         }
-
-        $author = $this->getDoctrine()
-            ->getRepository(Author::class)
-            ->find($id);
 
         return $this->render('bookstore/showBook.html.twig', [
             'book' => $book,
-            'author' => $author
         ]);
     }
 }
