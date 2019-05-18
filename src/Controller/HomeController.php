@@ -34,7 +34,6 @@ class HomeController extends AbstractController
     {
         $books = $this->repository->findAll();
         
-
         return $this->render('home/home.html.twig', [
             'current_menu' => 'home',
             'books' => $books,

@@ -67,7 +67,7 @@ class BookstoreController extends AbstractController
     }
 
     /**
-     * @Route("/book/{id}", name="showBook", requirements={"id"="\d+"})
+     * @Route("/book/{id}-{slug}", name="showBook", requirements={"id": "\d+", "slug": "[a-z0-9\-]*"})
      * @return response
      */
     public function showBook($id) : Response

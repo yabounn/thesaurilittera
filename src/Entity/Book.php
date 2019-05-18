@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Cocur\Slugify\Slugify;
 
 
 
@@ -81,6 +82,7 @@ class Book
      */
     private $price;
 
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -125,6 +127,14 @@ class Book
         $this->title = $title;
 
         return $this;
+    }
+
+    public function getSlug() : ?string
+    {
+        // $slugify = new Slugify();
+        // echo $slugify->slugify('Hello World!');
+        
+        return (new Slugify())->slugify($this->title);
     }
 
     public function getPublisher(): ?string
