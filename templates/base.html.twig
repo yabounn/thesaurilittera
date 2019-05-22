@@ -36,49 +36,52 @@
                     <a class="nav-link {% if current_menu is defined and current_menu == 'bookstore' %}active{% endif %}"
                         href="{{ path('bookstore') }}">Librairie</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if current_menu is defined and current_menu == 'bookexchange' %}active{% endif %}" href="{{ path('bookexchange')}}">Echanges</a>
-                </li>
+                {#<li class="nav-item">
+                    <a class="nav-link {% if current_menu is defined and current_menu == 'bookexchange' %}active{% endif %}"
+                        href="{{ path('bookexchange')}}">Echanges</a>
+                </li>#}
                 <li class="nav-item">
                     <a class="nav-link" href="">Forum</a>
                 </li>
             </ul>
+
             <!-- search bar-->
             <div class="container h-100">
                 <div class="d-flex justify-content-center h-100">
-                    <div id="searchBar">    
+                    <div id="searchBar">
                         {{ render(controller('App\\Controller\\SearchController::search')) }}
-                    </div>                    
+                    </div>
                 </div>
-                
+
             </div>
             <!-- /.search bar-->
+
             <ul class="navbar-nav login">
                 {% if not app.user %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
-                        <a style="color: #060606;" href=""><span class="fa-stack has-badge">
-                                <i class="fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
-                            </span><b>(0)</b></a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
-                        <a style="color: #060606;" href=""><span class="fa-stack has-badge">
-                                <i class="fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
-                            </span><b>(0)</b></a>
-                        <!-- <span class="fa-stack fa-2x has-badge" data-count="0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
+                    {#<a style="color: #060606;" href="{{ path('cart') }}"><span class="fa-stack has-badge">
                             <i class="fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
-                        </span> -->
-                    </li>
+                        </span> <span class="badge badge-pill badge-dark">0</span> </a>#}
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
+                    <a style="color: #060606;" href="{{ path('cart',{ id : app.user.id }) }}"><span
+                            class="fa-stack has-badge">
+                            <i class="fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
+                        </span> <span class="badge badge-pill badge-dark">0</span> </a>
+                </li>
                 {% endif %}
             </ul>
         </div>
     </nav>
     <!-- /.Navbar -->
+
     {% block body %}
-    
+
     {% endblock %}
+
     <!-- Footer -->
     <footer class="page-footer font-small blue-gry lighten-5  mt-4 pt-4">
 
@@ -179,13 +182,13 @@
                     <h5 class="font-weight-bold text-uppercase mb-4">Suivez-nous</h5>
 
                     <!-- Facebook -->
-                    
-                       <a href="#"><i class="fab fa-facebook-f"></i></a> 
-                    
+
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+
                     <!-- Twitter -->
-                    
-                        <a href="#"><i class="fab fa-twitter"></i></a> 
-                    
+
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+
                 </div>
                 <!-- Grid column -->
             </div>
@@ -201,21 +204,21 @@
     <!-- Footer -->
 
     {% block javascripts %}
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-        </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-        </script>
-        
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-        </script>
-        
-        <!-- <script src="{{ asset('js/navbar/booksearch.js') }}"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+    <!-- <script src="{{ asset('js/navbar/booksearch.js') }}"></script> -->
 
     {% endblock %}
 </body>

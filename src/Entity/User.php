@@ -92,9 +92,22 @@ class User implements UserInterface
      */
     private $comment;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="users")
+     */
+    private $books;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Book", inversedBy="cartUsers")
+     */
+    private $cart;
+
+
     public function __construct()
     {
         $this->comment = new ArrayCollection();
+        $this->books = new ArrayCollection();
+        $this->cart = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -251,7 +264,7 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     { }
-    
+
     /**
      * Methode UserInterface 
      */
@@ -292,6 +305,60 @@ class User implements UserInterface
             if ($comment->getUser() === $this) {
                 $comment->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Book[]
+     */
+    public function getBooks(): Collection
+    {
+        return $this->books;
+    }
+
+    public function addBook(Book $book): self
+    {
+        if (!$this->books->contains($book)) {
+            $this->books[] = $book;
+            $book->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBook(Book $book): self
+    {
+        if ($this->books->contains($book)) {
+            $this->books->removeElement($book);
+            $book->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Book[]
+     */
+    public function getCart(): Collection
+    {
+        return $this->cart;
+    }
+
+    public function addCart(Book $cart): self
+    {
+        if (!$this->cart->contains($cart)) {
+            $this->cart[] = $cart;
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Book $cart): self
+    {
+        if ($this->cart->contains($cart)) {
+            $this->cart->removeElement($cart);
         }
 
         return $this;

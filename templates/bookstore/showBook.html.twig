@@ -44,6 +44,7 @@
             <!-- /.section info-book  -->
         </div>
         <!-- /.first -->
+
         <!-- second -->
         <div class="second col-lg-4 col-12">
             <section class="buy-book">
@@ -55,12 +56,29 @@
                             <p><b>Prix : </b> 10,00 €</p>
                         </div>
                         <div class="col-md-6 offset-md-3 mt-4">
-                            <form action="">
-                                <select name="qté" id="">
+                            {% if app.user %}
+                            <form action="{{ path('addedToCart', { id : book.id }) }}" method="POST">
+                                <select name="quantity" id="quantity">
                                     <option value="">1</option>
+                                    <option value="">2</option>
+                                    <option value="">3</option>
+                                    <option value="">4</option>
+                                    <option value="">5</option>
+                                    <option value="">6</option>
+                                    <option value="">7</option>
+                                    <option value="">8</option>
+                                    <option value="">9</option>
                                 </select>
-                                <button class="btn btn-success">Ajouter au panier !</button>
-                            </form>    
+                                <a href="{{ path('addedToCart', { id : book.id }) }}"
+                                    class="btn btn-success btn-sm mt-4">Ajouter
+                                    au panier
+                                    !</a>
+                            </form>
+                            {% else %}
+                            <a href="{{ path('security_login') }}" class="btn btn-success btn-sm mt-4">Connectez-vous
+                                pour ajouter au panier
+                                !</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

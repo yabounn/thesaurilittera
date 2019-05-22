@@ -82,10 +82,23 @@ class Book
      */
     private $price;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="books")
+     */
+    private $users;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="cart")
+     */
+    private $cartUsers;
+
+
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->cartUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,11 +142,11 @@ class Book
         return $this;
     }
 
-    public function getSlug() : ?string
+    public function getSlug(): ?string
     {
         // $slugify = new Slugify();
         // echo $slugify->slugify('Hello World!');
-        
+
         return (new Slugify())->slugify($this->title);
     }
 
@@ -235,6 +248,60 @@ class Book
             if ($comment->getBook() === $this) {
                 $comment->setBook(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getCartUsers(): Collection
+    {
+        return $this->cartUsers;
+    }
+
+    public function addCartUser(User $cartUser): self
+    {
+        if (!$this->cartUsers->contains($cartUser)) {
+            $this->cartUsers[] = $cartUser;
+            $cartUser->addCart($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCartUser(User $cartUser): self
+    {
+        if ($this->cartUsers->contains($cartUser)) {
+            $this->cartUsers->removeElement($cartUser);
+            $cartUser->removeCart($this);
         }
 
         return $this;

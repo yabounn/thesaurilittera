@@ -28,7 +28,7 @@ class BookstoreController extends AbstractController
      * @Route("/bookstore", name="bookstore")
      * @return Response
      */
-    public function index() : Response 
+    public function index(): Response
     {
         // $repository = $this->getDoctrine()->getRepository(Book::class);
         // dump($repository);
@@ -52,10 +52,10 @@ class BookstoreController extends AbstractController
         $form = $this->createForm(AddedBookType::class, $book);
 
         $form->handleRequest($request);
-        
-        
+
+
         if ($form->isSubmitted() && $form->isValid()) {
-  
+
             $manager->persist($book);
             $manager->flush();
         }
@@ -70,9 +70,9 @@ class BookstoreController extends AbstractController
      * @param Book $book
      * @return response
      */
-    public function showBook(Book $book, string $slug) : Response // Injection de dependance en param, SF sait quel id envoyer
+    public function showBook(Book $book, string $slug): Response // Injection de dependance en param, SF sait quel id envoyer
     {
-        // Vérifie si slug ok en "ème param on passe une 301 (redirect perm)
+        // Vérifie si slug ok en "3ème param on passe une 301 
         if ($book->getSlug() !== $slug) {
             return $this->redirectToRoute('showBook', [
                 'id' => $book->getId(),
