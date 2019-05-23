@@ -14,7 +14,7 @@ class SearchController extends AbstractController
      */
     public function index()
     {
-        return $this->render('search/index.html.twig', [
+        return $this->render('frontend/search/index.html.twig', [
             'controller_name' => 'SearchController',
         ]);
     }
@@ -24,7 +24,7 @@ class SearchController extends AbstractController
     {
         $form = $this->createForm(SearchType::class);
 
-        return $this->render('search/search.html.twig', [
+        return $this->render('frontend/search/search.html.twig', [
             'formSearch' => $form->createView(),
         ]);
     }
@@ -64,8 +64,8 @@ class SearchController extends AbstractController
         }
         curl_close($curl);
 
-        return $this->render('search/resultSearch.html.twig', array(
-            'results' => $results 
+        return $this->render('frontend/search/resultSearch.html.twig', array(
+            'results' => $results
         ));
     }
 }

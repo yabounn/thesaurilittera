@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre panier !{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Votre panier</h1>
+        <table class="table table-striped table-hover mt-4">
+            <thead>
+                <tr>
+                    <th>Titre du livre</th>
+                    <th>Auteur</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                    <th>Actions</th>
+                    <th>Total HT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Kimbe raid, pa moli</td>
+                    <td>Gwada</td>
+                    <td>1</td>
+                    <td>100</td>
+                    <td>
+                        <a href="#"><i class="fas fa-sync"></i></a>
+                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                    <td>100</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row-flex mt-4">
+        <div class="col-md-6 offset-md-10">
+            <div class="htPrice"><b>Total HT :</b> 100 €</div>
+            <div class="tva"><b>TVA :</b> 5.5</div>
+            <div class="ttcPrice"><b>Total TTC :</b> 105.5 €</div>
+            <a href="{{ path('delivery')}}" class="btn btn-success">Valider le panier</a>
+        </div>
+        <a href="{{ path('bookstore') }}" class="btn btn-primary">Continuer les achats</a>
+    </div>
+    {% endblock %}
+
+    {% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/cartshopping/cart_shopping.js')}}"></script>
+    {% endblock %}

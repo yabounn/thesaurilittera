@@ -2,69 +2,64 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+use App\Entity\Book;
+use App\Entity\Address;
+use App\Form\AddressType;
 use App\Repository\BookRepository;
-use App\Repository\UserRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 class CartController extends AbstractController
 {
-    /**
-     * @Route("/cart/{id}", name="cart")
-     */
-    public function index(User $user, $id)
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $cart = $user->getCart();
-
-        return $this->render('cart/index.html.twig', [
-            'cart' => $cart,
-            'id' => $id
-        ]);
-    }
 
     /**
-     * @Route("/book/{id}/addedToCart", name="addedToCart")
-     */
-    public function addedToCart($id, UserInterface $userInt, UserRepository $user_repo, BookRepository $book_repo, ObjectManager $manager)
-    {
-        if ($this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY'))
-            $userId = $userInt->getId();
-        $userInfos = $user_repo->find($userId);
-
-        $book = $book_repo->find($id);
-
-        $cart = $userInfos->addCart($book);
-
-        $manager->persist($cart);
-        $manager->flush();
-
-        return $this->redirectToRoute('cart', [
-            'id' => $userId,
-        ]);
-    }
-
-    /**
-     * @Route("/book/{id}/remove", name="removeToCart")
+     * @Route("/panier", name="cart")
      *
      */
-    public function removeToCart($id, UserInterface $userInt, UserRepository $user_repo, BookRepository $book_repo, ObjectManager $manager)
+    public function index()
     {
-        $userId = $userInt->getId();
-        $userInfos = $user_repo->find($userId);
+        return $this->render('frontend/cart/index.html.twig', [
+            'controller_name' => 'CartController',
+        ]);
+    }
 
+    /**
+     * @Route("/panier/{id}/ajouter", name="add")
+     */
+    public function add($id, Book $book, BookRepository $book_repo, SessionInterface $session)
+    {
         $book = $book_repo->find($id);
 
-        $cart = $userInfos->removeCart($book);
 
-        $manager->persist($cart);
-        $manager->flush();
-
-        return $this->redirectToRoute('cart', [
-            'id' => $userId,
+        return $this->render('frontend/cart/add.html.twig', [
+            'book' => $book
         ]);
+    }
+
+    /**
+     * @Route("/panier/livraison", name="delivery")
+     */
+    public function delivery()
+    {
+        $address = new Address();
+
+        $form = $this->createForm(AddressType::class, $address);
+
+        // $form->handleRequest($request);
+
+        return $this->render('frontend/cart/delivery.html.twig', [
+            'formAddress' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/panier/valider", name="validate")
+     */
+    public function validate()
+    {
+        return $this->render('frontend/cart/validate.html.twig');
     }
 }

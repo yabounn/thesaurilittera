@@ -27,16 +27,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     */
-    private $firstname;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
      * 
      */
     private $username;
@@ -57,30 +47,6 @@ class User implements UserInterface
      * @Assert\EqualTo(propertyPath="password", message="Les mots de passe ne correspondent pas !")
      */
     private $confirm_password;
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $address;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $addressNumber;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $postalCode;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $city;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $telephone;
 
     /**
      * @ORM\Column(type="datetime")
@@ -93,14 +59,9 @@ class User implements UserInterface
     private $comment;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="users")
+     * @ORM\OneToOne(targetEntity="App\Entity\Address", mappedBy="user", cascade={"persist", "remove"})
      */
-    private $books;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Book", inversedBy="cartUsers")
-     */
-    private $cart;
+    private $address;
 
 
     public function __construct()
@@ -113,30 +74,6 @@ class User implements UserInterface
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
-    public function setFirstname(string $firstname): self
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getUsername(): ?string
@@ -183,66 +120,6 @@ class User implements UserInterface
     public function setConfirmPassword(string $confirm_password): self
     {
         $this->confirm_password = $confirm_password;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getAddressNumber(): ?int
-    {
-        return $this->addressNumber;
-    }
-
-    public function setAddressNumber(?int $addressNumber): self
-    {
-        $this->addressNumber = $addressNumber;
-
-        return $this;
-    }
-
-    public function getPostalCode(): ?int
-    {
-        return $this->postalCode;
-    }
-
-    public function setPostalCode(int $postalCode): self
-    {
-        $this->postalCode = $postalCode;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getTelephone(): ?int
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(int $telephone): self
-    {
-        $this->telephone = $telephone;
 
         return $this;
     }
@@ -338,27 +215,18 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Book[]
-     */
-    public function getCart(): Collection
+    public function getAddress(): ?Address
     {
-        return $this->cart;
+        return $this->address;
     }
 
-    public function addCart(Book $cart): self
+    public function setAddress(Address $address): self
     {
-        if (!$this->cart->contains($cart)) {
-            $this->cart[] = $cart;
-        }
+        $this->address = $address;
 
-        return $this;
-    }
-
-    public function removeCart(Book $cart): self
-    {
-        if ($this->cart->contains($cart)) {
-            $this->cart->removeElement($cart);
+        // set the owning side of the relation if necessary
+        if ($this !== $address->getUser()) {
+            $address->setUser($this);
         }
 
         return $this;

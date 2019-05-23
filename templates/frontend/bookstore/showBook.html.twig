@@ -56,8 +56,9 @@
                             <p><b>Prix : </b> 10,00 €</p>
                         </div>
                         <div class="col-md-6 offset-md-3 mt-4">
-                            {% if app.user %}
-                            <form action="{{ path('addedToCart', { id : book.id }) }}" method="POST">
+                            {#{% if app.user %}#}
+                            {#<form action="{{ path('add', { id : book.id }) }}" method="POST">#}
+                            <form action="{{ path('cart') }}" method="POST">
                                 <select name="quantity" id="quantity">
                                     <option value="">1</option>
                                     <option value="">2</option>
@@ -69,16 +70,16 @@
                                     <option value="">8</option>
                                     <option value="">9</option>
                                 </select>
-                                <a href="{{ path('addedToCart', { id : book.id }) }}"
-                                    class="btn btn-success btn-sm mt-4">Ajouter
+                                {#<a href="{{ path('add', { id : book.id }) }}"#}
+                                <a href="{{ path('cart') }}" class="btn btn-success btn-sm mt-4">Ajouter
                                     au panier
                                     !</a>
                             </form>
-                            {% else %}
+                            {#{% else %}
                             <a href="{{ path('security_login') }}" class="btn btn-success btn-sm mt-4">Connectez-vous
                                 pour ajouter au panier
                                 !</a>
-                            {% endif %}
+                            {% endif %}#}
                         </div>
                     </div>
                 </div>

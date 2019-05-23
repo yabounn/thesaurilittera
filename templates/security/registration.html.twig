@@ -10,19 +10,6 @@
         {# {{ form_widget(formRegistration) }} #}
 
         <div class="form-row">
-            <div class="form-group col-md-6">
-                {{ form_row(formRegistration.firstname, {'label': 'Prénom', 'attr': {
-        'placeholder': 'Prénom ...'}})
-                }}
-            </div>
-            <div class="form-group col-md-6">
-                {{ form_row(formRegistration.name, {'label': 'Nom', 'attr': {
-        'placeholder': 'Nom ...'}})
-                }}
-            </div>
-        </div>
-
-        <div class="form-row">
             {{ form_row(formRegistration.username, {'label': 'Pseudo', 'attr': {
         'placeholder': 'Pseudo ...'}})
             }}
@@ -47,35 +34,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            {{ form_row(formRegistration.address, {'label': 'Adresse postale', 'attr': {
-            'placeholder': 'Adresse postale ...'}})
-            }}
-        </div>
 
-        <div class="form-group">
-            {{ form_row(formRegistration.addressNumber, {'label': 'Numéro', 'attr': {
-            'placeholder': 'Numéro ...'}})
-            }}
-        </div>
-
-        <div class="form-group">
-            {{ form_row(formRegistration.postalCode, {'label': 'Code postal', 'attr': {
-            'placeholder': 'Code postal ...'}})
-            }}
-        </div>
-
-        <div class="form-group">
-            {{ form_row(formRegistration.city, {'label': 'Ville', 'attr': {
-            'placeholder': 'Ville ...'}})
-            }}
-        </div>
-
-        <div class="form-group">
-            {{ form_row(formRegistration.telephone, {'label': 'Telephone', 'attr': {
-            'placeholder': 'Telephone ...'}})
-            }}
-        </div>
         <button type="submit" class="btn btn-success">Inscription!</button>
 
         {{ form_end(formRegistration)}}

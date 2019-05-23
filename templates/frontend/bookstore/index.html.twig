@@ -35,12 +35,12 @@
                 <!-- /.filter-bar -->
 
 
-                
+
                 <div class="store row col-sm-12 row-0">
                     {% for book in books %}
                     <div class="book-container col-md-3 col-sm-6">
                         <h5 class="store-title-book">
-                            <a href="#">{{book.title}}</a>
+                            <a href="{{ path('showBook', {id:book.id, slug: book.slug}) }}">{{book.title}}</a>
                         </h5>
                         <div class="book-view book-closeview">
                             <div class="image-couv">
@@ -54,7 +54,11 @@
                                 <div class="back">
                                     <h6>{{book.title}}</h6>
                                     <p>{{book.price}}</p>
-                                    <button class="btn blue-gradient btn-rounded">Plus de détails</button>
+
+                                    <a href="{{ path('showBook', {id:book.id, slug: book.slug}) }}"
+                                        class="btn blue-gradient btn-rounded">Plus de
+                                        détails</a>
+
                                 </div>
                             </div>
                         </div>

@@ -25,7 +25,7 @@ class BookstoreController extends AbstractController
     }
 
     /**
-     * @Route("/bookstore", name="bookstore")
+     * @Route("/librairie", name="bookstore")
      * @return Response
      */
     public function index(): Response
@@ -35,7 +35,7 @@ class BookstoreController extends AbstractController
         $books = $this->repository->findAll();
         // dump($books);
 
-        return $this->render('bookstore/index.html.twig', [
+        return $this->render('frontend/bookstore/index.html.twig', [
             'current_menu' => 'bookstore',
             'books' => $books
         ]);
@@ -60,7 +60,7 @@ class BookstoreController extends AbstractController
             $manager->flush();
         }
 
-        return $this->render('bookstore/addedBook.html.twig', [
+        return $this->render('frontend/bookstore/addedBook.html.twig', [
             'formAddedBook' => $form->createView()
         ]);
     }
@@ -80,7 +80,7 @@ class BookstoreController extends AbstractController
             ], 301);
         }
 
-        return $this->render('bookstore/showBook.html.twig', [
+        return $this->render('frontend/bookstore/showBook.html.twig', [
             'book' => $book,
         ]);
     }
