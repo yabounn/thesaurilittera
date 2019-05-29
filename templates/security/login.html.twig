@@ -2,30 +2,83 @@
 
 {% block title %}Connexion !{% endblock %}
 
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/form/login.css')}}">
+{% endblock %}
+
 {% block body %}
 <div class="container">
-    <form method="post">
-        {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+    <div class="row">
+        <h2>Identifiez-vous</h2>
+        <div class="jumbotron col-md-12 mt-4">
+            <div class="row loginForm">
+                <div class=" col-md-4 offset-md-1">
+                    <form method="post">
+                        {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}
+                        </div>
+                        {% endif %}
+                        <h5>J'ai déjà un compte !</h5>
+                        <div class="form-group">
+                            <label for="inputEmail" class="sr-only">Email</label>
+                            <input type="email" value="{{ last_username }}" name="_username" id="inputEmail"
+                                class="form-control" placeholder="Adresse email ..." required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="sr-only">Password</label>
+                            <input type="password" name="_password" id="inputPassword" class="form-control"
+                                placeholder="Mot de passe ..." required>
+                        </div>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <h2 class="h3 mb-4 mt-4 font-weight-normal">Merci de renseigner vos identifiants !</h2>
-        <div class="form-group">
-            <label for="inputEmail" class="sr-only">Email</label>
-            <input type="email" value="{{ last_username }}" name="_username" id="inputEmail" class="form-control"
-                placeholder="Adresse email ..." required autofocus>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Connexion !</button>
+                            <!-- <p><a href="{{ path('security_registration') }}">Je n'ai pas de compte</a></p> -->
+                        </div>
+                    </form>
+                </div>
+                <div class=" col-md-4 offset-md-3 signIn">
+                    <h5>Je n'ai pas de compte</h5>
+                    {#<p class="btnSignIn"><a href="{{ path('security_registration') }}" class="btn btn-primary">Je
+                            m'inscris</a></p>#}
+                    <!-- Button trigger modal -->
+                    <a class="btn btn-primary btnSignIn modal-trigger" data-toggle="modal"
+                        data-target="{{ path('security_registration') }}" href="#modal1">Je
+                        m'inscris </a>
+                </div>
+            </div>
+            <!-- /.loginForm -->
         </div>
-        <div class="form-group">
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" name="_password" id="inputPassword" class="form-control"
-                placeholder="Mot de passe ..." required>
-        </div>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <!-- /.jumbotron -->
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-success">Connexion !</button>
-            <p><a href="{{ path('security_registration') }}">Je n'ai pas de compte</a></p>
+        <!-- Modal -->
+        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="signInTitle"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="signInTitle">Formulaire d'inscription</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {#{{ render(controller('App\\Controller\\SecurityController::registration'))}}#}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                        <!-- <button type="submit" class="btn btn-success validate">Inscription!</button> -->
+                    </div>
+                </div>
+            </div>
         </div>
-    </form>
+    </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/registration/registration.js') }}"></script>
 {% endblock %}

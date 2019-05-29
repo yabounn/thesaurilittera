@@ -12,10 +12,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/inscription", name="security_registration")
+     * @Route("/inscription", name="security_registration", methods="GET|POST")
      */
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
@@ -34,6 +35,7 @@ class SecurityController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
+            $request->getSession()->getFlashbag()->add('success', 'Votre inscription a été enregistré.');
             return $this->redirectToRoute('security_login');
         }
 

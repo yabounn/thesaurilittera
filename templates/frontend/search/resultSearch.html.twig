@@ -1,20 +1,14 @@
-{% extends 'base.html.twig'%}
+{% extends 'base.html.twig' %}
 
 {% block title %}
-    <title>Résultats de la recherche</title>
+<title>Résultats de la recherche</title>
 {% endblock title %}
 
 {% block body %}
-    <h1>Résultat(s) de la recherche</h1>
+<h1>Résultat(s) de la recherche</h1>
 
-    <ul>
-        {% for result in results %}
-        <li>{{ result.title }}</li>
-        <li>{{ result.author }}</li>
-        <li>{{ result.publisher }}</li>
-        <li>{{ result.publishedDate }}</li>
-        <li>{{ result.description }}</li>
-        <hr> 
-        {% endfor %}  
-    </ul>
+{% for book in books %}
+<p> {{ book.title }}</p>
+{% endfor %}
+
 {% endblock body %}

@@ -8,9 +8,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CategoryRepository;
 
 class CategoryController extends AbstractController
 {
+
+    /**
+     * @var CategoryRepository
+     */
+    private $repository;
+
+    public function __construct(CategoryRepository $repository)
+    {
+        $this->repository = $repository;
+    }
     /**
      * @Route("/category", name="category")
      */
@@ -18,6 +29,17 @@ class CategoryController extends AbstractController
     {
         return $this->render('category/index.html.twig', [
             'controller_name' => 'CategoryController',
+        ]);
+    }
+
+
+
+    public function list()
+    {
+        $categories = $this->repository->findAll();
+
+        return $this->render('category/list.html.twig', [
+            'categories' => $categories
         ]);
     }
 
@@ -32,8 +54,8 @@ class CategoryController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
-            $em =$this->getDoctrine()->getManager();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
 

@@ -25,16 +25,29 @@
             <!-- Row content -->
             <div class="row">
                 <!-- Filter bar-->
-                <div class="filter-bar row col-xs-12">
-                    <select class="custom-select">
-                        <option selected>Filtrer par</option>
-                        <option value="1">Titre du livre</option>
-                        <option value="2">Auteur</option>
+                <!-- <div class="filter-bar row col-xs-12">
+                    <select name="liste" class="custom-select">
+                        <optgroup label="list">
+                            <option value="1">Filtrer par</option>
+                            <option value="1">Titre du livre</option>
+                            <option value="2">Auteur</option>
+                            <option value="3">Catégorie</option>
+                        </optgroup>
                     </select>
-                </div>
+                </div> -->
+                <ul id="menu-list">
+                    <li>Filtrer par
+                        <ul>
+                            <li><a href="">Titre</a></li>
+                            <li><a href="">Auteur</a></li>
+                            <li>
+                                <a
+                                    href="{{ render(controller('App\\Controller\\CategoryController::list'))}}">Catégorie</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
                 <!-- /.filter-bar -->
-
-
 
                 <div class="store row col-sm-12 row-0">
                     {% for book in books %}

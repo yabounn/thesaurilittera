@@ -1,12 +1,14 @@
 {% form_theme formSearch 'bootstrap_4_layout.html.twig' %}
 
-{{ form_start(formSearch, {'action': path('resultSearch',{'search': 'search'}), 'method': 'GET',
+{{ form_start(formSearch, {'action': path('resultSearch',{'search': 'searchBar'}), 'method': 'GET',
                            'attr': {'id': 'searchForm'} })                                                                          
 }}
 
-{{ form_widget(formSearch, {'attr': {'placeholder': "Rechercher un livre, un auteur"}}) }}
+{{ form_widget(formSearch, {'attr': {'placeholder': "Rechercher un livre, un auteur",
+                            'id': 'searchBar'} })
+}}
 
-    <a href="{{ path('resultSearch',{'search' : 'search'}) }}" id="button" class="search_icon"><i class="fas fa-search"></i></a>
+<a href="{{ path('resultSearch',{'search' : 'searchBar'}) }}" id="button" class="search_icon"><i
+                class="fas fa-search"></i></a>
 
 {{ form_end(formSearch) }}
-

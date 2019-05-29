@@ -1,0 +1,15 @@
+ .loginForm {
+     justify-content: center;
+ }
+
+ .loginForm .signIn {
+     text-align: center;
+ }
+
+ button {
+     margin-bottom: 0.5em;
+ }
+
+ .signIn .btnSignIn {
+     margin-top: 1.2rem;
+ }

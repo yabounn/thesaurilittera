@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Book;
+use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SearchController extends AbstractController
 {
@@ -19,53 +23,31 @@ class SearchController extends AbstractController
         ]);
     }
 
-
-    public function search()
+    public function searchBar()
     {
         $form = $this->createForm(SearchType::class);
 
         return $this->render('frontend/search/search.html.twig', [
-            'formSearch' => $form->createView(),
+            'formSearch' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/resultSearch", name="resultSearch")
+     * @Route("/book/search", name="resultSearch")
      */
-    public function resultSearch(Request $request)
+    public function resultSearch(Request $request, BookRepository $bookRepository)
     {
-        $curl = curl_init('https://www.googleapis.com/books/v1/volumes?q=' . $request->query->get('search'));
+        $search = $request->query->get('search');
+        // dump($search);
+        $books = $bookRepository->findByTitle($search);
+        // dump($books);
 
-        // curl_setopt_array($curl, [
-        //     CURLOPT_CAINFO, __DIR__ . DIRECTORY_SEPARATOR . 'cert.cer',
-        //     CURLOPT_RETURNTRANSFER, true
-        // ]);
-
-        curl_setopt($curl, CURLOPT_CAINFO, __DIR__ . DIRECTORY_SEPARATOR . 'cert.cer');
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-        $data = curl_exec($curl);
-
-        if ($data === false || curl_getinfo($curl, CURLINFO_HTTP_CODE) !== 200) {
-            return null;
-        } else {
-            $results = [];
-            $data = json_decode($data, true);
-            foreach ($data['items'] as $book) {
-                $results[] = [
-                    'title'         => $book['volumeInfo']['title'] ?? '', //?? '' Opérateur NUll coalescent
-                    'author'        => $book['volumeInfo']['authors'][0] ?? '',
-                    'publisher'     => $book['volumeInfo']['publisher'] ?? '',
-                    'publishedDate' => $book['volumeInfo']['publishedDate'] ?? '',
-                    'description'   => $book['volumeInfo']['description'] ?? '',
-                    'cover'         => $book['volumeInfo']['imageLinks']['smallThumbnail'] ?? ''
-                ];
-            }
-        }
-        curl_close($curl);
-
-        return $this->render('frontend/search/resultSearch.html.twig', array(
-            'results' => $results
-        ));
+        return $this->render(
+            'frontend/search/resultSearch.html.twig',
+            [
+                'search' => $search,
+                'books' => $books
+            ]
+        );
     }
 }
