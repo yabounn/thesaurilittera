@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\Category;
 use App\Form\AddedBookType;
+use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use App\Repository\BookRepository;
 
 class BookstoreController extends AbstractController
 {
@@ -82,6 +83,18 @@ class BookstoreController extends AbstractController
 
         return $this->render('frontend/bookstore/showBook.html.twig', [
             'book' => $book,
+        ]);
+    }
+
+    /**
+     * @Route("/books/getCategory/{category}", name="booksCategory")
+     */
+    public function getCategory($category)
+    {
+        $books = $this->repository->findByCategory($category);
+
+        return $this->render('frontend/bookstore/getCategory.html.twig', [
+            'books' => $books
         ]);
     }
 }

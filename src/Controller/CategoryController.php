@@ -33,12 +33,14 @@ class CategoryController extends AbstractController
     }
 
 
-
-    public function list()
+    /**
+     * @Route("/category/list", name="categoryList")
+     */
+    public function categoryList()
     {
         $categories = $this->repository->findAll();
 
-        return $this->render('category/list.html.twig', [
+        return $this->render('category/categoryList.html.twig', [
             'categories' => $categories
         ]);
     }

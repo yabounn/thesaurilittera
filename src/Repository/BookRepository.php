@@ -37,6 +37,16 @@ class BookRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByCategory($category)
+    {
+        return $this->createQueryBuilder('b')
+            ->join('b.category', 'c')
+            ->Where('c.id = :category')
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getResult();
+    }
+
     // public function findOneBySomeField($value): ?Book
     // {
     //     return $this->createQueryBuilder('b')
