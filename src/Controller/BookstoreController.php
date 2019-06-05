@@ -11,6 +11,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\FilterBySearch;
+use App\Form\FilterBySearchType;
 
 class BookstoreController extends AbstractController
 {
@@ -29,16 +31,18 @@ class BookstoreController extends AbstractController
      * @Route("/librairie", name="bookstore")
      * @return Response
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        // $repository = $this->getDoctrine()->getRepository(Book::class);
-        // dump($repository);
-        $books = $this->repository->findAll();
-        // dump($books);
+        $search = new FilterBySearch();
+        $form = $this->createForm(FilterBySearchType::class, $search);
+        $form->handleRequest($request);
+
+        $books = $this->repository->findAll($search);
 
         return $this->render('frontend/bookstore/index.html.twig', [
             'current_menu' => 'bookstore',
-            'books' => $books
+            'books' => $books,
+            'form' => $form->createView()
         ]);
     }
 
