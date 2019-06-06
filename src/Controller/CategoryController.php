@@ -32,19 +32,6 @@ class CategoryController extends AbstractController
         ]);
     }
 
-
-    /**
-     * @Route("/category/list", name="categoryList")
-     */
-    public function categoryList()
-    {
-        $categories = $this->repository->findAll();
-
-        return $this->render('category/categoryList.html.twig', [
-            'categories' => $categories
-        ]);
-    }
-
     /**
      * @Route("/category/add", name="addedCategory")
      */
@@ -63,8 +50,6 @@ class CategoryController extends AbstractController
 
             return new Response('La catégorie a été ajoutée !');
         }
-
-        // $formView = $form->createView();
 
         return $this->render('category/addedCategory.html.twig', [
             'formAddedCategory' => $form->createView()

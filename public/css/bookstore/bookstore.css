@@ -1,3 +1,9 @@
-.bookstore .col-md-12{
+.bookstore .col-md-12 {
     text-align: center;
+}
+
+.bookstore .filterSearch {
+    text-align: start;
+    padding: 0;
+    background-color: #fdfeff94;
 }

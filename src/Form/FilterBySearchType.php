@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Category;
-use App\Entity\FilterBySearch;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -30,7 +29,7 @@ class FilterBySearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => FilterBySearch::class,
+            // 'data_class' => Category::class,
             'method' => 'get',
             'csrf_protection' => false,
         ]);

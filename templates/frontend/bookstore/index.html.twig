@@ -25,9 +25,10 @@
             <!-- Row content -->
             <div class="row">
                 <!-- Filter bar-->
-                <div class="jumbotron">
-                    <div class="container">
+                <div class="jumbotron filterSearch">
+                    <div class="container ">
                         {{ form_start(form) }}
+                        {{ form_label(form, 'Filtrer par :')}}
                         <div class="form-row">
                             <div class="col">
                                 {{ form_row(form.category)}}

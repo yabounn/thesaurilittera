@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Book;
-use App\Entity\Category;
 use App\Form\AddedBookType;
 use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,7 +10,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\FilterBySearch;
 use App\Form\FilterBySearchType;
 
 class BookstoreController extends AbstractController
@@ -33,11 +31,16 @@ class BookstoreController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $search = new FilterBySearch();
-        $form = $this->createForm(FilterBySearchType::class, $search);
+        $form = $this->createForm(FilterBySearchType::class);
         $form->handleRequest($request);
 
-        $books = $this->repository->findAll($search);
+        $category = $request->query->get('category');
+        $criteria = [];
+        if ($category) {
+            $criteria = ['category' => $category];
+        }
+
+        $books = $this->repository->findBy($criteria);
 
         return $this->render('frontend/bookstore/index.html.twig', [
             'current_menu' => 'bookstore',
@@ -87,18 +90,6 @@ class BookstoreController extends AbstractController
 
         return $this->render('frontend/bookstore/showBook.html.twig', [
             'book' => $book,
-        ]);
-    }
-
-    /**
-     * @Route("/books/getCategory/{category}", name="booksCategory")
-     */
-    public function getCategory($category)
-    {
-        $books = $this->repository->findByCategory($category);
-
-        return $this->render('frontend/bookstore/getCategory.html.twig', [
-            'books' => $books
         ]);
     }
 }

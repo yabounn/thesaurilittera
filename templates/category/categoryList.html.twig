@@ -1,6 +1,0 @@
-{% for category in categories %}
-{#<li>{{ category.title}}</li>#}
-<li>
-    <a href=" {{ path ('booksCategory', {'category': category.id}) }} ">{{ category.title}}</a>
-</li>
-{% endfor %}
