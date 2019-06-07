@@ -60,11 +60,9 @@
                                 <div class="back">
                                     <h6>{{book.title}}</h6>
                                     <p>{{book.price}}</p>
-
                                     <a href="{{ path('showBook', {id:book.id, slug: book.slug}) }}"
                                         class="btn blue-gradient btn-rounded">Plus de
                                         détails</a>
-
                                 </div>
                             </div>
                         </div>
@@ -80,7 +78,10 @@
 
 
         <!-- Pagination-->
-        <nav aria-label="Page navigation example">
+        <div class="pagination">
+            {{ knp_pagination_render(books) }}
+        </div>
+        {# <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Précédent</a></li>
                 <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -88,7 +89,7 @@
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" href="#">Suvant</a></li>
             </ul>
-        </nav>
+        </nav> #}
         <!-- /.pagination-->
     </div>
     <!-- /.grid row main -->

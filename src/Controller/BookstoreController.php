@@ -4,13 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Form\AddedBookType;
+use App\Form\FilterBySearchType;
 use App\Repository\BookRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\FilterBySearchType;
 
 class BookstoreController extends AbstractController
 {
@@ -29,7 +30,7 @@ class BookstoreController extends AbstractController
      * @Route("/librairie", name="bookstore")
      * @return Response
      */
-    public function index(Request $request): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
         $form = $this->createForm(FilterBySearchType::class);
         $form->handleRequest($request);
@@ -40,7 +41,12 @@ class BookstoreController extends AbstractController
             $criteria = ['category' => $category];
         }
 
-        $books = $this->repository->findBy($criteria);
+        $books = $paginator->paginate(
+            $this->repository->findBy($criteria),
+            $request->query->getInt('page', 1),
+            4
+        );
+
 
         return $this->render('frontend/bookstore/index.html.twig', [
             'current_menu' => 'bookstore',
