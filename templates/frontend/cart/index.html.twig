@@ -18,17 +18,29 @@
                 </tr>
             </thead>
             <tbody>
+                {% for book in books %}
                 <tr>
-                    <td>Kimbe raid, pa moli</td>
-                    <td>Gwada</td>
-                    <td>1</td>
-                    <td>100</td>
-                    <td>
-                        <a href="#"><i class="fas fa-sync"></i></a>
-                        <a href="#"><i class="fas fa-trash-alt"></i></a>
-                    </td>
-                    <td>100</td>
+                    <form action="{{ path('add', {'id': book.id}) }}" method="get">
+                        <td>{{book.title}}</td>
+                        <td>{{book.author.firstname}} {{book.author.name}}</td>
+                        <td>
+                            <select name="quantity" id="quantity" onchange="this.form.submit()">
+                                {% for i in 1..10 %}
+                                <option value="{{ i }}" {% if i == cartShopping[book.id] %} selected="selected"
+                                    {% endif %}>
+                                    {{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>{{book.price}}</td>
+                        <td>
+                            {# <a href="#"><i class="fas fa-sync"></i></a> #}
+                            <a href="{{ path('remove', {'id': book.id}) }}"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                        <td>{{book.price * cartShopping[book.id] }} €</td>
+                    </form>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

@@ -53,14 +53,14 @@
                     <h3 class="buy-book">Acheter ce livre</h3>
                     <div class="item row mt-4">
                         <div class="col-md-6 offset-md-3">
-                            <p><b>Prix : </b> 10,00 €</p>
+                            <p><b>Prix : </b> {{book.price}} €</p>
                         </div>
                         <div class="col-md-6 offset-md-3 mt-4">
-                            {#{% if app.user %}#}
-                            {#<form action="{{ path('add', { id : book.id }) }}" method="POST">#}
-                            <form action="{{ path('cart') }}" method="POST">
+                            {# <form action="{{ path('cart') }}" method="POST"> #}
+                            <form action="{{ path('add', {'id': book.id}) }}" method="GET">
+
                                 <select name="quantity" id="quantity">
-                                    <option value="">1</option>
+                                    {# <option value="">1</option>
                                     <option value="">2</option>
                                     <option value="">3</option>
                                     <option value="">4</option>
@@ -68,18 +68,17 @@
                                     <option value="">6</option>
                                     <option value="">7</option>
                                     <option value="">8</option>
-                                    <option value="">9</option>
+                                    <option value="">9</option> #}
+                                    {% for i in 1..10 %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                    {% endfor %}
                                 </select>
-                                {#<a href="{{ path('add', { id : book.id }) }}"#}
-                                <a href="{{ path('cart') }}" class="btn btn-success btn-sm mt-4">Ajouter
+                                {# <a href="{{ path('cart') }}" class="btn btn-success btn-sm mt-4">Ajouter
                                     au panier
-                                    !</a>
+                                    !</a> #}
+
+                                <button class="btn btn-success mt-4">Ajouter au panier !</button>
                             </form>
-                            {#{% else %}
-                            <a href="{{ path('security_login') }}" class="btn btn-success btn-sm mt-4">Connectez-vous
-                                pour ajouter au panier
-                                !</a>
-                            {% endif %}#}
                         </div>
                     </div>
                 </div>
@@ -90,14 +89,13 @@
     <!-- /.row -->
 </div>
 <!-- /.container one-book -->
-
-{#<div class="jumbotron-white">
-        <p>Prix</p>
+<div class="jumbotron-white">
+    <a href="{{ path('bookstore')}}" class="btn btn-primary btn-sm mt-4">Retour à la librairie</a>
+</div>
+{# <div class="jumbotron-white">
+     <p>Prix</p>
         <p>Quantité</p>
-        <p>Ajouter au panier</p>
-    </div>
-
-    <p>Retour à la librairie</p>
+        <p>Ajouter au panier</p> 
     <p>Haut de la page</p>
-</div>#}
+</div> #}
 {% endblock %}

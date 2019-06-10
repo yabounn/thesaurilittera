@@ -25,6 +25,16 @@ class BookRepository extends ServiceEntityRepository
     //         ->orderBy('b.id', 'DESC');    
     // }
 
+    public function findArray($array)
+    {
+        return $this->createQueryBuilder('b')
+            ->select('b')
+            ->where('b.id IN (:array)')
+            ->setParameter('array', $array)
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @param string $value
      * @return void
