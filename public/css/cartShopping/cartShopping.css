@@ -1,0 +1,9 @@
+.table.tableCartShopping td {
+    text-align: center;
+}
+
+.btnValidationCart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

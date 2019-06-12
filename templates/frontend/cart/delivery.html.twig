@@ -5,7 +5,7 @@
 
 {% block body %}
 <div class="container">
-    {#{% if app.user %}#}
+    {% if app.user %}
     <div class="row col-md-12">
         <div class="row-flex col-md-6">
             <h2>Adresse de livraison</h2>
@@ -24,7 +24,9 @@
             {{form(formAddress)}}
         </div>
     </div>
-    {#{% endif %}#}
+    {% else %}
+
+    {% endif %}
 </div>
 
 
