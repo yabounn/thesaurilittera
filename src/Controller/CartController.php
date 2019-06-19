@@ -10,6 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 
 class CartController extends AbstractController
 {
@@ -83,7 +85,7 @@ class CartController extends AbstractController
     /**
      * @Route("/panier/livraison", name="delivery")
      */
-    public function delivery()
+    public function delvery()
     {
         $address = new Address();
 

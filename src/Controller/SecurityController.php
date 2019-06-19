@@ -9,8 +9,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class SecurityController extends AbstractController
@@ -47,19 +47,25 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="security_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
+
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        $targetPath = "/";
+        // $referer = $request->getSession()->get('_security.main.target_path');
+        $referer = $request->headers->get('referer');
+        dump($referer);
+        if (false !== strstr($referer, '/panier/livraison')) {
+            $targetPath = $referer;
+        }
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
-            'error' => $error
+            'error' => $error,
+            'targetPath' => $targetPath
         ]);
     }
-
 
     /**
      * @Route("/deconnexion", name="security_logout")

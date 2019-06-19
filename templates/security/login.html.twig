@@ -36,6 +36,9 @@
                             <button type="submit" class="btn btn-success">Connexion !</button>
                             <!-- <p><a href="{{ path('security_registration') }}">Je n'ai pas de compte</a></p> -->
                         </div>
+                        {#<input type="hidden" name="_target_path"
+                            value="{{ app.session.get('_security.main.target_path') }}" />#}
+                        <input type="hidden" name="_target_path" value="{{ targetPath }}" />
                     </form>
                 </div>
                 <div class=" col-md-4 offset-md-3 signIn">
