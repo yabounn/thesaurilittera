@@ -9,11 +9,11 @@
     <div class="row col-md-12">
         <div class="row-flex col-md-6">
             {% if user.address|length != 0 %}
-            <form action="{{ path('validate') }}">
+            <form action="{{ path('validate') }}" method="POST">
                 <h2>Adresse de livraison</h2>
                 {% for address in user.address %}
                 <div class="btnRadioDelivery">
-                    <input type="radio" id="validate" name="delivery" value="{{ address.id }}" {% if loop.index0 == 0 %}
+                    <input type="radio" name="delivery" value="{{ address.id }}" {% if loop.index0 == 0 %}
                         checked="checked" {% endif %}>
 
                     <label class="radio" for="validate">{{ address.firstname }}
@@ -24,8 +24,7 @@
                     </label>
                 </div>
                 {% endfor %}
-
-                <a href="{{path('validate')}}" class="btn btn-primary mt-4">Valider !</a>
+                <button class="btn btn-primary mt-4">Valider !</button>
             </form>
             {% else %}
             <h2>Adresse de livraison</h2>

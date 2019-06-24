@@ -104,6 +104,7 @@ class CartController extends AbstractController
             return $this->redirectToRoute('delivery');
         }
 
+
         return $this->render('frontend/cart/delivery.html.twig', [
             'formAddress' => $form->createView(),
             'user' => $user
@@ -123,11 +124,44 @@ class CartController extends AbstractController
         return $this->redirectToRoute('delivery');
     }
 
+
+    public function setDeliveryOnSession(Request $request, SessionInterface $session, AddressRepository $repository, BookRepository $bookRepository)
+    {
+
+
+        if (!$session->has('address')) $session->set('address', []);
+        $address = $session->get('address');
+
+        if ($request->get('delivery') != null) {
+            $address['delivery'] = $request->get('delivery');
+        } else {
+            return $this->redirectToRoute('validate');
+        }
+
+        $session->set('address', $address);
+        return $this->redirectToRoute('validate');
+    }
+
     /**
      * @Route("/panier/valider", name="validate")
      */
-    public function validate()
+    public function validate(Request $request, SessionInterface $session, BookRepository $bookRepository, AddressRepository $repository, ObjectManager $manager)
     {
-        return $this->render('frontend/cart/validate.html.twig');
+        $this->setDeliveryOnSession($request, $session, $repository, $bookRepository);
+
+        $session = $request->getSession();
+        $address = $session->get('address');
+
+        $books = $bookRepository->findArray(array_keys($session->get('cartShopping')));
+        $delivery = $repository->find($address['delivery']);
+
+        // dump($delivery);
+        // die();
+
+        return $this->render('frontend/cart/validate.html.twig', [
+            'books' => $books,
+            'delivery' => $delivery,
+            'cartShopping' => $session->get('cartShopping')
+        ]);
     }
 }
