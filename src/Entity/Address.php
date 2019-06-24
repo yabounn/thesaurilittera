@@ -62,7 +62,7 @@ class Address
     private $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="address", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="address")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

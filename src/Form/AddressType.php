@@ -19,8 +19,12 @@ class AddressType extends AbstractType
             ->add('firstname', TextType::class)
             ->add('name', TextType::class)
             ->add('address', TextType::class)
-            ->add('address2', TextType::class)
-            ->add('addressNumber', IntegerType::class)
+            ->add('address2', TextType::class, [
+                'required' => false
+            ])
+            ->add('addressNumber', IntegerType::class, [
+                'required' => false
+            ])
             ->add('postalCode', NumberType::class)
             ->add('city', TextType::class)
             ->add('phoneNumber', TelType::class)

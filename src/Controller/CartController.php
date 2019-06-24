@@ -5,13 +5,13 @@ namespace App\Controller;
 use App\Entity\Address;
 use App\Form\AddressType;
 use App\Repository\BookRepository;
+use App\Repository\AddressRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
 
 class CartController extends AbstractController
 {
@@ -85,15 +85,42 @@ class CartController extends AbstractController
     /**
      * @Route("/panier/livraison", name="delivery")
      */
-    public function delvery()
+    public function delvery(Request $request, ObjectManager $manager)
     {
+        $user = $this->getUser();
         $address = new Address();
 
         $form = $this->createForm(AddressType::class, $address);
 
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $address->setCreatedAt(new \DateTime());
+            $address->setUser($user);
+            $manager->persist($address);
+            $manager->flush();
+
+            return $this->redirectToRoute('delivery');
+        }
+
         return $this->render('frontend/cart/delivery.html.twig', [
-            'formAddress' => $form->createView()
+            'formAddress' => $form->createView(),
+            'user' => $user
         ]);
+    }
+
+    /**
+     * @Route("/livraison/adresse/supprimer/{id}", name="removeAddressDelivery")
+     */
+    public function removeAddress($id, Address $address, AddressRepository $repository, ObjectManager $manager)
+    {
+        $address = $repository->find($id);
+
+        $manager->remove($address);
+        $manager->flush();
+
+        return $this->redirectToRoute('delivery');
     }
 
     /**

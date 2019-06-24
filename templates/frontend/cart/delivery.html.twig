@@ -8,23 +8,85 @@
     {% if app.user %}
     <div class="row col-md-12">
         <div class="row-flex col-md-6">
+            {% if user.address|length != 0 %}
+            <form action="{{ path('validate') }}">
+                <h2>Adresse de livraison</h2>
+                {% for address in user.address %}
+                <div class="btnRadioDelivery">
+                    <input type="radio" id="validate" name="delivery" value="{{ address.id }}" {% if loop.index0 == 0 %}
+                        checked="checked" {% endif %}>
+
+                    <label class="radio" for="validate">{{ address.firstname }}
+                        {{ address.name }} <br>{{ address.addressNumber }} {{ address.address }}
+                        {{ address.postalCode}} {{ address.city}} <a
+                            href=" {{path('removeAddressDelivery', {'id': address.id}) }} "><i
+                                class="fas fa-trash-alt"></i></a>
+                    </label>
+                </div>
+                {% endfor %}
+
+                <a href="{{path('validate')}}" class="btn btn-primary mt-4">Valider !</a>
+            </form>
+            {% else %}
             <h2>Adresse de livraison</h2>
-
-
-            <div class="row col-md-12">
-                <h5>Adresse de livraison</h5>
-
-            </div>
-            <!-- <div class="row col-md-12">
-                <h5>Adresse de facturation</h5>
-            </div> -->
-
-            <a href="{{path('validate')}}" class="btn btn-primary">Valider !</a>
-
+            <p>Vous n'avez pas d'adresse de livraison !</p>
+            {% endif %}
         </div>
         <div class="row col-md-6">
             <h2>Modifier l'adresse de livraison</h2>
-            {{form(formAddress)}}
+            <form action="{{ path('delivery') }}" method="post">
+                {{ form_start(formAddress) }}
+
+                <div class="form-row">
+
+                    {{form_row(formAddress.firstname, {'label': 'Prénom', 'attr':{
+                    'placeholder': 'Votre prénom ...' }})
+                    }}
+
+                    {{form_row(formAddress.name, {'label': 'Nom', 'attr':{
+                    'placeholder': 'Votre nom ...' }})
+                    }}
+                </div>
+
+                <div class="form-row">
+                    {{form_row(formAddress.address, {'label': 'Adresse', 'attr':{
+                    'placeholder': 'Votre adresse ...' }})
+                    }}
+                </div>
+
+                <div class="form-row">
+                    {{form_row(formAddress.address2, {'label': 'Informations complémentaires', 'attr':{
+                    'placeholder': 'Informations complémentaires ...' }})
+                    }}
+                </div>
+
+                <div class="form-row">
+                    {{form_row(formAddress.addressNumber, {'label': 'Numéro', 'attr':{
+                    'placeholder': 'Numéro de rue ...' }})
+                    }}
+                </div>
+
+                <div class="form-row">
+                    {{form_row(formAddress.postalCode, {'label': 'Code postal', 'attr':{
+                    'placeholder': 'Code postal ...' }})
+                    }}
+
+                    {{form_row(formAddress.city, {'label': 'Ville', 'attr':{
+                    'placeholder': 'Ville ...' }})
+                    }}
+                </div>
+
+                <div class="form-row">
+                    {{form_row(formAddress.phoneNumber, {'label': 'Téléphone', 'attr':{
+                    'placeholder': 'Numéro de téléphone ...' }})
+                    }}
+                </div>
+
+                <button class="btn btn-primary" type="submit">Modifier !</button>
+
+                {{ form_end(formAddress) }}
+
+            </form>
         </div>
     </div>
 

@@ -59,7 +59,7 @@ class User implements UserInterface
     private $comment;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Address", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Address", mappedBy="user", cascade={"persist", "remove"})
      */
     private $address;
 
@@ -69,6 +69,7 @@ class User implements UserInterface
         $this->comment = new ArrayCollection();
         $this->books = new ArrayCollection();
         $this->cart = new ArrayCollection();
+        $this->address = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -215,7 +216,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAddress(): ?Address
+    public function getAddress(): Collection
     {
         return $this->address;
     }
