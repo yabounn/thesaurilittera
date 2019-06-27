@@ -2,8 +2,15 @@
     text-align: center;
 }
 
+.btnDeliveryCart,
 .btnValidationCart {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
+/* .btnValidationCart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+} */

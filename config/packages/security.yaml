@@ -25,6 +25,7 @@ security:
                 login_path: security_login
                 check_path: security_login
                 use_referer: true
+                csrf_token_generator: security.csrf.token_manager
 
             logout:
                 path: security_logout

@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Validez votre panier !{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('css/cartShopping/cartShopping.css') }}" rel="stylesheet" />
+{% endblock stylesheets%}
+
 {% set total = 0 %}
+{% set tva = 0 %}
+{% set totalTtc = 0 %}
 
 {% block body %}
 <div class="container">
@@ -14,7 +22,6 @@
                     <th>Auteur</th>
                     <th>Quantité</th>
                     <th>Prix unitaire</th>
-                    <th>Actions</th>
                     <th>Total</th>
                 </tr>
             </thead>
@@ -25,25 +32,45 @@
                     <td>{{ book.author.firstname }} {{ book.author.name }}</td>
                     <td>{{ cartShopping[book.id] }}</td>
                     <td>{{ book.price }} €</td>
-                    <td>
-                        <a href="#"><i class="fas fa-sync"></i></a>
-                        <a href="#"><i class="fas fa-trash-alt"></i></a>
-                    </td>
                     <td>{{book.price * cartShopping[book.id] }} €</td>
                 </tr>
                 {% set total = total + (book.price * cartShopping[book.id]) %}
+                {% set tva = (total * 5.5) / 100 %}
+                {% set totalTtc = total + tva %}
                 {% endfor %}
             </tbody>
         </table>
     </div>
     <div class="row-flex mt-4">
         <div class="col-md-6 offset-md-10">
-            <div class="htPrice"><b>Total HT :</b> {{ total }}</div>
-            <div class="tva"><b>TVA :</b> 5.5</div>
-            <div class="ttcPrice"><b>Total TTC :</b> 105.5 €</div>
-            <a href="#" class="btn btn-success mt-4">Payer</a>
+            <div class="htPrice"><b>Total HT :</b> {{ total }} €</div>
+            <div class="tva"><b>TVA (5.5%) :</b> {{ tva }}</div>
+            <div class="ttcPrice"><b>Total TTC :</b> {{ totalTtc|number_format(2, '.', ',') }} €</div>
         </div>
-        <a href="{{ path('delivery') }}" class="btn btn-primary">Retour !</a>
+        <div class="jumbotron-white d-flex">
+            <div class="">
+                <h5>Adresse de livraison</h5>
+                {{ delivery.firstname}} {{ delivery.name }} <br>
+                {{ delivery.address }} <br>
+                {{ delivery.postalCode }} {{ delivery.city }}
+
+            </div>
+
+            <div class="ml-4">
+                <h5>Adresse de facturation</h5>
+                {{ facturation.firstname}} {{ facturation.name }} <br>
+                {{ facturation.address }} <br>
+                {{ facturation.postalCode }} {{ facturation.city }}
+            </div>
+        </div>
+
     </div>
+
+    <div class="col-md-12 mt-4 btnValidationCart">
+        <a href="{{ path('delivery')}}" class="btn btn-primary">Retour !</a>
+        <a href="#" class="btn btn-success">Payer</a>
+    </div>
+
+
 </div>
 {% endblock %}

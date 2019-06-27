@@ -127,13 +127,12 @@ class CartController extends AbstractController
 
     public function setDeliveryOnSession(Request $request, SessionInterface $session, AddressRepository $repository, BookRepository $bookRepository)
     {
-
-
         if (!$session->has('address')) $session->set('address', []);
         $address = $session->get('address');
 
-        if ($request->get('delivery') != null) {
+        if ($request->get('delivery') != null && $request->get('facturation') != null) {
             $address['delivery'] = $request->get('delivery');
+            $address['facturation'] = $request->get('facturation');
         } else {
             return $this->redirectToRoute('validate');
         }
@@ -154,6 +153,7 @@ class CartController extends AbstractController
 
         $books = $bookRepository->findArray(array_keys($session->get('cartShopping')));
         $delivery = $repository->find($address['delivery']);
+        $facturation = $repository->find($address['facturation']);
 
         // dump($delivery);
         // die();
@@ -161,6 +161,7 @@ class CartController extends AbstractController
         return $this->render('frontend/cart/validate.html.twig', [
             'books' => $books,
             'delivery' => $delivery,
+            'facturation' => $facturation,
             'cartShopping' => $session->get('cartShopping')
         ]);
     }

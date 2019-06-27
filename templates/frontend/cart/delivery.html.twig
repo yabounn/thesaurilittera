@@ -10,21 +10,41 @@
         <div class="row-flex col-md-6">
             {% if user.address|length != 0 %}
             <form action="{{ path('validate') }}" method="POST">
-                <h2>Adresse de livraison</h2>
-                {% for address in user.address %}
-                <div class="btnRadioDelivery">
-                    <input type="radio" name="delivery" value="{{ address.id }}" {% if loop.index0 == 0 %}
-                        checked="checked" {% endif %}>
+                <div class="form-group">
+                    <h4>Adresse de livraison</h4>
+                    {% for address in user.address %}
+                    <div class="btnRadioDelivery">
+                        <input type="radio" name="delivery" value="{{ address.id }}" {% if loop.index0 == 0 %}
+                            checked="checked" {% endif %}>
 
-                    <label class="radio" for="validate">{{ address.firstname }}
-                        {{ address.name }} <br>{{ address.addressNumber }} {{ address.address }}
-                        {{ address.postalCode}} {{ address.city}} <a
-                            href=" {{path('removeAddressDelivery', {'id': address.id}) }} "><i
-                                class="fas fa-trash-alt"></i></a>
-                    </label>
+                        <label class="radio" for="validate">{{ address.firstname }}
+                            {{ address.name }} <br>{{ address.addressNumber }} {{ address.address }}
+                            {{ address.postalCode}} {{ address.city}} <a
+                                href=" {{path('removeAddressDelivery', {'id': address.id}) }} "><i
+                                    class="fas fa-trash-alt"></i></a>
+                        </label>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-                <button class="btn btn-primary mt-4">Valider !</button>
+                <br><br>
+                <div class="form-group">
+                    <h4>Adresse de facturation</h4>
+                    {% for address in user.address %}
+                    <div class="btnRadioFacturation">
+                        <input type="radio" name="facturation" value="{{ address.id }}" {% if loop.index0 == 0 %}
+                            checked="checked" {% endif %}>
+
+                        <label class="radio" for="validate">{{ address.firstname }}
+                            {{ address.name }} <br>{{ address.addressNumber }} {{ address.address }}
+                            {{ address.postalCode}} {{ address.city}} <a
+                                href=" {{path('removeAddressDelivery', {'id': address.id}) }} "><i
+                                    class="fas fa-trash-alt"></i></a>
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <button class="btn btn-primary mt-4">Valider les adresses !</button>
             </form>
             {% else %}
             <h2>Adresse de livraison</h2>
@@ -32,7 +52,7 @@
             {% endif %}
         </div>
         <div class="row col-md-6">
-            <h2>Modifier l'adresse de livraison</h2>
+            <h2>Modifier une adresse</h2>
             <form action="{{ path('delivery') }}" method="post">
                 {{ form_start(formAddress) }}
 

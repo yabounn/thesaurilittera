@@ -56,7 +56,7 @@ class SecurityController extends AbstractController
         $targetPath = "/";
         // $referer = $request->getSession()->get('_security.main.target_path');
         $referer = $request->headers->get('referer');
-        dump($referer);
+        // dump($referer);
         if (false !== strstr($referer, '/panier/livraison')) {
             $targetPath = $referer;
         }
