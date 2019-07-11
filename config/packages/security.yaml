@@ -2,7 +2,13 @@ security:
     encoders:
         App\Entity\User:
             algorithm: bcrypt
-            
+
+    role_hierarchy:
+        # un membre avec le ROLE_ADMIN aura également le ROLE_USER
+        ROLE_ADMIN: ROLE_USER
+        # Le ROLE_SUPER_ADMIN avec le ROLE_ALLOWED_TO_SWITCH qui permet de s'authentifier en se faisant passer pour n'importe quel membre. Particulièrement utile pour débugger son code.
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
@@ -24,8 +30,9 @@ security:
             form_login:
                 login_path: security_login
                 check_path: security_login
-                use_referer: true
                 csrf_token_generator: security.csrf.token_manager
+                use_referer: true
+                
 
             logout:
                 path: security_logout
@@ -34,21 +41,13 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
-                    
-
-            # activate different ways to authenticate
-
-            # http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: true
-            # https://symfony.com/doc/current/security/form_login_setup.html
-
+            
+            switch_user: ~
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/book/add, roles: ROLE_ADMIN }
+        # - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/book/add, roles: ROLE_ADMIN }
 
         # - { path: ^/profile, roles: ROLE_USER }

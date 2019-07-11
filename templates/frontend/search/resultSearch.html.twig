@@ -5,10 +5,17 @@
 {% endblock title %}
 
 {% block body %}
-<h1>Résultat(s) de la recherche</h1>
-
-{% for book in books %}
-<p> {{ book.title }}</p>
-{% endfor %}
-
+<div class="jumbotron mt-4 resultSearch">
+    <div class="container">
+        <h1>Résultat(s) de la recherche</h1>
+        <br>
+        {% for book in books %}
+        <p> <a href="{{ path('showBook',{id:book.id, slug: book.slug}) }}"> {{ book.title }} </a> <br>
+            {{ book.author.firstname }}
+            {{ book.author.name }}
+        </p>
+        <hr>
+        {% endfor %}
+    </div>
+</div>
 {% endblock body %}

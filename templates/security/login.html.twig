@@ -38,7 +38,7 @@
                         </div>
                         {#<input type="hidden" name="_target_path"
                             value="{{ app.session.get('_security.main.target_path') }}" />#}
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
                         <input type="hidden" name="_target_path" value="{{ targetPath }}" />
                     </form>
                 </div>
@@ -73,7 +73,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                        <!-- <button type="submit" class="btn btn-success validate">Inscription!</button> -->
+                        <button id="validateRegistration" class="btn btn-success validate">Inscription!</button>
                     </div>
                 </div>
             </div>

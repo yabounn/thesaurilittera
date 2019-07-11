@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Form\AddedBookType;
-use App\Form\FilterBySearchType;
+use App\Form\FilterByCategoryType;
 use App\Repository\BookRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +32,7 @@ class BookstoreController extends AbstractController
      */
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
-        $form = $this->createForm(FilterBySearchType::class);
+        $form = $this->createForm(FilterByCategoryType::class);
         $form->handleRequest($request);
 
         $category = $request->query->get('category');

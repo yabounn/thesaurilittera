@@ -1,6 +1,6 @@
 {% form_theme formSearch 'bootstrap_4_layout.html.twig' %}
 
-{{ form_start(formSearch, {'action': path('resultSearch',{'search': 'searchBar'}), 'method': 'GET',
+{{ form_start(formSearch, {'action': path('resultSearch',{'search': 'search'}), 'method': 'GET',
                            'attr': {'id': 'searchForm'} })                                                                          
 }}
 
@@ -8,7 +8,6 @@
                             'id': 'searchBar'} })
 }}
 
-<a href="{{ path('resultSearch',{'search' : 'searchBar'}) }}" id="button" class="search_icon"><i
-                class="fas fa-search"></i></a>
+<button class="btn btn-link search_icon" id="button"><i class="fas fa-search"></i></button>
 
 {{ form_end(formSearch) }}

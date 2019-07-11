@@ -55,9 +55,11 @@
     background-position: center;
     transition: background 0.8s;
 }
+
 .ripple:hover {
     background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
 }
+
 .ripple:active {
     /* background-color: #6eb9f7; */
     background-color: #0069D9;
@@ -68,8 +70,9 @@
 /* Slides*/
 .carousel-item.active {
     display: flex;
-    align-items: stretch;    
+    align-items: stretch;
 }
+
 .carousel-item .mb-2 {
     box-shadow: 1px 1px 2px 1px rgba(0, 0, 255, .2);
 }

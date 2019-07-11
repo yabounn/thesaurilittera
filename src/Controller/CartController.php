@@ -31,6 +31,7 @@ class CartController extends AbstractController
             'controller_name' => 'CartController',
             'cartShopping' => $cartShopping,
             'books' => $books
+
         ]);
     }
 
@@ -44,22 +45,26 @@ class CartController extends AbstractController
         if (!$session->has('cartShopping')) $session->set('cartShopping', []);
         $cartShopping = $session->get('cartShopping');
 
+
         if (array_key_exists($id, $cartShopping)) {
             if ($request->query->get('quantity') != null) $cartShopping[$id] = $request->query->get('quantity');
-            $this->addFlash('success', 'La quantité a été modifié !');
+            $this->addFlash('success', 'La quantité a été modifié avec succès !');
         } else {
-            if ($request->query->get('quantity') != null)
+            if ($request->query->get('quantity') != null) {
                 $cartShopping[$id] = $request->query->get('quantity');
-            else
+            } else {
                 $cartShopping[$id] = 1;
 
-            $this->addFlash('success', 'Le livre a été ajouté !');
+                $this->addFlash('success', 'Le livre a été ajouté avec succès !');
+            }
         }
-
         $session->set('cartShopping', $cartShopping);
-
+        $cart_count = $cartShopping[$id];
+        dump($cart_count);
+        exit;
         return $this->redirectToRoute('cart', [
-            'cartShopping' => $cartShopping
+            'cartShopping' => $cartShopping,
+            // 'cart_count' => $cart_count
         ]);
     }
 

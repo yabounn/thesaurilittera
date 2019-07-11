@@ -23,7 +23,7 @@ class AddedBookType extends AbstractType
             ->add('author', AuthorType::class)
             ->add('publisher', TextType::class)
             ->add('publishedDate', DateType::class, [
-                  'widget' => 'single_text'  
+                'widget' => 'single_text'
             ])
             ->add('summary', TextareaType::class)
             ->add('imageFile', FileType::class)
@@ -33,9 +33,7 @@ class AddedBookType extends AbstractType
                 'choice_label' => 'title',
                 'expanded' => false,
                 'multiple' => false
-            ])
-
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

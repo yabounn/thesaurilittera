@@ -22,6 +22,7 @@ class CategoryController extends AbstractController
     {
         $this->repository = $repository;
     }
+
     /**
      * @Route("/category", name="category")
      */

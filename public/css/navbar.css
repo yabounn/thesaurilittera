@@ -1,5 +1,5 @@
 /* searchBar */
- #searchForm {
+#searchForm {
     display: flex;
     margin-bottom: auto;
     margin-top: auto;
@@ -39,8 +39,9 @@
 #searchForm:hover>.search_icon {
     background: white;
     color: #e74c3c;
+    text-decoration: none;
 }
- 
+
 .search_icon {
     height: 40px;
     width: 40px;
@@ -50,7 +51,7 @@
     align-items: center;
     border-radius: 50%;
     color: white;
-} 
+}
 
 /* counter shopping-cart */
 .has-badge[data-count]:after {
@@ -67,4 +68,5 @@
     text-align: center;
     min-width: 2em;
     font-weight: bold;
-} 
+
+}

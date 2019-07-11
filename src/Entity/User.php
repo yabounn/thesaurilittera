@@ -63,6 +63,11 @@ class User implements UserInterface
      */
     private $address;
 
+    /**
+     * @var array
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     public function __construct()
     {
@@ -152,9 +157,19 @@ class User implements UserInterface
     /**
      * Methode UserInterface 
      */
-    public function getRoles()
+    public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        $roles = $this->roles;
+
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): void
+    {
+        $this->roles = $roles;
     }
 
     /**
@@ -175,11 +190,17 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * Supprimer un commentaire
+     *
+     * @param Comment $comment
+     * @return self
+     */
     public function removeComment(Comment $comment): self
     {
         if ($this->comment->contains($comment)) {
             $this->comment->removeElement($comment);
-            // set the owning side to null (unless already changed)
+
             if ($comment->getUser() === $this) {
                 $comment->setUser(null);
             }
@@ -206,6 +227,12 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * Supprimer un livre
+     *
+     * @param Book $book
+     * @return self
+     */
     public function removeBook(Book $book): self
     {
         if ($this->books->contains($book)) {
@@ -216,16 +243,17 @@ class User implements UserInterface
         return $this;
     }
 
+
     public function getAddress(): Collection
     {
         return $this->address;
     }
 
+
     public function setAddress(Address $address): self
     {
         $this->address = $address;
 
-        // set the owning side of the relation if necessary
         if ($this !== $address->getUser()) {
             $address->setUser($this);
         }

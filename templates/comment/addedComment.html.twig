@@ -1,0 +1,49 @@
+{% form_theme formAddedComment 'bootstrap_4_layout.html.twig' %}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un commentaire{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    {% if app.user %}
+    <div class="jumbotron mt-4 col-md-8">
+        <h2>Ajouter un commentaire</h2>
+        {{ form_start(formAddedComment) }}
+
+        <div class="form-group">
+            {{ form_row(formAddedComment.user) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(formAddedComment.title, {'label': 'Titre', 'attr': {'placeholder':'Titre du commentaire, d\'un livre ...'}})
+            }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(formAddedComment.content, {'label': 'Commentaire', 'attr': {'placeholder':'Vos impressions , un commentaire sur un livre ...'}})
+            }}
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Ajouter !</button>
+        </div>
+
+        {{ form_end(formAddedComment) }}
+    </div>
+    {% else %}
+    <div class="container">
+        <div class="jumbotron-white mt-4 col-md-8">
+            <h4>Connectez-vous pour ajouter un commentaire</h4>
+            <a href="{{ path('security_login') }}" class="btn btn-success mt-4">Se connecter !</a>
+
+        </div>
+
+    </div>
+    {% endif %}
+
+
+</div>
+
+{% endblock %}

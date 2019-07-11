@@ -13,19 +13,17 @@ class UserFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
-        for($i = 1; $i <= 10; $i++){
+        for ($i = 1; $i <= 10; $i++) {
             $user = new User();
-            $user->setFirstname($faker->firstName)
-                 ->setName($faker->lastName)
-                 ->setUsername($faker->userName)
-                 ->setEmail($faker->email)
-                 ->setPassword($faker->password) // A HASHER
-                 ->setAddress($faker->address)
-                 ->setCreatedAt(new \DateTime());
+            $user
+                ->setUsername($faker->userName)
+                ->setEmail($faker->email)
+                ->setPassword($faker->passwordEncoder->encodePassword()) // A HASHER
+                ->setCreatedAt(new \DateTime());
 
             $manager->persist($user);
         }
-        
+
         $manager->flush();
     }
 }
