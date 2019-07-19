@@ -21,17 +21,16 @@ class CartController extends AbstractController
     public function index(SessionInterface $session, BookRepository $repository)
     {
         $cartShopping = $session->get('cartShopping');
-
+        dump($session);
+        exit;
         if (!$session->has('cartShopping')) $session->set('cartShopping', []);
 
         $books = $repository->findArray(array_keys($session->get('cartShopping')));
-
 
         return $this->render('frontend/cart/index.html.twig', [
             'controller_name' => 'CartController',
             'cartShopping' => $cartShopping,
             'books' => $books
-
         ]);
     }
 
@@ -44,7 +43,6 @@ class CartController extends AbstractController
 
         if (!$session->has('cartShopping')) $session->set('cartShopping', []);
         $cartShopping = $session->get('cartShopping');
-
 
         if (array_key_exists($id, $cartShopping)) {
             if ($request->query->get('quantity') != null) $cartShopping[$id] = $request->query->get('quantity');
@@ -59,14 +57,21 @@ class CartController extends AbstractController
             }
         }
         $session->set('cartShopping', $cartShopping);
-        $cart_count = $cartShopping[$id];
-        dump($cart_count);
-        exit;
+        $nbCart = $cartShopping;
+        // foreach ($nbCart as $value) {
+        //     dump($value);
+        // };
+        // dump($nbCart);
+        // exit;
+
+
         return $this->redirectToRoute('cart', [
             'cartShopping' => $cartShopping,
-            // 'cart_count' => $cart_count
+            // 'nbBook' => $nbBook
         ]);
     }
+
+
 
     /**
      * @Route("/panier/{id}/supprimer", name="remove")
@@ -99,7 +104,6 @@ class CartController extends AbstractController
 
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
             $address->setCreatedAt(new \DateTime());
             $address->setUser($user);
@@ -108,7 +112,6 @@ class CartController extends AbstractController
 
             return $this->redirectToRoute('delivery');
         }
-
 
         return $this->render('frontend/cart/delivery.html.twig', [
             'formAddress' => $form->createView(),
@@ -128,7 +131,6 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute('delivery');
     }
-
 
     public function setDeliveryOnSession(Request $request, SessionInterface $session, AddressRepository $repository, BookRepository $bookRepository)
     {

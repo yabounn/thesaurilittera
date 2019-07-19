@@ -1,16 +1,18 @@
-{% form_theme formRegistration 'bootstrap_4_layout.html.twig' %}
+{#{% form_theme formRegistration 'bootstrap_4_layout.html.twig' %}#}
 
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}
 
 {% block stylesheets %}
 {{ parent() }}
 <link rel="stylesheet" href="{{ asset('css/form/registration.css')}}">
-{% endblock %}
+{% endblock %}#}
 
-{% block body %}
-<div class="container">
+{#{% block body %}
+
+<div class="container col-sm-6">
+    <!-- <div class="jumbotron"> -->
     <div class="row-flex">
-        <div class="row col-md-12">
+        <div class="row col-12">
             {{ form_start(formRegistration, {'action': path('security_registration')}) }}
 
             <div class="form-row">
@@ -40,9 +42,12 @@
 
         <button type="submit" class="btn btn-success">Inscription!</button>
 
-
         {{ form_end(formRegistration)}}
     </div>
 </div>
-</div>
-{% endblock %}
+<!-- </div> -->
+{% endblock %}#}
+
+{{ form_start(formRegistration, {'action': path('security_registration')}) }}
+{{ form_widget(formRegistration) }}
+{{ form_end(formRegistration) }}

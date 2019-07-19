@@ -60,7 +60,7 @@
 
                     <a style="color: #060606;" href="{{ path('cart') }}"><span class="fa-stack has-badge">
                             <i class="fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
-                        </span> <span class="badge badge-pill badge-dark">0</span>
+                        </span> <span class="badge badge-pill badge-dark">{{ app.session.get('nbBook') }}</span>
                     </a>
                 </li>
                 {% else %}

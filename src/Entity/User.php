@@ -71,6 +71,7 @@ class User implements UserInterface
 
     public function __construct()
     {
+        $this->roles = ['ROLE_USER'];
         $this->comment = new ArrayCollection();
         $this->books = new ArrayCollection();
         $this->cart = new ArrayCollection();
@@ -161,9 +162,9 @@ class User implements UserInterface
     {
         $roles = $this->roles;
 
-        if (empty($roles)) {
-            $roles[] = 'ROLE_USER';
-        }
+        // if (empty($roles)) {
+        //     $roles[] = 'ROLE_USER';
+        // }
         return array_unique($roles);
     }
 
