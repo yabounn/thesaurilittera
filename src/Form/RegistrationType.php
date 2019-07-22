@@ -16,14 +16,15 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('password', PasswordType::class)
-            ->add('confirm_password', PasswordType::class)
+            ->add('username', TextType::class, ['required' => false])
+            ->add('email', EmailType::class, ['required' => false])
+            ->add('password', PasswordType::class, ['required' => false])
+            ->add('confirm_password', PasswordType::class, ['required' => false])
             // Btn a laisser ici pour le bon fonctionnement de la modale
-            ->add('save', SubmitType::class, ['label' => 'Inscription !'])
+            // ->add('save', SubmitType::class, [
+            //     'label' => 'Inscription !'
+            // ])
             // ->add('createdAt')
-
         ;
     }
 

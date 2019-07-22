@@ -14,6 +14,7 @@
         <div class="jumbotron col-md-12 mt-4">
             <div class="row loginForm">
                 <div class=" col-md-4 offset-md-1">
+                    <!-- Form  -->
                     <form method="post">
                         {% if error %}
                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}
@@ -34,68 +35,47 @@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-success">Connexion !</button>
-                            <!-- <p><a href="{{ path('security_registration') }}">Je n'ai pas de compte</a></p> -->
                         </div>
-
                         <input type="hidden" name="_target_path" value="{{ targetPath }}" />
                     </form>
+                    <!-- /.form -->
                 </div>
 
                 <div class=" col-md-4 offset-md-2 signIn">
                     <h5>Créer un compte !</h5>
-                    {#<p class="btnSignIn"><a href="{{ path('security_registration') }}" class="btn btn-primary">Je
-                            m'inscris</a></p>#}
-
-                    <!-- Button trigger modal -->
-                    <a class="btn btn-primary left-align modal-trigger" data-tooltip="voir"
-                        data-target="{{ path('security_registration') }}" href="#modal1">Je m'inscris </a>
-
-
+                    <!-- Button modal -->
+                    <!-- <a class="btn btn-primary left-align modal-trigger" data-tooltip="voir"
+                        data-target="{{ path('security_registration') }}" href="#modal1">Je m'inscris </a> -->
+                    <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-plus"></i> Je m'inscris
+                    </button> -->
+                    <a class="btn btn-primary" href="{{ path('security_registration') }}"><i class="fa fa-plus"></i> Je
+                        m'inscris</a>
                 </div>
             </div>
             <!-- /.loginForm -->
         </div>
         <!-- /.jumbotron -->
 
-        <!-- Modal -->
-        <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="signInTitle"
-            aria-hidden="true">
+        <!-- Modal inscription -->
+        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle"
+            aria-hidden="true" data-target="{{ path('security_registration') }}">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="signInTitle">Formulaire d'inscription</h5>
+                        <h5 class="modal-title" id="exampleModalTitle">Formulaire d'inscription</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button id="validateRegistration" class="btn btn-success validate">Inscription!</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        {{ render(controller('App\\Controller\\SecurityController::registration')) }}
                     </div>
                 </div>
-                <input type="hidden" name="formPseudo" id="formPseudo" value="">
             </div>
         </div> -->
-        <!-- /.modal -->
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            </div>
-
-        </div>
+        <!-- /.modal inscription -->
     </div>
     <!-- /.row -->
 </div>
-{% endblock %}
-
-{% block javascripts %}
-{{ parent() }}
-<script src="{{ asset('js/registration/registration.js') }}"></script>
 {% endblock %}

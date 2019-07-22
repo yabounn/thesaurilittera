@@ -1,53 +1,64 @@
-{#{% form_theme formRegistration 'bootstrap_4_layout.html.twig' %}#}
+{% form_theme formRegistration 'bootstrap_4_layout.html.twig' %}
 
-{#{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block stylesheets %}
 {{ parent() }}
 <link rel="stylesheet" href="{{ asset('css/form/registration.css')}}">
-{% endblock %}#}
+{% endblock %}
 
-{#{% block body %}
+{% block body %}
+<div class="container">
+    <h2>Formulaire d'inscription</h2>
+    <div class="row formRegistration">
 
-<div class="container col-sm-6">
-    <!-- <div class="jumbotron"> -->
-    <div class="row-flex">
-        <div class="row col-12">
-            {{ form_start(formRegistration, {'action': path('security_registration')}) }}
+        {{ form_start(formRegistration) }}
 
-            <div class="form-row">
-                {{ form_row(formRegistration.username, {'label': 'Pseudo', 'attr': {
-                    'placeholder': 'Pseudo ...'}})
-                }}
-            </div>
-
-            <div class="form-row">
-                {{ form_row(formRegistration.email, {'label': 'Adresse email', 'attr': {
-                    'placeholder': 'Adresse email ...'}})
-                }}
-            </div>
-
-            <div class="form-row">
-                {{ form_row(formRegistration.password, {'label': 'Mot de passe', 'attr': {
-                    'placeholder': 'Mot de passe ...'}})
-                }}
-            </div>
-
-            <div class="form-row">
-                {{ form_row(formRegistration.confirm_password, {'label': 'Confirmation du mot de passe', 'attr': {
-                    'placeholder': 'Confirmez le mot de passe ...'}})
-                }}
-            </div>
+        <div class="form-row col-md-12">
+            {{ form_row(formRegistration.username, {
+                        'label': 'Pseudo', 
+                        'attr': {'placeholder': 'Pseudo...'}
+                    })   
+        }}
         </div>
 
-        <button type="submit" class="btn btn-success">Inscription!</button>
+        <div class="form-row col-md-12">
+            {{ form_row(formRegistration.email, {
+                        'label': 'Adresse mail', 
+                        'attr': {'placeholder': 'Email ...'}
+                    })   
+        }}
+        </div>
 
-        {{ form_end(formRegistration)}}
+        <div class="form-row col-md-12">
+            {{ form_row(formRegistration.password, {
+                        'label': 'Mot de passe', 
+                        'attr': {'placeholder': 'Mot de passe ...'}
+                    })   
+        }}
+        </div>
+
+        <div class="form-row col-md-12">
+            {{ form_row(formRegistration.confirm_password, {
+                        'label': 'Confirmation', 
+                        'attr': {'placeholder': 'Confirmation mot de passe ...'}
+                    })   
+        }}
+        </div>
+
+        <div class="form-row col-md-12">
+            {{ form_widget(formRegistration) }}
+            <button class="btn btn-primary" type="submit">Envoyer !</button>
+        </div>
+
+
+        {{ form_end(formRegistration) }}
+
     </div>
 </div>
-<!-- </div> -->
-{% endblock %}#}
+{% endblock %}
 
-{{ form_start(formRegistration, {'action': path('security_registration')}) }}
-{{ form_widget(formRegistration) }}
-{{ form_end(formRegistration) }}
+{#{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/registration/registration.js') }}"></script>
+{% endblock %}#}

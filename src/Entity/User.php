@@ -27,23 +27,26 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     * @Assert\NotBlank(message="Le champs pseudo ne peut pas être vide !")
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le champs email ne peut pas être vide !")
      * @Assert\Email()
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le champs password ne peut pas être vide !")
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit contenir au minimum 8 caractères !")
      */
     private $password;
 
     /**
+     * @Assert\NotBlank(message="Le champs ne peut pas être vide !")
      * @Assert\EqualTo(propertyPath="password", message="Les mots de passe ne correspondent pas !")
      */
     private $confirm_password;
