@@ -43,12 +43,6 @@
 
                 <div class=" col-md-4 offset-md-2 signIn">
                     <h5>Créer un compte !</h5>
-                    <!-- Button modal -->
-                    <!-- <a class="btn btn-primary left-align modal-trigger" data-tooltip="voir"
-                        data-target="{{ path('security_registration') }}" href="#modal1">Je m'inscris </a> -->
-                    <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        <i class="fa fa-plus"></i> Je m'inscris
-                    </button> -->
                     <a class="btn btn-primary" href="{{ path('security_registration') }}"><i class="fa fa-plus"></i> Je
                         m'inscris</a>
                 </div>
@@ -56,25 +50,6 @@
             <!-- /.loginForm -->
         </div>
         <!-- /.jumbotron -->
-
-        <!-- Modal inscription -->
-        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle"
-            aria-hidden="true" data-target="{{ path('security_registration') }}">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalTitle">Formulaire d'inscription</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        {{ render(controller('App\\Controller\\SecurityController::registration')) }}
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- /.modal inscription -->
     </div>
     <!-- /.row -->
 </div>

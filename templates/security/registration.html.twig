@@ -12,7 +12,9 @@
     <h2>Formulaire d'inscription</h2>
     <div class="row formRegistration">
 
-        {{ form_start(formRegistration) }}
+        {{ form_start(formRegistration, {
+            'label': 'Formulaire'
+        }) }}
 
         <div class="form-row col-md-12">
             {{ form_row(formRegistration.username, {
@@ -51,14 +53,8 @@
             <button class="btn btn-primary" type="submit">Envoyer !</button>
         </div>
 
-
         {{ form_end(formRegistration) }}
 
     </div>
 </div>
 {% endblock %}
-
-{#{% block javascripts %}
-{{ parent() }}
-<script src="{{ asset('js/registration/registration.js') }}"></script>
-{% endblock %}#}

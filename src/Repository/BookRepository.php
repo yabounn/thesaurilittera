@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Book;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
+
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,12 +21,13 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    // public function findAllQuery()
-    // {
-    //     return $this->createQueryBuilder('b')
-    //         ->orderBy('b.id', 'DESC');    
-    // }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $array
+     * @return void
+     */
     public function findArray($array)
     {
         return $this->createQueryBuilder('b')
@@ -36,6 +39,8 @@ class BookRepository extends ServiceEntityRepository
     }
 
     /**
+     * Recherche par titre du livre ou auteur
+     * 
      * @param string $value
      * @return void
      */
@@ -51,14 +56,16 @@ class BookRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    // public function findOneBySomeField($value): ?Book
-    // {
-    //     return $this->createQueryBuilder('b')
-    //         ->andWhere('b.exampleField = :val')
-    //         ->setParameter('val', $value)
-    //         ->getQuery()
-    //         ->getOneOrNullResult()
-    //     ;
-    // }
-
+    /**
+     * Renvoie de façon aléatoire un livre
+     *
+     * @return void
+     */
+    public function bookInTheRandom()
+    {
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata(Book::class, 'title');
+        $sql = "SELECT * FROM book ORDER BY RAND() LIMIT 1";
+        return $this->getEntityManager()->createNativeQuery($sql, $rsm)->getOneOrNullResult();
+    }
 }

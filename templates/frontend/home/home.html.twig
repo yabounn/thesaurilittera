@@ -6,7 +6,7 @@
 {{ parent() }}
 <link href="{{ asset('css/home/home.css') }}" rel="stylesheet" />
 <link href="{{ asset('css/home/carousel.css') }}" rel="stylesheet" />
-<link href="{{ asset('css/home/selectionBook.css') }}" rel="stylesheet" />
+<link href="{{ asset('css/home/randomBook.css') }}" rel="stylesheet" />
 <link href="{{ asset('css/home/bestSelling.css') }}" rel="stylesheet" />
 {% endblock %}
 
@@ -38,6 +38,7 @@
                                         {% for book in books %}
                                         <div class="d-flex col-4">
                                             <!-- d-flex (bootstrap) permet d'obtenir une même hauteur pour toutes les cartes-->
+                                            <!-- card -->
                                             <div class="card text-center">
                                                 <div class="card-body">
                                                     <img class="card-img-top"
@@ -51,11 +52,12 @@
                                                         <h6><b>{{book.author.firstname}} {{book.author.name}}</b></h6>
                                                         <h6>{{book.category.title}}</h6>
                                                         <p>{{book.summary | slice(0, 100)}} [...]</p>
-                                                        {#<a href="{{path('showBook', {id:book.id, slug: book.slug})}}" class="btn btn-primary ">Plus
-                                !</a>#}
+                                                        <a href="{{path('showBook', {id:book.id, slug: book.slug})}}"
+                                                            class="btn btn-primary ">Voir plus !</a>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- /.card -->
                                         </div>
                                     </div>
                                     <!-- /.carousel-item active -->
@@ -66,34 +68,35 @@
                                 <!-- /.carousel-inner -->
                             </div>
                             <!-- /.carousel content -->
-
                         </section>
                         <!-- /.section-preview -->
                     </div>
                     <!-- /.section-carousel -->
 
-                    <div class="col-md-12 book-selection ">
-                        <h3>Sélection du livre de la semaine</h3>
+                    <!-- book-random -->
+                    <div class="col-md-12 book-random ">
+                        <h3>Un livre en particulier</h3>
                         <section class="card-selection">
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img src="{{ asset('images/ancient-books.jpg') }}" class="card-img"
-                                        alt="Livre antique">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Titre du livre</h5>
-                                        <h5 class="card-title">Auteur</h5>
-                                        <h6 class="card-title">Catégorie</h6>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural lead-in to additional content. This content is a little bit longer.
-                                        </p>
+                            <div class="row">
+                                <div class="card-body">
+                                    <div class="img-card col-sm-4">
+                                        <img class="card-img-left"
+                                            src="{{ asset('images/covers/')}}{{bookInTheRandom.filename}}"
+                                            alt="{{bookInTheRandom.title}}">
+                                    </div>
+                                    <div class="content-card col-sm-8">
+                                        <h5 class="card-title">{{bookInTheRandom.title}}</h5>
+                                        <h6 class="card-title"><b>{{bookInTheRandom.author.firstname}}
+                                                {{bookInTheRandom.author.name}}</b>
+                                        </h6>
+                                        <h6 class="card-title">{{bookInTheRandom.category.title}}</h6>
+                                        <p class="card-text">{{bookInTheRandom.summary | slice(0, 100)}} [...]</p>
                                     </div>
                                 </div>
                             </div>
                         </section>
                     </div>
-                    <!-- /.book-selection -->
+                    <!-- /.book-random -->
                 </div>
                 <!-- /.row carousel-selection -->
             </div>

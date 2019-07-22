@@ -1,4 +1,4 @@
-.book-selection  {
+.book-random {
     margin-top: 2em;
     margin-bottom: 1.5em;
     display: inline-block;
@@ -6,7 +6,16 @@
     /* border: 1px solid blue; */
 }
 
-.book-selection>h3 {
+.book-random>h3 {
     text-align: center;
     padding: 1em;
+}
+
+.card-selection .card-body {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card-selection .card-img-left {
+    width: 60%;
 }
