@@ -5,7 +5,7 @@ $('.carousel .carousel-item').each(function () {
   }
   next.children(':first-child').clone().appendTo($(this));
 
-  // Montre 3 cartes par slide 
+  // Affiche 3 cartes par slide 
   for (var i = 0; i < 3; i++) {
     next = next.next();
     if (!next.length) {
@@ -14,3 +14,11 @@ $('.carousel .carousel-item').each(function () {
     next.children(':first-child').clone().appendTo($(this));
   }
 });
+
+// jQuery(document).ready(function ($) {
+//   $('.carousel-indicators > li:first').addClass('active');
+//   $('.carousel-inner > .carousel-item:first').addClass('active');
+//   $('.carousel').carousel({
+//     interval: 2000
+//   });
+// });

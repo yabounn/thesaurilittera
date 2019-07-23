@@ -39,7 +39,7 @@ class BookRepository extends ServiceEntityRepository
     }
 
     /**
-     * Recherche par titre du livre ou auteur
+     * Recherche par titre du livre ou par auteur
      * 
      * @param string $value
      * @return void
