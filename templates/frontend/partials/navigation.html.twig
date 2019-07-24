@@ -1,0 +1,68 @@
+{% block stylesheets%}
+<link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+{% endblock %}
+
+{% block navigation %}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand thesaurilittera" href="{{ path('home') }}"><img
+            src="https://img.icons8.com/flat_round/64/000000/bookmark-book.png" width="50"
+            height="50">Thesaurilittera</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link {% if current_menu is defined and current_menu == 'home' %}active{% endif %}"
+                    href="{{ path('home') }}">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if current_menu is defined and current_menu == 'bookstore' %}active{% endif %}"
+                    href="{{ path('bookstore') }}">Librairie</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="">Forum</a>
+            </li>
+        </ul>
+
+        <!-- search bar-->
+        <div class="container h-100">
+            <div class="d-flex justify-content-center h-100">
+                <div id="searchBar">
+                    {{ render(controller('App\\Controller\\SearchController::searchBar')) }}
+                </div>
+            </div>
+        </div>
+        <!-- /.search bar-->
+
+        <!-- login/logout  -->
+        <ul class="navbar-nav login">
+            {% if not app.user %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
+
+                <a style="color: #060606;" href="{{ path('cart') }}"><span class="fa-stack has-badge">
+                        <i class="fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
+                    </span> <span class="badge badge-pill badge-dark">{{ app.session.get('nbBook') }}</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
+                <a style="color: #060606;" href="{{ path('cart',{ id : app.user.id }) }}"><span
+                        class="fa-stack has-badge">
+                        <i class="fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
+                    </span> <span class="badge badge-pill badge-dark">0</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+        <!-- /.login/logout -->
+    </div>
+</nav>
+<!-- /.Navbar -->
+{% endblock %}

@@ -1,5 +1,4 @@
 {% extends 'base.html.twig'%}
-
 {% block title 'Thesaurilittera'%}
 
 {% block stylesheets %}
@@ -8,6 +7,10 @@
 <link href="{{ asset('css/home/carousel.css') }}" rel="stylesheet" />
 <link href="{{ asset('css/home/randomBook.css') }}" rel="stylesheet" />
 <link href="{{ asset('css/home/bestSelling.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block navigation %}
+{% include 'frontend/partials/navigation.html.twig'%}
 {% endblock %}
 
 {% block body %}
@@ -20,10 +23,8 @@
                     <div class="col-md-12 section-carousel">
                         <h3>En ce moment...</h3>
                         <section class=" section-preview text-center">
-
                             <!-- Carousel content  -->
                             <div id="option" class="carousel slide" data-ride="carousel">
-
                                 <!--Controls-->
                                 <div class="controls-top">
                                     <a class="btn-floating ripple" href="#option" data-slide="prev"><i
@@ -159,6 +160,10 @@
     <!-- /.container -->
 </main>
 {% endblock body %}
+
+{% block footer %}
+{% include 'frontend/partials/footer.html.twig'%}
+{% endblock %}
 
 {% block javascripts %}
 {{ parent() }}
