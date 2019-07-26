@@ -1,7 +1,32 @@
+{% extends 'base.html.twig' %}
+
 {% block stylesheets %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/solar/bootstrap.min.css">
-{% endblock %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset ('css/admin/header/header.css') }}">
+<link rel="stylesheet" href="{{ asset ('css/admin/navigation/sidebar.css') }}">
+{% endblock stylesheets %}
+
+{% block header %}
+{% include 'admin/partials/header.html.twig' %}
+{% endblock header %}
 
 {% block body %}
-<h1>Bienvenue sur votre espace administration {{ app.user.username }} !</h1>
-{% endblock %}
+<div class="wrapper">
+    <div class="row">
+        <div class="row col-md-4">
+            {% include 'admin/partials/sidebar.html.twig' %}
+        </div>
+
+        <div class="row col-md-6">
+            <section class="content">
+
+            </section>
+        </div>
+    </div>
+</div>
+<!-- ./wrapper -->
+{% endblock body %}
+
+{% block javascript %}
+{{ parent() }}
+{% endblock javascript%}

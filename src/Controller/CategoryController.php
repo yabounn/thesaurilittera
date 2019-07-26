@@ -24,7 +24,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/category", name="category")
+     * @Route("/admin/category", name="category")
      */
     public function index()
     {
@@ -34,7 +34,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/category/add", name="addedCategory")
+     * @Route("/admin/category/add", name="addedCategory")
      */
     public function add(Request $request)
     {
@@ -49,10 +49,12 @@ class CategoryController extends AbstractController
             $em->persist($category);
             $em->flush();
 
-            return new Response('La catégorie a été ajoutée !');
+            $this->addFlash('success', 'La catégorie a été ajoutée !');
+
+            return $this->redirectToRoute('admin_book_add');
         }
 
-        return $this->render('category/addedCategory.html.twig', [
+        return $this->render('admin/category/addedCategory.html.twig', [
             'formAddedCategory' => $form->createView()
         ]);
     }

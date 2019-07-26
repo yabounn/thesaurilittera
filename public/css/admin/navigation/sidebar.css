@@ -1,0 +1,28 @@
+aside.main-sidebar {
+    position: absolute;
+    height: 100%;
+    background-color: #222D32;
+    color: #e4e6e9;
+}
+
+.sidebar-menu>li {
+    list-style: none;
+}
+
+.btn-secondary,
+.btn-secondary:not(:disabled):not(.disabled).active,
+.btn-secondary:not(:disabled):not(.disabled):active,
+.show>.btn-secondary.dropdown-toggle {
+
+    background-color: #222D32;
+    border-color: #222D32;
+}
+
+.dropdown-menu {
+    background-color: #5a6268;
+}
+
+.dropdown-item {
+    color: #e4e6e9;
+
+}

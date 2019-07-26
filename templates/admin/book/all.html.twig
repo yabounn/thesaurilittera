@@ -2,34 +2,54 @@
 
 {% block title %}Tous les livres !{% endblock %}
 
-{% block body %}
-<div class="container mt-4">
-    <h2>Gérer la bibliothèque</h2>
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset ('css/admin/header/header.css') }}">
+<link rel="stylesheet" href="{{ asset ('css/admin/navigation/sidebar.css') }}">
+<link rel="stylesheet" href="{{ asset ('css/admin/bookstore/books.css') }}">
+{% endblock stylesheets %}
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Titre du livre</th>
-                <th>Auteur</th>
-                <th>Catégorie</th>
-                <th>Prix</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for book in books%}
-            <tr>
-                <td>{{ book.title }}</td>
-                <td>{{ book.author.firstname }} {{book.author.name}}</td>
-                <td>{{ book.category.title }}</td>
-                <td>{{ book.price }} €</td>
-                <td>
-                    <a href="{{ path('admin_book_edit', {id: book.id})}}" class="btn btn-primary">Editer</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+{% block header %}
+{% include 'admin/partials/header.html.twig' %}
+{% endblock header %}
+
+{% block body %}
+
+<div class="row all-book">
+    <div class="row col-md-3">
+        {% include 'admin/partials/sidebar.html.twig' %}
+    </div>
+
+    <div class="row col-md-8">
+        <h2>Gérer la bibliothèque</h2>
+        <section class="content">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Titre du livre</th>
+                        <th>Auteur</th>
+                        <th>Catégorie</th>
+                        <th>Prix €</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books%}
+                    <tr>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.author.firstname }} {{book.author.name}}</td>
+                        <td>{{ book.category.title }}</td>
+                        <td>{{ book.price }}</td>
+                        <td>
+                            <a href="{{ path('admin_book_edit', {id: book.id})}}" class="btn btn-primary">Editer</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
 </div>
 
 {% endblock %}

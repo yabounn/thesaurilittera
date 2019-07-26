@@ -20,7 +20,13 @@ class AddedBookType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('author', AuthorType::class)
+            // ->add('author', AuthorType::class)
+            ->add('author', EntityType::class, [
+                'class' => 'App\Entity\Author',
+                'choice_label' => 'name',
+                'expanded' => false,
+                'multiple' => false
+            ])
             ->add('publisher', TextType::class)
             ->add('publishedDate', DateType::class, [
                 'widget' => 'single_text'

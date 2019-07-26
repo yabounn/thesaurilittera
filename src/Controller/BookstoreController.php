@@ -52,8 +52,6 @@ class BookstoreController extends AbstractController
         ]);
     }
 
-
-
     /**
      * @Route("/book/{id}-{slug}", name="showBook", requirements={"id": "\d+", "slug": "[a-z0-9\-]*"})
      * @param Book $book

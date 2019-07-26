@@ -1,0 +1,8 @@
+header.main-header {
+    background-color: #dfc072;
+}
+
+header h5 {
+    display: inline-block;
+    margin-inline-start: 2em;
+}

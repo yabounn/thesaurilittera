@@ -69,7 +69,6 @@ class AdminBookController extends AbstractController
             $manager->persist($book);
             $manager->flush();
         }
-
         return $this->render('admin/book/add.html.twig', [
             'formAddedBook' => $form->createView()
         ]);
