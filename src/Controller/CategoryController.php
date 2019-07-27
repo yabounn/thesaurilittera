@@ -34,7 +34,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/admin/category/add", name="addedCategory")
+     * @Route("/admin/category/add", name="category_add")
      */
     public function add(Request $request)
     {
@@ -54,7 +54,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('admin_book_add');
         }
 
-        return $this->render('admin/category/addedCategory.html.twig', [
+        return $this->render('admin/category/add.html.twig', [
             'formAddedCategory' => $form->createView()
         ]);
     }

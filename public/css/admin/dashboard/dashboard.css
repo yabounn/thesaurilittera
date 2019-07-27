@@ -1,0 +1,8 @@
+.row {
+    padding: 0;
+    margin: 0;
+}
+
+.dashboard-sidebar {
+    position: inherit;
+}

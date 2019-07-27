@@ -3,6 +3,10 @@
     margin: 0;
 }
 
-.book-add {
+.category-sidebar {
+    position: inherit;
+}
+
+.category-add {
     justify-content: space-evenly;
 }

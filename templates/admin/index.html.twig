@@ -4,6 +4,8 @@
 {{ parent() }}
 <link rel="stylesheet" href="{{ asset ('css/admin/header/header.css') }}">
 <link rel="stylesheet" href="{{ asset ('css/admin/navigation/sidebar.css') }}">
+<link rel="stylesheet" href="{{ asset ('css/admin/dashboard/dashboard.css') }}">
+
 {% endblock stylesheets %}
 
 {% block header %}
@@ -11,20 +13,16 @@
 {% endblock header %}
 
 {% block body %}
-<div class="wrapper">
-    <div class="row">
-        <div class="row col-md-4">
-            {% include 'admin/partials/sidebar.html.twig' %}
-        </div>
 
-        <div class="row col-md-6">
-            <section class="content">
+<div class="row">
+    <div class="row col-md-3 dashboard-sidebar">
+        {% include 'admin/partials/sidebar.html.twig' %}
+    </div>
 
-            </section>
-        </div>
+    <div class="row col-md-8">
+        <h2>Voici votre tableau de bord {{ app.user.username }} !</h2>
     </div>
 </div>
-<!-- ./wrapper -->
 {% endblock body %}
 
 {% block javascript %}

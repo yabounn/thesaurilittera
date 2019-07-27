@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Author;
+use App\Form\AuthorType;
 
 class AdminBookController extends AbstractController
 {
@@ -71,6 +73,38 @@ class AdminBookController extends AbstractController
         }
         return $this->render('admin/book/add.html.twig', [
             'formAddedBook' => $form->createView()
+        ]);
+    }
+
+    //  Auteur //
+
+    /**
+     * Permet d'ajouter un auteur
+     * 
+     *@Route("/admin/author/add", name="author_add")
+     * @param Request $request
+     * @return void
+     */
+    public function addAuthor(Request $request)
+    {
+        $author = new Author();
+
+        $form = $this->createForm(AuthorType::class, $author);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($author);
+            $em->flush();
+
+            $this->addFlash('success', 'L\'auteur a été ajouté !');
+
+            return $this->redirectToRoute('admin_book_add');
+        }
+
+        return $this->render('admin/author/add.html.twig', [
+            'formAddedAuthor' => $form->createView()
         ]);
     }
 }

@@ -18,101 +18,111 @@
 {% block body %}
 
 <div class="row">
-    <div class="row col-md-4">
+    <div class="row col-md-3">
         {% include 'admin/partials/sidebar.html.twig' %}
     </div>
 
-    <div class="row col-md-6">
-        <section class="content">
-            {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-            {% endfor %}
-            <h2>Ajouter un livre </h2>
+    <div class="row col-md-8 mt-4 book-add">
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+        <h2>Ajouter un livre </h2>
 
-            {{ form_start(formAddedBook) }}
-            <div class="form-group">
-                {{ form_row(formAddedBook.title, {
+        {{ form_start(formAddedBook) }}
+        <div class="form-group">
+            {{ form_row(formAddedBook.title, {
                                 'label': 'Titre', 
                                 'attr': {'placeholder': 'Titre du livre ...'}
                             })
                 }}
-            </div>
+        </div>
 
-            <div class="form-group">
-                {{ form_row(formAddedBook.author, {
+        <div class="form-group">
+            {{ form_row(formAddedBook.author, {
                                 'label': 'Auteur'
                             })
                 }}
 
-                <a href="{{ path('author_add') }}">+</a>
+            <a href="{{ path('author_add') }}">+</a>
+        </div>
 
-            </div>
-
-            <div class="form-group">
-                {{ form_row(formAddedBook.publisher, {
+        <div class="form-group">
+            {{ form_row(formAddedBook.publisher, {
                                 'label': 'Editions', 
                                 'attr': {'placeholder': 'Editions ...'}
                             })
                 }}
-            </div>
+        </div>
 
-            <div class="form-group">
-                {{ form_row(formAddedBook.publishedDate, { 
+        <div class="form-group">
+            {{ form_row(formAddedBook.publishedDate, { 
                                 'label': 'Date de publication', 
                                 'attr': {'placeholder': 'Date de publication ...'}
                             })
                 }}
-            </div>
+        </div>
 
-            <div class="form-group">
-                {{ form_row(formAddedBook.summary, {
+        <div class="form-group">
+            {{ form_row(formAddedBook.summary, {
                                 'label': 'Résumé', 
                                 'attr': {'placeholder': 'Résumé du livre ...'}
                             })
                 }}
-            </div>
+        </div>
 
-            <div class="form-group">
-                {{ form_row(formAddedBook.publishedDate, {
+        <div class="form-group">
+            {{ form_row(formAddedBook.publishedDate, {
                                 'label': 'Date de publication', 
                                 'attr': {'placeholder': 'Date de publication ...'}
                             })
                 }}
-            </div>
+        </div>
 
-            <div class="form-group">
-                {{ form_row(formAddedBook.imageFile, {
+        <div class="form-group">
+            {{ form_row(formAddedBook.imageFile, {
                                 'label': 'Couverture', 
                                 'attr': {'placeholder': 'Insérer l\'image de la couverture ...'}
                             })
                 }}
-            </div>
+        </div>
 
-            <div class="form-group">
-                {{ form_row(formAddedBook.category, {
+        <div class="form-group">
+            {{ form_row(formAddedBook.category, {
                                 'label': 'Categorie', 
                                 'attr': {'placeholder': 'Choisir une catégorie ...'}
                             })
                 }}
-                <a href="{{ path('addedCategory') }}">+</a>
-            </div>
+            <a href="{{ path('category_add') }}">+</a>
+        </div>
 
-            <div class="form-group">
-                {{ form_row(formAddedBook.price, {
+        <div class="form-group">
+            {{ form_row(formAddedBook.price, {
                                 'label': 'Prix', 
                                 'attr': {'placeholder': 'Prix du livre ...'}
                             })
                 }}
-            </div>
+        </div>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-success">Ajouter !</button>
-            </div>
-            {{ form_end(formAddedBook) }}
-        </section>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Ajouter !</button>
+        </div>
+        {{ form_end(formAddedBook) }}
+
+
+
+        <!-- modal -->
+
+        <!-- /.modal -->
     </div>
+    <!-- /.row col-md-8 -->
 </div>
+<!-- /.row -->
 
 {% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/admin/addedAuthor.js') }}"></script>
+{% endblock javascripts%}
