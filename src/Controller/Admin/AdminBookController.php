@@ -18,13 +18,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Serializer\Encoder\JsonDecode;
 
 class AdminBookController extends AbstractController
 {
-    /**
-     * @var BookRepository
-     */
+
     private $repository;
+    private $authorRepository;
+    private $categoryRepository;
+
 
 
     public function __construct(BookRepository $repository, AuthorRepository $authorRepository, CategoryRepository $categoryRepository)

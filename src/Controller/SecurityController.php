@@ -37,7 +37,7 @@ class SecurityController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            $request->getSession()->getFlashbag()->add('success', 'Votre inscription a été enregistré.');
+            $request->getSession()->getFlashbag()->add('success', 'Votre inscription a été enregistrée.');
             return $this->redirectToRoute('security_login');
         }
 
