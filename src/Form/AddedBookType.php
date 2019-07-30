@@ -32,7 +32,8 @@ class AddedBookType extends AbstractType
                 'widget' => 'single_text'
             ])
             ->add('summary', TextareaType::class)
-            ->add('imageFile', FileType::class)
+            ->add('imageFile', FileType::class, ['required' => false])
+            ->add('filename', TextType::class, ['required' => false])
             ->add('price')
             ->add('category', EntityType::class, [
                 'class' => 'App\Entity\Category',

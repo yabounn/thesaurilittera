@@ -3,14 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Book;
+use App\Entity\Author;
 use App\Form\AddedBookType;
+use App\Form\AuthorType;
 use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Author;
-use App\Form\AuthorType;
 
 class AdminBookController extends AbstractController
 {
@@ -48,19 +48,31 @@ class AdminBookController extends AbstractController
     /**
      * @Route("/admin/book/edit/{id}", name="admin_book_edit")
      */
-    public function edit(Book $book)
-    {
-        return $this->render('admin/book/edit.html.twig', [
-            'book' => $book
-        ]);
-    }
+    // public function edit(Book $book, Request $request, ObjectManager $manager)
+    // {
+    //     $form = $this->createForm(AddedBookType::class, $book);
+
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $manager->flush();
+    //     }
+    //     return $this->render('admin/book/add.html.twig', [
+    //         'formAddedBook' => $form->createView()
+    //     ]);
+    // }
 
     /**
+     * Permet de créér et  de modifier un livre
+     * 
      * @Route("/admin/book/add", name="admin_book_add")
+     * @Route("/admin/book/edit/{id}", name="admin_book_edit")
      */
-    public function add(Request $request, ObjectManager $manager)
+    public function formBook(Book $book = null, Request $request, ObjectManager $manager)
     {
-        $book = new book();
+        if (!$book) {
+            $book = new book();
+        }
 
         $form = $this->createForm(AddedBookType::class, $book);
 
@@ -72,9 +84,24 @@ class AdminBookController extends AbstractController
             $manager->flush();
         }
         return $this->render('admin/book/add.html.twig', [
-            'formAddedBook' => $form->createView()
+            'formBook' => $form->createView(),
+            'editMode' => $book->getId() !== null
         ]);
     }
+
+    /**
+     * Undocumented function
+     *
+     * @Route("/admin/book/delete", name="admin_book_delete")
+     * @param int $id
+     * @param Request $request
+     * @param ObjectManager $manager
+     * @return void
+     */
+    public function delete($id, Request $request, ObjectManager $manager)
+    { }
+
+
 
     //  Auteur //
 

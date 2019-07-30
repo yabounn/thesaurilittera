@@ -8,7 +8,7 @@
 {{ parent() }}
 <link rel="stylesheet" href="{{ asset ('css/admin/header/header.css') }}">
 <link rel="stylesheet" href="{{ asset ('css/admin/navigation/sidebar.css') }}">
-<link rel="stylesheet" href="{{ asset ('css/admin/author/author.css') }}">
+<link rel="stylesheet" href="{{ asset ('css/admin/author/addedAuthor.css') }}">
 {% endblock stylesheets %}
 
 {% block header %}
@@ -19,43 +19,36 @@
 {% block body %}
 
 <div class="row">
-    <div class="row col-md-3">
+    <div class="row col-md-3 author-sidebar">
         {% include 'admin/partials/sidebar.html.twig' %}
     </div>
 
-    <div class="row col-md-6">
-        <section class="content">
+    <div class="row col-md-8 mt-4 author-add">
+        <h2>Ajouter un auteur</h2>
 
-            <h2>Ajouter un auteur</h2>
-            {{ form_start(formAddedAuthor) }}
-
-            {# <div class="form-group">
-                {{ form_row(formAddedAuthor.firstname, {
+        {{ form_start(formAddedAuthor) }}
+        <div class="form-group">
+            {{ form_row(formAddedAuthor.firstname, {
                                 'label' : 'Prénom',
                                 'attr': {'placeholder' :  'Prénom de l\'auteur' },
                                 'help': 'Facultatif'
                             }) 
                 }}
-            </div>
+        </div>
 
-            <div class="form-group">
-                {{ form_row(formAddedAuthor.name, {
+        <div class="form-group">
+            {{ form_row(formAddedAuthor.name, {
                                 'label' : 'Nom',
                                 'attr': {'placeholder' : 'Nom de l\'auteur'}
                             })
                 }}
-            </div> #}
+        </div>
 
-            <div class="form-group">
-                {{ form_row(formAddedAuthor.firstnameName)}}
-            </div>
+        <div class="form-group">
+            <button class="btn btn-primary">Ajouter !</button>
+        </div>
 
-            <div class="form-group">
-                <button class="btn btn-primary">Ajouter !</button>
-            </div>
-
-            {{ form_end(formAddedAuthor) }}
-        </section>
+        {{ form_end(formAddedAuthor) }}
     </div>
 
 </div>

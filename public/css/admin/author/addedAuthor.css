@@ -1,0 +1,9 @@
+.row {
+    position: inherit;
+    padding: 0%;
+    margin: 0%;
+}
+
+.author-add {
+    justify-content: space-evenly;
+}
