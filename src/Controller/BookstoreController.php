@@ -13,12 +13,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BookstoreController extends AbstractController
 {
-
-    /**
-     * @var BookRepository
-     */
     private $repository;
 
+    /**
+     * @param BookRepository $repository
+     */
     public function __construct(BookRepository $repository)
     {
         $this->repository = $repository;

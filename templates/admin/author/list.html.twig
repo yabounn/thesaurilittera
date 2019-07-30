@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des auteurs !{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset ('css/admin/header/header.css') }}">
+<link rel="stylesheet" href="{{ asset ('css/admin/navigation/sidebar.css') }}">
+<link rel="stylesheet" href="{{ asset ('css/admin/author/list.css') }}">
+{% endblock stylesheets %}
+
+{% block header %}
+{% include 'admin/partials/header.html.twig' %}
+{% endblock header %}
+
+{% block body %}
+<div class="row author-list">
+    <div class="row col-md-3">
+        {% include 'admin/partials/sidebar.html.twig' %}
+    </div>
+
+    <div class="row col-md-8 mt-4">
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+        <table class="table table-striped mt-4 author">
+            <thead>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <h2>Liste des auteurs</h2>
+                <div class="btn-plus">
+                    <a class="btn btn-warning" href="{{ path('admin_author_add') }}">+</a>
+                </div>
+                {% for author in authors%}
+                <tr>
+                    <td>{{ author.firstname }}</td>
+                    <td>{{author.name }}</td>
+                    <td class="btn-action">
+                        <a href="{{ path('admin_author_delete', {id: author.id}) }}" class="btn btn-outline-danger"><i
+                                class="far fa-times-circle"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

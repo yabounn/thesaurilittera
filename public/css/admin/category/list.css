@@ -1,18 +1,13 @@
-.row {
-    padding: 0;
-    margin: 0;
-}
-
 .btn-plus>a {
     font-size: 1.5rem;
     border-radius: 50%;
     margin-inline: 3em;
 }
 
-table.library td.btn-action {
+table.category td.btn-action {
     display: flex;
 }
 
-table.library td.btn-action a {
+table.category td.btn-action a {
     border-radius: 50%;
 }

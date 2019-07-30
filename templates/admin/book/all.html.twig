@@ -20,9 +20,16 @@
     </div>
 
     <div class="row col-md-8 mt-4">
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
         <h2>Gérer la bibliothèque</h2>
-
-        <table class="table table-striped mt-4">
+        <div class="btn-plus">
+            <a class="btn btn-warning" href="{{ path('admin_book_add')}}">+</a>
+        </div>
+        <table class="table table-striped mt-4 library">
             <thead>
                 <tr>
                     <th>Titre du livre</th>
@@ -39,8 +46,13 @@
                     <td>{{ book.author.firstname }} {{book.author.name}}</td>
                     <td>{{ book.category.title }}</td>
                     <td>{{ book.price }}</td>
-                    <td>
-                        <a href="{{ path('admin_book_edit', {id: book.id})}}" class="btn btn-primary">Editer</a>
+                    <td class="btn-action">
+                        <a href="{{ path('admin_book_show', {id: book.id})}}" class="btn btn-outline-success"><i
+                                class="far fa-eye"></i></a>
+                        <a href="{{ path('admin_book_edit', {id: book.id})}}" class="btn btn-outline-primary"><i
+                                class="fas fa-pencil-alt"></i></a>
+                        <a href="{{ path('admin_book_delete', {id: book.id})}}" class="btn btn-outline-danger"><i
+                                class="far fa-times-circle"></i></a>
                     </td>
                 </tr>
                 {% endfor %}

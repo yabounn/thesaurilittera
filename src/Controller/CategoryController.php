@@ -36,26 +36,26 @@ class CategoryController extends AbstractController
     /**
      * @Route("/admin/category/add", name="category_add")
      */
-    public function add(Request $request)
-    {
-        $category = new Category();
+    // public function add(Request $request)
+    // {
+    //     $category = new Category();
 
-        $form = $this->createForm(CategoryType::class, $category);
+    //     $form = $this->createForm(CategoryType::class, $category);
 
-        $form->handleRequest($request);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($category);
-            $em->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $em = $this->getDoctrine()->getManager();
+    //         $em->persist($category);
+    //         $em->flush();
 
-            $this->addFlash('success', 'La catégorie a été ajoutée !');
+    //         $this->addFlash('success', 'La catégorie a été ajoutée !');
 
-            return $this->redirectToRoute('admin_book_add');
-        }
+    //         return $this->redirectToRoute('admin_book_add');
+    //     }
 
-        return $this->render('admin/category/add.html.twig', [
-            'formAddedCategory' => $form->createView()
-        ]);
-    }
+    //     return $this->render('admin/category/add.html.twig', [
+    //         'formAddedCategory' => $form->createView()
+    //     ]);
+    // }
 }

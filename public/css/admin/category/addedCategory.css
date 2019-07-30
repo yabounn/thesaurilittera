@@ -9,4 +9,10 @@
 
 .category-add {
     justify-content: space-evenly;
+    background-color: #ffc107;
+}
+
+.category-add form {
+    background-color: #DAB86E;
+    padding: 1em;
 }

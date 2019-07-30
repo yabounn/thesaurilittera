@@ -26,26 +26,26 @@ class AuthorController extends AbstractController
      * @param Request $request
      * @return void
      */
-    public function add(Request $request)
-    {
-        $author = new Author();
+    // public function add(Request $request)
+    // {
+    //     $author = new Author();
 
-        $form = $this->createForm(AuthorType::class, $author);
+    //     $form = $this->createForm(AuthorType::class, $author);
 
-        $form->handleRequest($request);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($author);
-            $em->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $em = $this->getDoctrine()->getManager();
+    //         $em->persist($author);
+    //         $em->flush();
 
-            $this->addFlash('success', 'L\'auteur a été ajouté !');
+    //         $this->addFlash('success', 'L\'auteur a été ajouté !');
 
-            return $this->redirectToRoute('admin_book_add');
-        }
+    //         return $this->redirectToRoute('admin_book_add');
+    //     }
 
-        return $this->render('admin/author/add.html.twig', [
-            'formAddedAuthor' => $form->createView()
-        ]);
-    }
+    //     return $this->render('admin/author/add.html.twig', [
+    //         'formAddedAuthor' => $form->createView()
+    //     ]);
+    // }
 }

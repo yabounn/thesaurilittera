@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Informations{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset ('css/admin/header/header.css') }}">
+<link rel="stylesheet" href="{{ asset ('css/admin/navigation/sidebar.css') }}">
+<link rel="stylesheet" href="{{ asset ('css/admin/bookstore/book.css') }}">
+{% endblock stylesheets %}
+
+{% block header %}
+{% include 'admin/partials/header.html.twig' %}
+{% endblock header %}
+
+{% block body %}
+<div class="row one-book">
+    <div class="row col-md-3">
+        {% include 'admin/partials/sidebar.html.twig' %}
+    </div>
+
+    <div class="row col-md-8 mt-4">
+        <div class="item row mt-4">
+            <div class="col-md-2 col-12">
+                <img src="{{ asset('images/covers/')}}{{book.filename}}" style="width: inherit" alt="{{ book.title }}">
+            </div>
+            <div class="col-md-6 col-12">
+                <h3>{{book.title}}</h3>
+                <h5>{{book.author.firstname}} {{book.author.name}}</h5>
+            </div>
+            <div class="col-md-4 col-12">
+                <p><b>Paru le :</b> {{book.publishedDate|date("d/m/Y")}}</p>
+                <p><b>Editeur :</b> {{book.publisher}}</p>
+                <a href="{{ path('admin_book_all')}}" class="btn btn-primary btn-sm mt-4">Retour à la bibliothèque</a>
+            </div>
+            <div class="row col-md-8 col-12 mt-4">
+                <p><b>Résumé :</b> {{book.summary | nl2br}}</p>
+            </div>
+        </div>
+        <!-- /.item row -->
+    </div>
+</div>
+</div>
+
+{% endblock %}

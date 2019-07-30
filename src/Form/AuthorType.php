@@ -13,14 +13,14 @@ class AuthorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', TextType::class, ['required' => true])
+            ->add('firstname', TextType::class, ['required' => false])
             ->add('name', TextType::class, ['required' => true]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Author::class,
+            'data_class' => Author::class
         ]);
     }
 }

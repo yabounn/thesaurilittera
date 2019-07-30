@@ -1,8 +1,18 @@
+.row {
+    padding: 0;
+    margin: 0;
+}
+
 aside.main-sidebar {
     position: absolute;
     height: 100%;
     background-color: #222D32;
     color: #e4e6e9;
+    padding: 1em;
+}
+
+form.sidebar-form {
+    margin-block-end: 1em;
 }
 
 ul.dropdown,
@@ -61,6 +71,10 @@ ul.dropdown ul ul {
 
 ul.dropdown li:hover>ul {
     visibility: visible;
+}
+
+ul.dropdown i {
+    margin: 0.5em;
 }
 
 ul.dropdown-vertical {

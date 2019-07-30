@@ -22,19 +22,19 @@
                     <!-- Item row -->
                     <div class="item row mt-4">
                         <div class="col-md-2 col-12">
-                            <img src="{{ asset('images/covers/')}}{{book.filename}}" style="width: inherit"
-                                alt="festival extra danse">
+                            <img src="{{ asset('images/covers/')}}{{ book.filename }}" style="width: inherit"
+                                alt="{{ book.title }}">
                         </div>
                         <div class="col-md-6 col-12">
-                            <h3>{{book.title}}</h3>
-                            <h4>{{book.author.name}}</h4>
+                            <h3>{{ book.title }}</h3>
+                            <h5>{{book.author.firstname}} {{ book.author.name }}</h5>
                         </div>
                         <div class="col-md-4 col-12">
-                            <p><b>Paru le :</b> {{book.publishedDate|date("d/m/Y")}}</p>
-                            <p><b>Editeur :</b> {{book.publisher}}</p>
+                            <p><b>Paru le :</b> {{ book.publishedDate|date("d/m/Y") }}</p>
+                            <p><b>Editeur :</b> {{ book.publisher }}</p>
                         </div>
                         <div class="row col-md-8 col-12 mt-4">
-                            <p><b>Résumé :</b> {{book.summary | nl2br}}</p>
+                            <p><b>Résumé :</b> {{ book.summary | nl2br }}</p>
                         </div>
                     </div>
                     <!-- /.item row -->
