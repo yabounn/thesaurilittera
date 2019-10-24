@@ -50,18 +50,18 @@
         <div class="jumbotron-white d-flex">
             <div class="">
                 <h5>Adresse de livraison</h5>
-                {{ delivery.firstname}} {{ delivery.name }} <br>
-                {{ delivery.address }} <br>
+                {{ delivery.name }} {{ delivery.firstname}} <br>
+                {{ delivery.addressNumber }} {{ delivery.address }} <br>
                 {{ delivery.postalCode }} {{ delivery.city }}
 
             </div>
 
-            {#<div class="ml-4">
+            <div class="ml-4">
                 <h5>Adresse de facturation</h5>
                 {{ facturation.firstname}} {{ facturation.name }} <br>
-                {{ facturation.address }} <br>
+                {{ facturation.addressNumber }} {{ facturation.address }} <br>
                 {{ facturation.postalCode }} {{ facturation.city }}
-            </div>#}
+            </div>
         </div>
 
     </div>

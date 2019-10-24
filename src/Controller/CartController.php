@@ -21,8 +21,7 @@ class CartController extends AbstractController
     public function index(SessionInterface $session, BookRepository $repository)
     {
         $cartShopping = $session->get('cartShopping');
-        // dump($session);
-        // exit;
+
         if (!$session->has('cartShopping')) $session->set('cartShopping', []);
 
         $books = $repository->findArray(array_keys($session->get('cartShopping')));
@@ -57,21 +56,11 @@ class CartController extends AbstractController
             }
         }
         $session->set('cartShopping', $cartShopping);
-        $nbCart = $cartShopping;
-        // foreach ($nbCart as $value) {
-        //     dump($value);
-        // };
-        // dump($nbCart);
-        // exit;
-
 
         return $this->redirectToRoute('cart', [
             'cartShopping' => $cartShopping,
-            // 'nbBook' => $nbBook
         ]);
     }
-
-
 
     /**
      * @Route("/panier/{id}/supprimer", name="remove")
@@ -159,16 +148,17 @@ class CartController extends AbstractController
         return $this->redirectToRoute('delivery');
     }
 
+
     public function setDeliveryOnSession(Request $request, SessionInterface $session)
     {
         if (!$session->has('address')) $session->set('address', []);
         $address = $session->get('address');
 
-        // if ($request->get('delivery') != null && $request->get('facturation') != null) {
-        //     $address['delivery'] = $request->get('delivery');
-        //     $address['facturation'] = $request->get('facturation');
-        if ($request->get('delivery') != null) {
+        if ($request->get('delivery') != null && $request->get('facturation') != null) {
             $address['delivery'] = $request->get('delivery');
+            $address['facturation'] = $request->get('facturation');
+            // if ($request->get('delivery') != null) {
+            //     $address['delivery'] = $request->get('delivery');
         } else {
             return $this->redirectToRoute('validate');
         }
@@ -189,15 +179,12 @@ class CartController extends AbstractController
 
         $books = $bookRepository->findArray(array_keys($session->get('cartShopping')));
         $delivery = $repository->find($address['delivery']);
-        // $facturation = $repository->find($address['facturation']);
-
-        // dump($delivery);
-        // die();
+        $facturation = $repository->find($address['facturation']);
 
         return $this->render('frontend/cart/validate.html.twig', [
             'books' => $books,
             'delivery' => $delivery,
-            // 'facturation' => $facturation,
+            'facturation' => $facturation,
             'cartShopping' => $session->get('cartShopping')
         ]);
     }
