@@ -19,8 +19,9 @@
 
                         <label class="radio" for="validate">{{ address.firstname }}
                             {{ address.name }} <br>{{ address.addressNumber }} {{ address.address }}
-                            {{ address.postalCode}} {{ address.city}} <a
-                                href=" {{path('removeAddressDelivery', {'id': address.id}) }} "><i
+                            {{ address.postalCode}} {{ address.city}}
+                            <a href=" {{path('modifyAddressDelivery', {'id': address.id}) }} ">modifier</a>
+                            <a href=" {{path('removeAddressDelivery', {'id': address.id}) }} "><i
                                     class="fas fa-trash-alt"></i></a>
                         </label>
                     </div>
@@ -45,6 +46,7 @@
                 </div>#}
 
                 <button class="btn btn-primary mt-4">Valider !</button>
+
             </form>
             {% else %}
             <h2>Adresse de livraison</h2>

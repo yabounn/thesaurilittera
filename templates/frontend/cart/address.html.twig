@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification{% endblock %}
+
+{% block body %}
+<h2>Modifier une adresse</h2>
+<form action="{{ path('delivery') }}" method="post">
+    {{ form_start(formAddress) }}
+
+    <div class="form-row">
+
+        {{form_row(formAddress.firstname, {'label': 'Prénom', 'attr':{
+                    'placeholder': 'Votre prénom ...' }})
+        }}
+
+        {{form_row(formAddress.name, {'label': 'Nom', 'attr':{
+                    'placeholder': 'Votre nom ...' }})
+        }}
+    </div>
+
+    <div class="form-row">
+        {{form_row(formAddress.address, {'label': 'Adresse', 'attr':{
+                    'placeholder': 'Votre adresse ...' }})
+        }}
+    </div>
+
+    <div class="form-row">
+        {{form_row(formAddress.address2, {'label': 'Informations complémentaires', 'attr':{
+                    'placeholder': 'Informations complémentaires ...' }})
+        }}
+    </div>
+
+    <div class="form-row">
+        {{form_row(formAddress.addressNumber, {'label': 'Numéro', 'attr':{
+                    'placeholder': 'Numéro de rue ...' }})
+        }}
+    </div>
+
+    <div class="form-row">
+        {{form_row(formAddress.postalCode, {'label': 'Code postal', 'attr':{
+                    'placeholder': 'Code postal ...' }})
+        }}
+
+        {{form_row(formAddress.city, {'label': 'Ville', 'attr':{
+                    'placeholder': 'Ville ...' }})
+        }}
+    </div>
+
+    <div class="form-row">
+        {{form_row(formAddress.phoneNumber, {'label': 'Téléphone', 'attr':{
+                    'placeholder': 'Numéro de téléphone ...' }})
+        }}
+    </div>
+
+    <button class="btn btn-primary" type="submit">Modifier !</button>
+
+    {{ form_end(formAddress) }}
+
+</form>
+{% endblock %}

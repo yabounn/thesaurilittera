@@ -97,11 +97,6 @@ class CartController extends AbstractController
      */
     public function delivery(Request $request, ObjectManager $manager, SessionInterface $session, BookRepository $repository)
     {
-        // $cartShopping = $session->get('cartShopping');
-        // dump($cartShopping);
-        // dump($session);
-        // die();
-
         $user = $this->getUser();
         $address = new Address();
         $books = $repository->findArray(array_keys($session->get('cartShopping')));
@@ -125,6 +120,29 @@ class CartController extends AbstractController
             'books' => $books,
             'cartShopping' => $session->get('cartShopping')
 
+        ]);
+    }
+
+    /**
+     * @Route("/livraison/adresse/modifier/{id}", name="modifyAddressDelivery")
+     */
+    public function updateAddress(Request $request, Address $address, ObjectManager $manager)
+    {
+        $user = $this->getUser();
+
+        $form = $this->createForm(AddressType::class, $address);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $address->setCreatedAt(new \DateTime());
+            $address->setUser($user);
+            $manager->persist($address);
+            $manager->flush();
+
+            return $this->redirectToRoute('delivery');
+        }
+        return $this->render('frontend/cart/address.html.twig', [
+            'formAddress' => $form->createView()
         ]);
     }
 
