@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset ('css/admin/header/header.css') }}">
+<link rel="stylesheet" href="{{ asset ('css/admin/navigation/sidebar.css') }}">
+<link rel="stylesheet" href="{{ asset ('css/admin/user/one.css') }}">
+{% endblock stylesheets %}
+
+{% block header %}
+{% include 'admin/partials/header.html.twig' %}
+{% endblock header %}
+
+{% block body %}
+<div class="row user-one">
+    <div class="row col-md-3">
+        {% include 'admin/partials/sidebar.html.twig' %}
+    </div>
+
+    <div class="row col-md-8 mt-4 user-info">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+        <!-- user card -->
+        <div class="block col-xs-6">
+            <div class="card"><img class="card-img img-responsive" src="{{ asset('images/avatar/avatar.png')}}"
+                    alt="user avatar">
+                <div class="card-img-overlay">
+                    <h4 class="card-title">{{ app.user.username }}</h4>
+                    <p class="card-text"><small>{{ app.user.email }}</small></p>
+
+                </div>
+            </div>
+            <div class="card-footer text-center"><a class="btn btn-primary-outline"
+                    href="{{ path('admin_user_edit', {id : app.user.id}) }}">Modifier vos
+                    informations</a></div>
+        </div>
+        <!-- user card -->
+
+        <!-- address card -->
+        <div class="card border-secondary mb-3" style="max-width: 18rem;">
+            <div class="card-body text-secondary">
+                <h5 class="card-title">Addresse</h5>
+                <p class="card-text"></p>
+                <a href="{{ path('admin_address_add', {id : app.user.id}) }}" class="btn btn-primary btn-sm">Ajouter</a>
+                <hr>
+                <!-- <h5 class="card-title">Email</h5>
+                <p class="card-text"></p>
+                <a href="#" class="btn btn-primary btn-sm">Modifier</a> -->
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+</div>
+{% endblock %}

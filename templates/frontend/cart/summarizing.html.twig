@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre panier !{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('css/cartShopping/cartShopping.css') }}" rel="stylesheet" />
+{% endblock stylesheets%}
+
+{% set total = 0 %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h4>Récapitulatif du panier</h4>
+        <table class="table table-striped table-hover mt-4 tableCartShopping">
+            <thead>
+                <tr>
+                    <th>Titre du livre</th>
+                    <th>Auteur</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <form action="{{ path('add', {'id': book.id}) }}" method="get">
+                        <td>{{book.title}}</td>
+                        <td>{{book.author.firstname}} {{book.author.name}}</td>
+                        <td>{{ cartShopping[book.id] }}</td>
+                        <td>{{book.price}}</td>
+                        <td>{{book.price * cartShopping[book.id] }} €</td>
+                    </form>
+                </tr>
+                {% set total = total + (book.price * cartShopping[book.id]) %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> <!-- /.row  -->
+    <div class="row-flex mt-4">
+        <div class="col-md-6 offset-md-10">
+            {% if books|length != 0 %}
+            <div class="ttcPrice"><b>Total :</b> {{ total }} €</div>
+            {% endif %}
+        </div>
+
+        {#<div class="col-md-12 mt-4 btnDeliveryCart">
+            <a href="{{ path('bookstore') }}" class="btn btn-success">Continuer les achats</a>
+        </div>#}
+    </div>
+</div> <!-- /.container  -->
+{% endblock %}

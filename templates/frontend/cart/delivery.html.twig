@@ -26,7 +26,7 @@
                     </div>
                     {% endfor %}
                 </div>
-                <br><br>
+                {#<br><br>
                 <div class="form-group">
                     <h4>Adresse de facturation</h4>
                     {% for address in user.address %}
@@ -42,17 +42,17 @@
                         </label>
                     </div>
                     {% endfor %}
-                </div>
+                </div>#}
 
-                <button class="btn btn-primary mt-4">Valider les adresses !</button>
+                <button class="btn btn-primary mt-4">Valider !</button>
             </form>
             {% else %}
             <h2>Adresse de livraison</h2>
             <p>Vous n'avez pas d'adresse de livraison !</p>
             {% endif %}
         </div>
-        <div class="row col-md-6">
-            <h2>Modifier une adresse</h2>
+        <div class="row col-md-6 summarizing">
+            {#<h2>Modifier une adresse</h2>
             <form action="{{ path('delivery') }}" method="post">
                 {{ form_start(formAddress) }}
 
@@ -105,7 +105,11 @@
 
                 {{ form_end(formAddress) }}
 
-            </form>
+            </form> #}
+            <!-- <div class="jumbotron mt-2"> -->
+            <!-- {{ render(controller('App\\Controller\\CartController::index')) }} -->
+            {{ include('frontend/cart/summarizing.html.twig') }}
+            <!-- </div> -->
         </div>
     </div>
 
