@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
         <h5>Récapitulatif du panier</h5>
-        <table class="table">
+        <table class="table mt-4">
             <thead>
                 <tr>
                     <th>Livre</th>
@@ -37,18 +37,13 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4" class="text-right">Total :</td>
+                    <td colspan="4" class="text-right"><b>Total HT :</b></td>
                     {% if books|length != 0 %}
-                    <td>{{ total }}</td>
+                    <td>{{ total }} €</td>
                     {% endif %}
                 </tr>
             </tfoot>
         </table>
     </div> <!-- /.row  -->
-
-    {#<div class="col-md-12 mt-4 btnDeliveryCart">
-            <a href="{{ path('bookstore') }}" class="btn btn-success">Continuer les achats</a>
-        </div>#}
-</div>
 </div> <!-- /.container  -->
-{% endblock %}
+{% endblock body %}

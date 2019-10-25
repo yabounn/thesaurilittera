@@ -9,14 +9,31 @@
 
 {% block body %}
 <div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('home') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('cart') }}">Panier</a></li>
+            <li class="breadcrumb-item active">Livraison</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container">
     {% if app.user %}
+
+    <div class="row col-md-12 mt-4">
+        {{ include('frontend/cart/summarizing.html.twig') }}
+    </div>
+</div>
+<div class="container">
     <div class="row col-md-12 mt-4 addresses">
-        <!-- <div class="row-flex col-md-6 my-4"> -->
         {% if user.address|length != 0 %}
+
         <form action="{{ path('validate') }}" method="POST">
-            <div class="form-group">
+            <div class="form-group delivery ">
                 <h4>Adresse de livraison</h4>
                 {% for address in user.address %}
+
                 <div class="btnRadioDelivery">
                     <input type="radio" name="delivery" value="{{ address.id }}" {% if loop.index0 == 0 %}
                         checked="checked" {% endif %}>
@@ -24,41 +41,48 @@
                     <label class="radio" for="validate">{{ address.firstname }}
                         {{ address.name }} <br> {{ address.addressNumber }} {{ address.address }}
                         {{ address.postalCode}} {{ address.city}}
-                        <a href=" {{path('modifyAddressDelivery', {'id': address.id}) }} ">modifier</a>
-                        <a href=" {{path('removeAddressDelivery', {'id': address.id}) }} "><i
+
+                        <a class="btn btn-outline-primary btn-sm"
+                            href=" {{path('modifyAddressDelivery', {'id': address.id}) }} "><i
+                                class="fas fa-pencil-alt"></i></a>
+
+                        <a class="btn btn-outline-danger btn-sm"
+                            href=" {{path('removeAddressDelivery', {'id': address.id}) }} "><i
                                 class="fas fa-trash-alt"></i></a>
                     </label>
-                </div>
+                </div> <!-- /.btnRadioDelivery -->
                 {% endfor %}
-            </div>
+            </div> <!-- /.delivery -->
             <br><br>
-            <div class="form-group">
+            <div class="form-group facturation">
                 <h4>Adresse de facturation</h4>
-
                 {% for address in user.address %}
+
                 <div class="btnRadioFacturation">
                     <input type="radio" name="facturation" value="{{ address.id }}" {% if loop.index0 == 0 %}
                         checked="checked" {% endif %}>
 
                     <label class="radio" for="validate">{{ address.firstname }}
                         {{ address.name }} <br>{{ address.addressNumber }} {{ address.address }}
-                        {{ address.postalCode}} {{ address.city}} <a
+                        {{ address.postalCode}} {{ address.city}}
+
+                        <a class="btn btn-outline-danger btn-sm"
                             href=" {{path('removeAddressDelivery', {'id': address.id}) }} "><i
                                 class="fas fa-trash-alt"></i></a>
                     </label>
-
-                </div>
+                </div> <!-- /.btnRadioFacturation-->
                 {% endfor %}
-            </div>
-            <button class="btn btn-primary mt-4">Valider !</button>
+            </div> <!-- /.facturation -->
+
+            <button class="btn btn-primary mt-4">Valider les adresses</button>
         </form>
 
         {% else %}
         <h2>Adresse de livraison</h2>
         <p>Vous n'avez pas d'adresse de livraison !</p>
         {% endif %}
-        <!-- </div> -->
-        <div class="row col-md-6 mb-4 offset-3">
+
+        <div class="row col-md-6 mb-4 offset-3 addedAddress">
             <h4>Ajouter une adresse</h4>
             <form action="{{ path('delivery') }}" method="post">
                 {{ form_start(formAddress) }}
@@ -101,22 +125,18 @@
                 <button class="btn btn-success" type="submit">Ajouter !</button>
                 {{ form_end(formAddress) }}
             </form>
-        </div> <!-- /.form -->
+        </div> <!-- /.form addedAddress -->
     </div> <!-- /.row col-md-12 addresses -->
 
-    <div class="row col-md-6 mt-4">
-        <!-- <div class="col-md-6 mt-4 py-2"> -->
-        {{ include('frontend/cart/summarizing.html.twig') }}
-        <!-- </div> -->
-    </div>
+
 
     {% else %}
     <div class="jumbotron mt-4 loginCart">
         <div class="container">
-            <h5>Vous devez vous identifier pour valider le panier !</h5>
+            <h5>Identifiez-vous pour valider le panier !</h5>
             <a href="{{ path('security_login') }}" class="btn btn-success mt-4">Se connecter !</a>
         </div>
-
     </div>
     {% endif %}
-    {% endblock %}
+</div>
+{% endblock %}

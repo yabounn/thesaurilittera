@@ -13,6 +13,16 @@
 
 {% block body %}
 <div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('home') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('cart') }}">Panier</a></li>
+            <li class="breadcrumb-item active">Validation</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container">
     <div class="row">
         <h2>Validation du panier</h2>
         <table class="table table-striped table-hover mt-4">
@@ -39,38 +49,44 @@
                 {% set totalTtc = total + tva %}
                 {% endfor %}
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" class="text-right"><b>Total HT :</b></td>
+                    <td>{{ total }} €</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="text-right"><b>TVA (5.5%) :</b></td>
+                    <td>{{ tva }}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="text-right"><b>Total TTC :</b></td>
+                    <td>{{ totalTtc|number_format(2, '.', ',') }} €</td>
+                </tr>
+            </tfoot>
         </table>
     </div>
-    <div class="row-flex mt-4">
-        <div class="col-md-6 offset-md-10">
-            <div class="htPrice"><b>Total HT :</b> {{ total }} €</div>
-            <div class="tva"><b>TVA (5.5%) :</b> {{ tva }}</div>
-            <div class="ttcPrice"><b>Total TTC :</b> {{ totalTtc|number_format(2, '.', ',') }} €</div>
-        </div>
-        <div class="jumbotron-white d-flex">
-            <div class="">
-                <h5>Adresse de livraison</h5>
-                {{ delivery.name }} {{ delivery.firstname}} <br>
-                {{ delivery.addressNumber }} {{ delivery.address }} <br>
-                {{ delivery.postalCode }} {{ delivery.city }}
 
-            </div>
+    <div class="jumbotron-white d-flex">
+        <div class="">
+            <h5>Adresse de livraison</h5>
+            {{ delivery.name }} {{ delivery.firstname}} <br>
+            {{ delivery.addressNumber }} {{ delivery.address }} <br>
+            {{ delivery.postalCode }} {{ delivery.city }}
 
-            <div class="ml-4">
-                <h5>Adresse de facturation</h5>
-                {{ facturation.firstname}} {{ facturation.name }} <br>
-                {{ facturation.addressNumber }} {{ facturation.address }} <br>
-                {{ facturation.postalCode }} {{ facturation.city }}
-            </div>
         </div>
 
+        <div class="ml-4">
+            <h5>Adresse de facturation</h5>
+            {{ facturation.firstname}} {{ facturation.name }} <br>
+            {{ facturation.addressNumber }} {{ facturation.address }} <br>
+            {{ facturation.postalCode }} {{ facturation.city }}
+        </div>
     </div>
-
-    <div class="col-md-12 mt-4 btnValidationCart">
-        <a href="{{ path('delivery')}}" class="btn btn-primary">Retour !</a>
-        <a href="#" class="btn btn-success">Payer</a>
-    </div>
-
 
 </div>
-{% endblock %}
+
+<div class="col-md-6 offset-4 mt-4 btnValidationCart">
+    <a href="{{ path('delivery')}}" class="btn btn-outline-primary">Retour !</a>
+    <a href="#" class="btn btn-success">Payer</a>
+</div>
+{% endblock body %}
